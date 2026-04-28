@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "villas": "Villas",
+    "about": "About Us",
+    "listVilla": "List Your Villa",
+    "contact": "Contact",
+    "callNow": "Call Now"
+  },
+  "hero": {
+    "subtitle": "Luxury Vacation Experience",
+    "title1": "Premium Villas",
+    "title2": "In Vung Tau",
+    "description": "Discover our handpicked collection of luxury villas with private pools, stunning ocean views, and 24/7 concierge service",
+    "searchPlaceholder": "Search villas..."
+  },
+  "search": {
+    "checkIn": "Check-in",
+    "checkOut": "Check-out",
+    "guests": "Guests",
+    "findVilla": "Find a villa",
+    "selectGuests": "Select"
+  },
+  "common": {
+    "perNight": "/ night",
+    "bedrooms": "BR",
+    "bathrooms": "BA",
+    "guests": "guests",
+    "viewAll": "View all",
+    "featured": "Featured",
+    "bookNow": "Book Now",
+    "reviews": "reviews"
+  },
+  "footer": {
+    "description": "The leading luxury villa rental platform in Vung Tau. Experience premium vacations with professional concierge service.",
+    "explore": "Explore",
+    "company": "Company",
+    "contactUs": "Contact",
+    "terms": "Terms of Service",
+    "privacy": "Privacy Policy",
+    "copyright": "All rights reserved."
+  }
+}
