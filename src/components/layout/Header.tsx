@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import { Menu, X, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -14,14 +15,21 @@ const navLinks = [
 ];
 
 export default function Header() {
-  const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
+  const [scrolled, setScrolled] = useState(!isHomepage);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
+    if (!isHomepage) {
+      setScrolled(true);
+      return;
+    }
     const onScroll = () => setScrolled(window.scrollY > 20);
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHomepage]);
 
   return (
     <>

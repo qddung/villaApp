@@ -17,17 +17,17 @@ const footerLinks = {
 
 export default function Footer() {
   return (
-    <footer className="bg-navy text-white">
+    <footer className="bg-sand-dark text-gray-800">
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block">
-              <span className="font-heading text-2xl font-bold">
-                Villa<span className="text-gold">VungTau</span>
+              <span className="font-heading text-2xl font-bold text-navy">
+                Villa<span className="text-gold-dark">VungTau</span>
               </span>
             </Link>
-            <p className="mt-4 text-sm leading-relaxed text-white/70">
+            <p className="mt-4 text-sm leading-relaxed text-gray-700">
               Nền tảng cho thuê villa cao cấp hàng đầu tại Vũng Tàu.
               Trải nghiệm kỳ nghỉ đẳng cấp với dịch vụ concierge chuyên nghiệp.
             </p>
@@ -35,7 +35,7 @@ export default function Footer() {
 
           {/* Khám phá */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold-dark">
               Khám phá
             </h3>
             <ul className="space-y-3">
@@ -43,7 +43,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 transition-colors hover:text-white"
+                    className="text-sm text-gray-700 transition-colors hover:text-gray-900"
                   >
                     {link.label}
                   </Link>
@@ -54,7 +54,7 @@ export default function Footer() {
 
           {/* Công ty */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold-dark">
               Công ty
             </h3>
             <ul className="space-y-3">
@@ -62,7 +62,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/70 transition-colors hover:text-white"
+                    className="text-sm text-gray-700 transition-colors hover:text-gray-900"
                   >
                     {link.label}
                   </Link>
@@ -73,14 +73,14 @@ export default function Footer() {
 
           {/* Liên hệ */}
           <div>
-            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold-dark">
               Liên hệ
             </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="tel:+84909123456"
-                  className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white"
+                  className="flex items-center gap-3 text-sm text-gray-700 transition-colors hover:text-gray-900"
                 >
                   <Phone className="h-4 w-4 shrink-0" />
                   0909 123 456
@@ -89,14 +89,14 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:hello@villavungtau.vn"
-                  className="flex items-center gap-3 text-sm text-white/70 transition-colors hover:text-white"
+                  className="flex items-center gap-3 text-sm text-gray-700 transition-colors hover:text-gray-900"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
                   hello@villavungtau.vn
                 </a>
               </li>
               <li>
-                <span className="flex items-start gap-3 text-sm text-white/70">
+                <span className="flex items-start gap-3 text-sm text-gray-700">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0" />
                   12 Đường Thùy Vân, Phường Thắng Tam, TP. Vũng Tàu
                 </span>
@@ -106,20 +106,20 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 sm:flex-row">
-          <p className="text-xs text-white/50">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-gray-300 pt-8 sm:flex-row">
+          <p className="text-xs text-gray-600">
             &copy; {new Date().getFullYear()} VillaVungTau. Tất cả quyền được bảo lưu.
           </p>
           <div className="flex gap-6">
             <Link
               href="#"
-              className="text-xs text-white/50 transition-colors hover:text-white/80"
+              className="text-xs text-gray-600 transition-colors hover:text-gray-900"
             >
               Điều khoản sử dụng
             </Link>
             <Link
               href="#"
-              className="text-xs text-white/50 transition-colors hover:text-white/80"
+              className="text-xs text-gray-600 transition-colors hover:text-gray-900"
             >
               Chính sách bảo mật
             </Link>

@@ -22,7 +22,7 @@ const priceRanges = [
 
 const bedroomOptions = [1, 2, 3, 4, 5];
 
-const topAmenities = ["pool", "ocean-view", "bbq", "karaoke", "gym", "jacuzzi", "beach-access"];
+const topAmenities = ["pool", "ocean-view", "bbq", "karaoke", "billiards", "jacuzzi", "beach-access"];
 
 export default function FilterSidebar({
   filters,

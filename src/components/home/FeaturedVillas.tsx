@@ -3,6 +3,7 @@ import Image from "next/image";
 import { MapPin, Bed, Users, Star, ArrowRight } from "lucide-react";
 import { getFeaturedVillas } from "@/data/villas";
 import { formatPrice } from "@/lib/utils";
+import { getVillaMainImage } from "@/lib/get-villa-main-image";
 
 export default function FeaturedVillas() {
   const featured = getFeaturedVillas().slice(0, 6);
@@ -37,7 +38,7 @@ export default function FeaturedVillas() {
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src={villa.images[0]}
+                  src={getVillaMainImage(villa.slug, villa.images[0])}
                   alt={villa.name}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-105"

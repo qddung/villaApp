@@ -17,6 +17,8 @@ export const amenities: Amenity[] = [
   { id: "washer", name: "Máy giặt", icon: "WashingMachine", category: "Tiện nghi trong nhà" },
   { id: "elevator", name: "Thang máy", icon: "ArrowUpDown", category: "Tiện nghi chung" },
   { id: "beach-access", name: "Gần biển", icon: "Umbrella", category: "Vị trí" },
+  { id: "billiards", name: "Phòng Billiards", icon: "CircleDot", category: "Giải trí" },
+  { id: "waterfall-pool", name: "Hồ bơi thác nước", icon: "Droplets", category: "Tiện nghi ngoài trời" },
 ];
 
 export function getAmenityByIds(ids: string[]): Amenity[] {

@@ -8,6 +8,7 @@ import AmenityGrid from "@/components/villas/AmenityGrid";
 import BookingWidget from "@/components/villas/BookingWidget";
 import VillaCard from "@/components/villas/VillaCard";
 import { formatPrice } from "@/lib/utils";
+import { resolveVillaImages } from "@/lib/resolve-villa-images";
 import type { Metadata } from "next";
 
 interface PageProps {
@@ -33,6 +34,10 @@ export default async function VillaDetailPage({ params }: PageProps) {
   const villa = getVillaBySlug(slug);
   if (!villa) notFound();
 
+  // Use local images from src/image/villa_data/{slug}/ if available
+  const localImages = resolveVillaImages(villa.slug);
+  const displayImages = localImages && localImages.length > 0 ? localImages : villa.images;
+
   const similar = villas
     .filter((v) => v.id !== villa.id && (v.areaSlug === villa.areaSlug || v.bedrooms === villa.bedrooms))
     .slice(0, 3);
@@ -41,8 +46,7 @@ export default async function VillaDetailPage({ params }: PageProps) {
     <div className="min-h-screen bg-white pt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Gallery */}
-        <VillaGallery images={villa.images} name={villa.name} />
-
+        <VillaGallery images={displayImages} name={villa.name} />
         {/* Content grid */}
         <div className="mt-8 grid gap-10 lg:grid-cols-3">
           {/* Main content */}

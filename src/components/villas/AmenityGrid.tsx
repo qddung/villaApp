@@ -1,12 +1,14 @@
 import {
   Waves, Sunset, TreePine, Flame, Wifi, Wind, CookingPot, Car,
   Shield, Music, Dumbbell, Bath, Tv, WashingMachine, ArrowUpDown, Umbrella,
+  CircleDot, Droplets,
 } from "lucide-react";
 import { getAmenityByIds } from "@/data/amenities";
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Waves, Sunset, TreePine, Flame, Wifi, Wind, CookingPot, Car,
   Shield, Music, Dumbbell, Bath, Tv, WashingMachine, ArrowUpDown, Umbrella,
+  CircleDot, Droplets,
 };
 
 interface AmenityGridProps {
