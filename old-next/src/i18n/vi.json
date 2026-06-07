@@ -1,0 +1,42 @@
+{
+  "nav": {
+    "villas": "Villa",
+    "about": "Về chúng tôi",
+    "listVilla": "Đăng ký villa",
+    "contact": "Liên hệ",
+    "callNow": "Gọi ngay"
+  },
+  "hero": {
+    "subtitle": "Trải nghiệm nghỉ dưỡng đẳng cấp",
+    "title1": "Villa Cao Cấp",
+    "title2": "Tại Vũng Tàu",
+    "description": "Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng, view biển tuyệt đẹp và dịch vụ concierge 24/7",
+    "searchPlaceholder": "Tìm villa..."
+  },
+  "search": {
+    "checkIn": "Ngày đến",
+    "checkOut": "Ngày đi",
+    "guests": "Số khách",
+    "findVilla": "Tìm villa",
+    "selectGuests": "Chọn"
+  },
+  "common": {
+    "perNight": "/ đêm",
+    "bedrooms": "PN",
+    "bathrooms": "PT",
+    "guests": "khách",
+    "viewAll": "Xem tất cả",
+    "featured": "Nổi bật",
+    "bookNow": "Đặt ngay",
+    "reviews": "đánh giá"
+  },
+  "footer": {
+    "description": "Nền tảng cho thuê villa cao cấp hàng đầu tại Vũng Tàu. Trải nghiệm kỳ nghỉ đẳng cấp với dịch vụ concierge chuyên nghiệp.",
+    "explore": "Khám phá",
+    "company": "Công ty",
+    "contactUs": "Liên hệ",
+    "terms": "Điều khoản sử dụng",
+    "privacy": "Chính sách bảo mật",
+    "copyright": "Tất cả quyền được bảo lưu."
+  }
+}
