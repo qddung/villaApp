@@ -1,8 +1,10 @@
 import { Controller, Get, Post, Delete, Query, Body, UseInterceptors, UploadedFile, Param, Res } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { ApiTags, ApiOperation, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { ImagesService } from './images.service';
-import { Response } from 'express';
+import type { Response } from 'express';
 
+@ApiTags('Images')
 @Controller('api')
 export class ImagesController {
   constructor(private readonly imagesService: ImagesService) { }

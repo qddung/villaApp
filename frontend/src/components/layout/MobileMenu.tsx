@@ -61,14 +61,14 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             Liên hệ
           </p>
           <a
-            to="tel:+84909123456"
+            href="tel:+84909123456"
             className="mb-3 flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
           >
             <Phone className="h-4 w-4" />
             0909 123 456
           </a>
           <a
-            to="mailto:hello@villavungtau.vn"
+            href="mailto:hello@villavungtau.vn"
             className="flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
           >
             <Mail className="h-4 w-4" />
@@ -78,7 +78,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
 
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <a
-            to="tel:+84909123456"
+            href="tel:+84909123456"
             className="flex w-full items-center justify-center gap-2 rounded-full bg-navy py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
           >
             <Phone className="h-4 w-4" />

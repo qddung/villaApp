@@ -1,0 +1,109 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+generator backendClient {
+  provider = "prisma-client-js"
+  output   = "../../backend/node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Villa {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  name          String
+  tagline       String   @default("")
+  description   String   @default("")
+  area          String   @default("")
+  areaSlug      String   @default("")
+  address       String   @default("")
+  bedrooms      Int      @default(3)
+  bathrooms     Int      @default(2)
+  maxGuests     Int      @default(8)
+  size          Int      @default(200)
+  pricePerNight Int      @default(5000000)
+  priceWeekend  Int      @default(7000000)
+  priceHoliday  Int      @default(10000000)
+  rating        Float    @default(5.0)
+  reviewCount   Int      @default(0)
+  checkIn       String   @default("14:00")
+  checkOut      String   @default("12:00")
+  featured      Boolean  @default(false)
+  lat           Float    @default(10.35)
+  lng           Float    @default(107.08)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  images     VillaImage[]
+  amenities  VillaAmenity[]
+  highlights VillaHighlight[]
+  policies   VillaPolicy[]
+  reviews    Review[]
+
+  @@map("villas")
+}
+
+model VillaImage {
+  id      String @id @default(cuid())
+  url     String
+  order   Int    @default(0)
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_images")
+}
+
+model VillaAmenity {
+  id      String @id @default(cuid())
+  name    String
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_amenities")
+}
+
+model VillaHighlight {
+  id      String @id @default(cuid())
+  text    String
+  order   Int    @default(0)
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_highlights")
+}
+
+model VillaPolicy {
+  id      String @id @default(cuid())
+  text    String
+  order   Int    @default(0)
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_policies")
+}
+
+model Review {
+  id      String @id @default(cuid())
+  author  String
+  avatar  String   @default("")
+  date    String
+  rating  Float
+  comment String
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}

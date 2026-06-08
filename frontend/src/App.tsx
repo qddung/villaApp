@@ -7,7 +7,11 @@ import HomePage from './pages/HomePage';
 import VillasPage from './pages/VillasPage';
 import VillaDetailPage from './pages/VillaDetailPage';
 import AdminPage from './pages/AdminPage';
-
+import AboutPage from './pages/AboutPage';
+import ContactPage from './pages/ContactPage';
+import ListYourVillaPage from './pages/ListYourVillaPage';
+import BookingPage from './pages/BookingPage';
+import BookingConfirmationPage from './pages/BookingConfirmationPage';
 function App() {
   const loadVillas = useVillaStore((state) => state.loadVillas);
   const loading = useVillaStore((state) => state.loading);
@@ -28,6 +32,11 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/villas" element={<VillasPage />} />
           <Route path="/villas/:slug" element={<VillaDetailPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/list-your-villa" element={<ListYourVillaPage />} />
+          <Route path="/booking" element={<BookingPage />} />
+          <Route path="/booking/confirmation" element={<BookingConfirmationPage />} />
           <Route path="/admin" element={<AdminPage />} />
           <Route path="*" element={<div>Not Found</div>} />
         </Routes>

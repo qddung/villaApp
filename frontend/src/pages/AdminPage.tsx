@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Villa } from "@/lib/types";
-import { amenities } from "@/data/amenities";
 import { areas } from "@/data/areas";
-import { slugify, formatPrice } from "@/lib/utils";
+import { slugify } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
 import { saveVilla, deleteVilla, getVillaImages, deleteVillaImage, uploadVillaImage, getFullImageUrl } from "@/lib/api";
 import {
   Plus, Save, Trash2, X,
-  Bed, Bath, Users, MapPin, Upload, ImageIcon, Star
+  Bed, MapPin, ImageIcon
 } from "lucide-react";
 
 const emptyVilla: Villa = {
@@ -51,11 +50,10 @@ export default function AdminPage() {
   const [editing, setEditing] = useState<Villa | null>(null);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
-  const [newHighlight, setNewHighlight] = useState("");
-  const [newPolicy, setNewPolicy] = useState("");
+
   const [mainImage, setMainImage] = useState<string | null>(null);
-  const [detailImages, setDetailImages] = useState<string[]>([]);
-  const [uploading, setUploading] = useState(false);
+  const [, setDetailImages] = useState<string[]>([]);
+  const [, setUploading] = useState(false);
 
   useEffect(() => {
     if (sessionStorage.getItem("admin_authed") === "1") {
@@ -187,36 +185,7 @@ export default function AdminPage() {
     setEditing({ ...editing, area: area.name, areaSlug: area.slug });
   }
 
-  function toggleAmenity(id: string) {
-    if (!editing) return;
-    const current = editing.amenities;
-    const updated = current.includes(id)
-      ? current.filter((a) => a !== id)
-      : [...current, id];
-    setEditing({ ...editing, amenities: updated });
-  }
 
-  function addHighlight() {
-    if (!editing || !newHighlight.trim()) return;
-    setEditing({ ...editing, highlights: [...editing.highlights, newHighlight.trim()] });
-    setNewHighlight("");
-  }
-
-  function removeHighlight(index: number) {
-    if (!editing) return;
-    setEditing({ ...editing, highlights: editing.highlights.filter((_, i) => i !== index) });
-  }
-
-  function addPolicy() {
-    if (!editing || !newPolicy.trim()) return;
-    setEditing({ ...editing, rules: { ...editing.rules, policies: [...editing.rules.policies, newPolicy.trim()] } });
-    setNewPolicy("");
-  }
-
-  function removePolicy(index: number) {
-    if (!editing) return;
-    setEditing({ ...editing, rules: { ...editing.rules, policies: editing.rules.policies.filter((_, i) => i !== index) } });
-  }
 
   async function handleSave() {
     if (!editing) return;

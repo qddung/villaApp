@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { MapPin, Bed, Bath, Users, Maximize2, Star, Clock, ShieldCheck } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
 import VillaGallery from "@/components/villas/VillaGallery";

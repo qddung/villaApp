@@ -1,51 +1,169 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import * as fs from 'fs';
-import * as path from 'path';
-import { Villa } from '../shared/types';
+import { PrismaService } from '../prisma/prisma.service';
+import type { Villa } from '../shared/types';
+
+const villaIncludes = {
+  images: { orderBy: { order: 'asc' as const } },
+  amenities: true,
+  highlights: { orderBy: { order: 'asc' as const } },
+  policies: { orderBy: { order: 'asc' as const } },
+  reviews: true,
+};
+
+/** Map a Prisma villa (with relations) to the frontend Villa shape */
+function toVillaDto(dbVilla: any): Villa {
+  return {
+    id: dbVilla.id,
+    slug: dbVilla.slug,
+    name: dbVilla.name,
+    tagline: dbVilla.tagline,
+    description: dbVilla.description,
+    area: dbVilla.area,
+    areaSlug: dbVilla.areaSlug,
+    address: dbVilla.address,
+    images: dbVilla.images.map((img: any) => img.url),
+    bedrooms: dbVilla.bedrooms,
+    bathrooms: dbVilla.bathrooms,
+    maxGuests: dbVilla.maxGuests,
+    size: dbVilla.size,
+    pricePerNight: dbVilla.pricePerNight,
+    priceWeekend: dbVilla.priceWeekend,
+    priceHoliday: dbVilla.priceHoliday,
+    amenities: dbVilla.amenities.map((a: any) => a.name),
+    highlights: dbVilla.highlights.map((h: any) => h.text),
+    rating: dbVilla.rating,
+    reviewCount: dbVilla.reviewCount,
+    reviews: dbVilla.reviews.map((r: any) => ({
+      id: r.id,
+      author: r.author,
+      avatar: r.avatar,
+      date: r.date,
+      rating: r.rating,
+      comment: r.comment,
+    })),
+    rules: {
+      checkIn: dbVilla.checkIn,
+      checkOut: dbVilla.checkOut,
+      policies: dbVilla.policies.map((p: any) => p.text),
+    },
+    coordinates: { lat: dbVilla.lat, lng: dbVilla.lng },
+    featured: dbVilla.featured,
+  };
+}
 
 @Injectable()
 export class VillasService {
-  private readonly dataPath = path.join(process.cwd(), 'src/data/villas.json');
+  constructor(private readonly prisma: PrismaService) {}
 
-  private readVillas(): Villa[] {
-    const raw = fs.readFileSync(this.dataPath, 'utf-8');
-    return JSON.parse(raw);
+  async findAll(): Promise<Villa[]> {
+    const villas = await this.prisma.villa.findMany({
+      include: villaIncludes,
+      orderBy: { createdAt: 'desc' },
+    });
+    return villas.map(toVillaDto);
   }
 
-  private writeVillas(villas: Villa[]) {
-    fs.writeFileSync(this.dataPath, JSON.stringify(villas, null, 2), 'utf-8');
-  }
-
-  findAll(): Villa[] {
-    return this.readVillas();
-  }
-
-  findOne(slug: string): Villa {
-    const villas = this.readVillas();
-    const villa = villas.find((v) => v.slug === slug);
+  async findOne(slug: string): Promise<Villa> {
+    const villa = await this.prisma.villa.findUnique({
+      where: { slug },
+      include: villaIncludes,
+    });
     if (!villa) {
       throw new NotFoundException(`Villa with slug ${slug} not found`);
     }
-    return villa;
+    return toVillaDto(villa);
   }
 
-  save(villa: Villa): Villa {
-    const villas = this.readVillas();
-    const existingIndex = villas.findIndex((v) => v.id === villa.id);
-    
-    if (existingIndex >= 0) {
-      villas[existingIndex] = villa;
-    } else {
-      villas.push(villa);
-    }
+  async save(villa: Villa): Promise<Villa> {
+    const data = {
+      slug: villa.slug,
+      name: villa.name,
+      tagline: villa.tagline,
+      description: villa.description,
+      area: villa.area,
+      areaSlug: villa.areaSlug,
+      address: villa.address,
+      bedrooms: villa.bedrooms,
+      bathrooms: villa.bathrooms,
+      maxGuests: villa.maxGuests,
+      size: villa.size,
+      pricePerNight: villa.pricePerNight,
+      priceWeekend: villa.priceWeekend,
+      priceHoliday: villa.priceHoliday,
+      rating: villa.rating,
+      reviewCount: villa.reviewCount,
+      checkIn: villa.rules?.checkIn ?? '14:00',
+      checkOut: villa.rules?.checkOut ?? '12:00',
+      featured: villa.featured,
+      lat: villa.coordinates?.lat ?? 10.35,
+      lng: villa.coordinates?.lng ?? 107.08,
+    };
 
-    this.writeVillas(villas);
-    return villa;
+    const saved = await this.prisma.villa.upsert({
+      where: { id: villa.id || '' },
+      create: {
+        id: villa.id || undefined,
+        ...data,
+        images: {
+          create: (villa.images || []).map((url, i) => ({ url, order: i })),
+        },
+        amenities: {
+          create: (villa.amenities || []).map((name) => ({ name })),
+        },
+        highlights: {
+          create: (villa.highlights || []).map((text, i) => ({ text, order: i })),
+        },
+        policies: {
+          create: (villa.rules?.policies || []).map((text, i) => ({ text, order: i })),
+        },
+        reviews: {
+          create: (villa.reviews || []).map((r) => ({
+            id: r.id || undefined,
+            author: r.author,
+            avatar: r.avatar,
+            date: r.date,
+            rating: r.rating,
+            comment: r.comment,
+          })),
+        },
+      },
+      update: {
+        ...data,
+        images: {
+          deleteMany: {},
+          create: (villa.images || []).map((url, i) => ({ url, order: i })),
+        },
+        amenities: {
+          deleteMany: {},
+          create: (villa.amenities || []).map((name) => ({ name })),
+        },
+        highlights: {
+          deleteMany: {},
+          create: (villa.highlights || []).map((text, i) => ({ text, order: i })),
+        },
+        policies: {
+          deleteMany: {},
+          create: (villa.rules?.policies || []).map((text, i) => ({ text, order: i })),
+        },
+        reviews: {
+          deleteMany: {},
+          create: (villa.reviews || []).map((r) => ({
+            id: r.id || undefined,
+            author: r.author,
+            avatar: r.avatar,
+            date: r.date,
+            rating: r.rating,
+            comment: r.comment,
+          })),
+        },
+      },
+      include: villaIncludes,
+    });
+
+    return toVillaDto(saved);
   }
 
-  delete(id: string): void {
-    let villas = this.readVillas();
-    villas = villas.filter((v) => v.id !== id);
-    this.writeVillas(villas);
+  async delete(id: string): Promise<void> {
+    await this.prisma.villa.delete({ where: { id } });
   }
 }

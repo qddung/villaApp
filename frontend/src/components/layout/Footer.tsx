@@ -22,7 +22,7 @@ export default function Footer() {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="lg:col-span-1">
-            <Link href="/" className="inline-block">
+            <Link to="/" className="inline-block">
               <span className="font-heading text-2xl font-bold text-navy">
                 Villa<span className="text-gold-dark">VungTau</span>
               </span>
@@ -42,7 +42,7 @@ export default function Footer() {
               {footerLinks.explore.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="text-sm text-gray-700 transition-colors hover:text-gray-900"
                   >
                     {link.label}
@@ -61,7 +61,7 @@ export default function Footer() {
               {footerLinks.company.map((link) => (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    to={link.href}
                     className="text-sm text-gray-700 transition-colors hover:text-gray-900"
                   >
                     {link.label}
@@ -112,13 +112,13 @@ export default function Footer() {
           </p>
           <div className="flex gap-6">
             <Link
-              href="#"
+              to="#"
               className="text-xs text-gray-600 transition-colors hover:text-gray-900"
             >
               Điều khoản sử dụng
             </Link>
             <Link
-              href="#"
+              to="#"
               className="text-xs text-gray-600 transition-colors hover:text-gray-900"
             >
               Chính sách bảo mật

@@ -3,10 +3,8 @@ import { Link } from "react-router-dom";
 import { MapPin, Bed, Users, Star, ArrowRight } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
 import { formatPrice } from "@/lib/utils";
-import { useTranslations } from "@/i18n";
 
 export default function FeaturedVillas() {
-  const { t } = useTranslations();
   const getFeaturedVillas = useVillaStore((state) => state.getFeaturedVillas);
   const featured = getFeaturedVillas().slice(0, 6);
 

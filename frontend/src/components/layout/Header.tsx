@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MobileMenu from "./MobileMenu";
 
@@ -43,7 +43,7 @@ export default function Header() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}
-            <Link href="/" className="flex items-center gap-2">
+            <Link to="/" className="flex items-center gap-2">
               <span
                 className={cn(
                   "font-heading text-2xl font-bold tracking-tight transition-colors",
@@ -59,7 +59,7 @@ export default function Header() {
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
-                  href={link.href}
+                  to={link.href}
                   className={cn(
                     "text-sm font-medium tracking-wide transition-colors hover:text-gold",
                     scrolled ? "text-navy" : "text-white/90"

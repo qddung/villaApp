@@ -1,7 +1,9 @@
 import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { VillasService } from './villas.service';
-import { Villa } from '../shared/types';
+import type { Villa } from '../shared/types';
 
+@ApiTags('Villas')
 @Controller('api/villas')
 export class VillasController {
   constructor(private readonly villasService: VillasService) {}
