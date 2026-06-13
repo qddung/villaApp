@@ -1,12 +1,15 @@
 import { create } from 'zustand';
-import { Villa } from '@/lib/types';
-import { fetchVillas } from '@/lib/api';
+import { Villa, FilterOptions } from '@/lib/types';
+import { fetchVillas, fetchFilterOptions } from '@/lib/api';
 
 interface VillaState {
   villas: Villa[];
+  filterOptions: FilterOptions | null;
   loading: boolean;
+  loadingFilters: boolean;
   error: string | null;
   loadVillas: () => Promise<void>;
+  loadFilterOptions: () => Promise<void>;
   getVillaBySlug: (slug: string) => Villa | undefined;
   getFeaturedVillas: () => Villa[];
   getVillasByArea: (areaSlug: string) => Villa[];
@@ -14,7 +17,9 @@ interface VillaState {
 
 export const useVillaStore = create<VillaState>((set, get) => ({
   villas: [],
+  filterOptions: null,
   loading: true,
+  loadingFilters: true,
   error: null,
   loadVillas: async () => {
     try {
@@ -23,6 +28,15 @@ export const useVillaStore = create<VillaState>((set, get) => ({
       set({ villas, loading: false });
     } catch (err: any) {
       set({ error: err.message, loading: false });
+    }
+  },
+  loadFilterOptions: async () => {
+    try {
+      set({ loadingFilters: true, error: null });
+      const filterOptions = await fetchFilterOptions();
+      set({ filterOptions, loadingFilters: false });
+    } catch (err: any) {
+      set({ error: err.message, loadingFilters: false });
     }
   },
   getVillaBySlug: (slug) => get().villas.find((v) => v.slug === slug),

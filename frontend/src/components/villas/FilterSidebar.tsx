@@ -1,7 +1,5 @@
-
 import { X } from "lucide-react";
-import { areas } from "@/data/areas";
-import { amenities } from "@/data/amenities";
+import { useVillaStore } from "@/store/useVillaStore";
 import { SearchFilters } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -12,32 +10,29 @@ interface FilterSidebarProps {
   onClose: () => void;
 }
 
-const priceRanges = [
-  { label: "Dưới 5 triệu", min: 0, max: 5000000 },
-  { label: "5 - 8 triệu", min: 5000000, max: 8000000 },
-  { label: "8 - 12 triệu", min: 8000000, max: 12000000 },
-  { label: "Trên 12 triệu", min: 12000000, max: 999999999 },
-];
-
-const bedroomOptions = [1, 2, 3, 4, 5];
-
-const topAmenities = ["pool", "ocean-view", "bbq", "karaoke", "billiards", "jacuzzi", "beach-access"];
-
 export default function FilterSidebar({
   filters,
   onChange,
   open,
   onClose,
 }: FilterSidebarProps) {
+  const filterOptions = useVillaStore((state) => state.filterOptions);
+
+  // Fallback if not loaded for some reason
+  const availableAreas = filterOptions?.areas || [];
+  const availableAmenities = filterOptions?.amenities || [];
+  const priceRanges = filterOptions?.priceRanges || [];
+  const bedroomOptions = filterOptions?.bedroomOptions || [];
+
   const updateFilter = (key: keyof SearchFilters, value: unknown) => {
     onChange({ ...filters, [key]: value });
   };
 
-  const toggleAmenity = (id: string) => {
+  const toggleAmenity = (name: string) => {
     const current = filters.amenities || [];
-    const updated = current.includes(id)
-      ? current.filter((a) => a !== id)
-      : [...current, id];
+    const updated = current.includes(name)
+      ? current.filter((a) => a !== name)
+      : [...current, name];
     updateFilter("amenities", updated);
   };
 
@@ -99,7 +94,7 @@ export default function FilterSidebar({
               />
               <span className="text-sm text-gray-700">Tất cả</span>
             </label>
-            {areas.map((area) => (
+            {availableAreas.map((area) => (
               <label key={area.slug} className="flex cursor-pointer items-center gap-2">
                 <input
                   type="radio"
@@ -192,21 +187,17 @@ export default function FilterSidebar({
             Tiện nghi
           </h4>
           <div className="space-y-2">
-            {topAmenities.map((id) => {
-              const amenity = amenities.find((a) => a.id === id);
-              if (!amenity) return null;
-              return (
-                <label key={id} className="flex cursor-pointer items-center gap-2">
-                  <input
-                    type="checkbox"
-                    checked={filters.amenities?.includes(id) || false}
-                    onChange={() => toggleAmenity(id)}
-                    className="accent-gold"
-                  />
-                  <span className="text-sm text-gray-700">{amenity.name}</span>
-                </label>
-              );
-            })}
+            {availableAmenities.map((amenity) => (
+              <label key={amenity} className="flex cursor-pointer items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={filters.amenities?.includes(amenity) || false}
+                  onChange={() => toggleAmenity(amenity)}
+                  className="accent-gold"
+                />
+                <span className="text-sm text-gray-700">{amenity}</span>
+              </label>
+            ))}
           </div>
         </div>
       </aside>

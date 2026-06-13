@@ -14,6 +14,7 @@ const villaIncludes = {
 function toVillaDto(dbVilla: any): Villa {
   return {
     id: dbVilla.id,
+    tenantId: dbVilla.tenantId,
     slug: dbVilla.slug,
     name: dbVilla.name,
     tagline: dbVilla.tagline,
@@ -53,7 +54,7 @@ function toVillaDto(dbVilla: any): Villa {
 
 @Injectable()
 export class VillasService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async findAll(): Promise<Villa[]> {
     const villas = await this.prisma.villa.findMany({
@@ -61,6 +62,44 @@ export class VillasService {
       orderBy: { createdAt: 'desc' },
     });
     return villas.map(toVillaDto);
+  }
+
+  async getDefaultFilters() {
+    const areasDb = await this.prisma.villa.groupBy({
+      by: ['areaSlug', 'area'],
+      _count: {
+        id: true,
+      },
+    });
+
+    const areas = areasDb
+      .filter((a) => a.areaSlug && a.area)
+      .map((a) => ({
+        slug: a.areaSlug,
+        name: a.area,
+        villaCount: a._count.id,
+      }));
+
+    const amenitiesDb = await this.prisma.villaAmenity.groupBy({
+      by: ['name'],
+    });
+    const amenities = amenitiesDb.map((a) => a.name).sort();
+
+    const priceRanges = [
+      { label: 'Dưới 5 triệu', min: 0, max: 5000000 },
+      { label: '5 - 8 triệu', min: 5000000, max: 8000000 },
+      { label: '8 - 12 triệu', min: 8000000, max: 12000000 },
+      { label: 'Trên 12 triệu', min: 12000000, max: 999999999 },
+    ];
+
+    const bedroomOptions = [1, 2, 3, 4, 5];
+
+    return {
+      areas,
+      amenities,
+      priceRanges,
+      bedroomOptions,
+    };
   }
 
   async findOne(slug: string): Promise<Villa> {
@@ -103,6 +142,7 @@ export class VillasService {
       where: { id: villa.id || '' },
       create: {
         id: villa.id || undefined,
+        tenantId: villa.tenantId || 'DEFAULT_TENANT_ID',
         ...data,
         images: {
           create: (villa.images || []).map((url, i) => ({ url, order: i })),

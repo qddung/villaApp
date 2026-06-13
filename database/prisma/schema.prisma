@@ -16,39 +16,107 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Villa {
-  id            String   @id @default(cuid())
-  slug          String   @unique
-  name          String
-  tagline       String   @default("")
-  description   String   @default("")
-  area          String   @default("")
-  areaSlug      String   @default("")
-  address       String   @default("")
-  bedrooms      Int      @default(3)
-  bathrooms     Int      @default(2)
-  maxGuests     Int      @default(8)
-  size          Int      @default(200)
-  pricePerNight Int      @default(5000000)
-  priceWeekend  Int      @default(7000000)
-  priceHoliday  Int      @default(10000000)
-  rating        Float    @default(5.0)
-  reviewCount   Int      @default(0)
-  checkIn       String   @default("14:00")
-  checkOut      String   @default("12:00")
-  featured      Boolean  @default(false)
-  lat           Float    @default(10.35)
-  lng           Float    @default(107.08)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+model Tenant {
+  id           String   @id @default(uuid())
+  name         String
+  businessType String?
+  status       String   @default("active") // active, suspended
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
-  images     VillaImage[]
-  amenities  VillaAmenity[]
-  highlights VillaHighlight[]
-  policies   VillaPolicy[]
-  reviews    Review[]
+  users    User[]
+  villas   Villa[]
+  bookings Booking[]
+  settings Settings?
+
+  @@map("tenants")
+}
+
+model Settings {
+  id                          String @id @default(uuid())
+  tenantId                    String @unique
+  tenant                      Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  bookingConfirmationTemplate String?
+  contactEmail                String?
+  contactPhone                String?
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  @@map("settings")
+}
+
+model Villa {
+  id            String           @id @default(uuid())
+  tenantId      String
+  tenant        Tenant           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  slug          String           @unique
+  name          String
+  tagline       String
+  description   String
+  area          String
+  areaSlug      String
+  address       String
+  bedrooms      Int
+  bathrooms     Int
+  maxGuests     Int
+  size          Int              // m2
+  pricePerNight Float
+  priceWeekend  Float
+  priceHoliday  Float
+  rating        Float
+  reviewCount   Int
+  checkIn       String
+  checkOut      String
+  featured      Boolean
+  lat           Float
+  lng           Float
+  createdAt     DateTime         @default(now())
+  updatedAt     DateTime         @updatedAt
+
+  images         VillaImage[]
+  amenities      VillaAmenity[]
+  highlights     VillaHighlight[]
+  policies       VillaPolicy[]
+  reviews        Review[]
+  bookings       Booking[]
+  seasonalPrices SeasonalPrice[]
 
   @@map("villas")
+}
+
+model SeasonalPrice {
+  id        String   @id @default(uuid())
+  villaId   String
+  villa     Villa    @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  startDate DateTime
+  endDate   DateTime
+  price     Float
+  type      String   // peak, holiday, promotional
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("seasonal_prices")
+}
+
+model Booking {
+  id        String   @id @default(uuid())
+  tenantId  String
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  villaId   String
+  villa     Villa    @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  phone     String
+  note      String?
+  checkIn   String
+  checkOut  String
+  guests    Int
+  total     Float
+  status    String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("bookings")
 }
 
 model VillaImage {
@@ -106,4 +174,20 @@ model Review {
   villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
 
   @@map("reviews")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String?  @unique
+  password  String
+  fullName  String?
+  phone     String?
+  role      String   @default("pending") // pending, pending_owner, owner, admin, staff
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
 }

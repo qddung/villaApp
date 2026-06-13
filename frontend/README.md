@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# Villa VungTau - Frontend Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application for the Villa VungTau booking platform. It is a React Single Page Application (SPA) built with Vite, TypeScript, and TailwindCSS.
 
-Currently, two official plugins are available:
+## Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The application has been restructured from a Multi-Page setup into a clean, unified SPA structure using React Router DOM.
 
-## React Compiler
+### Unified Router
+All routing across both the client-facing website and the internal admin dashboard is centrally managed in a single router:
+- **Router Entry**: `src/root/index.tsx`
+- **Main Entry Point**: `src/main.tsx`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Folder-based Page Routing
+We strictly follow a folder-based component structure to mirror URL routing.
 
-## Expanding the ESLint configuration
+- **Client Pages**: Located in `src/pages/client/`
+- **Admin Pages**: Located in `src/pages/admin/`
+- **Auth Pages**: Located in `src/pages/auth/`
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Each route is its own folder (named identically to the route URL snippet), and the primary component file inside is named identically but strictly in `camelCase`. 
+For example:
+- The route `/` maps to `src/pages/client/home/home.tsx`
+- The route `/booking/confirmation` maps to `src/pages/client/bookingConfirmation/bookingConfirmation.tsx`
+- The route `/admin/dashboard` maps to `src/pages/admin/dashboard/dashboard.tsx`
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Context Providers
+Global states and utilities are provided to the entire application at the root router level via React Context. All Next.js legacy dependencies have been removed to fit the Vite ecosystem.
+- `NotificationProvider`: Global toast notifications and confirmation dialogs (`src/contexts/NotificationContext.tsx`).
+- `ThemeProvider`: Light/Dark mode state management (`src/contexts/ThemeContext.tsx`).
+- `AuthProvider`: User authentication, session persistence, and role-based route guarding (`src/contexts/AuthContext.tsx`).
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Available Scripts
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+In the project directory, you can run:
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Compiles TypeScript and bundles the app for production (outputs to `dist/html/index.html`).
+- `npm run preview`: Locally previews the production build.

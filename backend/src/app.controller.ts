@@ -10,6 +10,7 @@ export class AppController {
     if (req.path.startsWith('/api')) {
       return next();
     }
-    res.sendFile(join(__dirname, '..', '..', 'frontend', 'dist', 'index.html'));
+    
+    res.sendFile(join(__dirname, '..', '..', 'frontend', 'dist', 'html', 'index.html'));
   }
 }

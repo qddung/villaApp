@@ -1,5 +1,6 @@
 export interface Villa {
   id: string;
+  tenantId?: string;
   slug: string;
   name: string;
   tagline: string;

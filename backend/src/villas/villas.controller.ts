@@ -13,6 +13,11 @@ export class VillasController {
     return this.villasService.findAll();
   }
 
+  @Get('filters/default')
+  getDefaultFilters() {
+    return this.villasService.getDefaultFilters();
+  }
+
   @Get(':slug')
   findOne(@Param('slug') slug: string) {
     return this.villasService.findOne(slug);

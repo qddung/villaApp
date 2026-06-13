@@ -95,3 +95,22 @@ export interface SearchFilters {
   guests?: number;
   sortBy?: "price-asc" | "price-desc" | "rating" | "newest";
 }
+
+export interface PriceRange {
+  label: string;
+  min: number;
+  max: number;
+}
+
+export interface AreaOption {
+  slug: string;
+  name: string;
+  villaCount: number;
+}
+
+export interface FilterOptions {
+  areas: AreaOption[];
+  amenities: string[];
+  priceRanges: PriceRange[];
+  bedroomOptions: number[];
+}

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400..700&family=Montserrat:wght@400..800&display=swap");
 @import "tailwindcss";
 
 @theme inline {
@@ -10,16 +11,8 @@
   --color-sand: #F5F0E8;
   --color-sand-dark: #E8E0D0;
   --color-cream: #FDFBF7;
-  --font-heading: "Playfair Display", Georgia, serif;
+  --font-heading: "Montserrat", sans-serif;
   --font-body: "Inter", system-ui, sans-serif;
-}
-
-@font-face {
-  font-family: "Playfair Display";
-  font-style: normal;
-  font-weight: 400 900;
-  font-display: swap;
-  src: url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&display=swap");
 }
 
 body {

@@ -45,6 +45,45 @@ interface VillaJson {
 async function main() {
   console.log('🌱 Seeding database...');
 
+  // Create default tenant
+  let tenant = await prisma.tenant.findFirst({
+    where: { name: 'Villa Vung Tau Default' },
+  });
+
+  if (!tenant) {
+    tenant = await prisma.tenant.create({
+      data: {
+        name: 'Villa Vung Tau Default',
+        businessType: 'Villa Rental',
+        status: 'active',
+      },
+    });
+    console.log('Created default Tenant:', tenant.id);
+  }
+
+  // Insert initial admin user
+  const adminExists = await prisma.user.findUnique({
+    where: { username: 'admin' },
+  });
+
+  if (!adminExists) {
+    const bcrypt = require('bcryptjs');
+    const hashedPassword = await bcrypt.hash('admin123', 10);
+    await prisma.user.create({
+      data: {
+        username: 'admin',
+        email: 'admin@villavungtau.com',
+        password: hashedPassword,
+        fullName: 'System Admin',
+        role: 'owner',
+        tenantId: tenant.id,
+      },
+    });
+    console.log('Seeded initial admin user: admin / admin123');
+  } else {
+    console.log('Admin user already exists.');
+  }
+
   // Read the existing JSON data
   const dataPath = path.join(__dirname, '..', '..', 'backend', 'src', 'data', 'villas.json');
   const raw = fs.readFileSync(dataPath, 'utf-8');
@@ -53,9 +92,12 @@ async function main() {
   for (const villa of villas) {
     console.log(`  → Seeding villa: ${villa.name}`);
 
-    await prisma.villa.create({
-      data: {
+    await prisma.villa.upsert({
+      where: { slug: villa.slug },
+      update: {},
+      create: {
         id: villa.id,
+        tenantId: tenant.id,
         slug: villa.slug,
         name: villa.name,
         tagline: villa.tagline,
