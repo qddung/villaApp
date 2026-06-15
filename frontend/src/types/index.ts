@@ -6,6 +6,5 @@ export interface UserProfile {
   full_name?: string;
   phone?: string;
   role: UserRole;
-  tenant_id?: string;
   created_at: string;
 }

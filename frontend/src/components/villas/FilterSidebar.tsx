@@ -21,7 +21,7 @@ export default function FilterSidebar({
   // Fallback if not loaded for some reason
   const availableAreas = filterOptions?.areas || [];
   const availableAmenities = filterOptions?.amenities || [];
-  const priceRanges = filterOptions?.priceRanges || [];
+
   const bedroomOptions = filterOptions?.bedroomOptions || [];
 
   const updateFilter = (key: keyof SearchFilters, value: unknown) => {
@@ -41,7 +41,7 @@ export default function FilterSidebar({
   };
 
   const hasFilters =
-    filters.area || filters.minPrice || filters.bedrooms || (filters.amenities?.length ?? 0) > 0;
+    filters.area || filters.bedrooms || (filters.amenities?.length ?? 0) > 0;
 
   return (
     <>
@@ -112,40 +112,7 @@ export default function FilterSidebar({
           </div>
         </div>
 
-        {/* Price */}
-        <div className="mb-8">
-          <h4 className="mb-3 text-sm font-semibold uppercase tracking-wider text-gray-400">
-            Khoảng giá / đêm
-          </h4>
-          <div className="space-y-2">
-            <label className="flex cursor-pointer items-center gap-2">
-              <input
-                type="radio"
-                name="price"
-                checked={!filters.minPrice && !filters.maxPrice}
-                onChange={() => {
-                  onChange({ ...filters, minPrice: undefined, maxPrice: undefined });
-                }}
-                className="accent-gold"
-              />
-              <span className="text-sm text-gray-700">Tất cả</span>
-            </label>
-            {priceRanges.map((range) => (
-              <label key={range.label} className="flex cursor-pointer items-center gap-2">
-                <input
-                  type="radio"
-                  name="price"
-                  checked={filters.minPrice === range.min && filters.maxPrice === range.max}
-                  onChange={() => {
-                    onChange({ ...filters, minPrice: range.min, maxPrice: range.max });
-                  }}
-                  className="accent-gold"
-                />
-                <span className="text-sm text-gray-700">{range.label}</span>
-              </label>
-            ))}
-          </div>
-        </div>
+
 
         {/* Bedrooms */}
         <div className="mb-8">

@@ -34,9 +34,9 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 md:top-4 md:left-4 md:right-4 z-50 transition-all duration-300 md:rounded-2xl",
           scrolled
-            ? "bg-white/95 backdrop-blur-md shadow-sm"
+            ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/5"
             : "bg-transparent"
         )}
       >

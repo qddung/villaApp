@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { X, Phone, Mail } from "lucide-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 interface MobileMenuProps {
   open: boolean;
@@ -10,6 +10,16 @@ interface MobileMenuProps {
 }
 
 export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    import("@/lib/api").then(({ fetchSettings }) => {
+      fetchSettings().then((data) => {
+        if (data) setSettings(data);
+      });
+    });
+  }, []);
+
   useEffect(() => {
     if (open) {
       document.body.style.overflow = "hidden";
@@ -61,24 +71,24 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             Liên hệ
           </p>
           <a
-            href="tel:+84909123456"
+            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
             className="mb-3 flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
           >
             <Phone className="h-4 w-4" />
-            0909 123 456
+            {settings?.contactPhone || "0909 123 456"}
           </a>
           <a
-            href="mailto:hello@villavungtau.vn"
+            href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}
             className="flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
           >
             <Mail className="h-4 w-4" />
-            hello@villavungtau.vn
+            {settings?.contactEmail || "hello@villavungtau.vn"}
           </a>
         </div>
 
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <a
-            href="tel:+84909123456"
+            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
             className="flex w-full items-center justify-center gap-2 rounded-full bg-navy py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
           >
             <Phone className="h-4 w-4" />

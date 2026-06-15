@@ -3,6 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 import type { Villa } from '../shared/types';
 
 const villaIncludes = {
+  areaObj: true,
   images: { orderBy: { order: 'asc' as const } },
   amenities: true,
   highlights: { orderBy: { order: 'asc' as const } },
@@ -14,13 +15,12 @@ const villaIncludes = {
 function toVillaDto(dbVilla: any): Villa {
   return {
     id: dbVilla.id,
-    tenantId: dbVilla.tenantId,
     slug: dbVilla.slug,
     name: dbVilla.name,
     tagline: dbVilla.tagline,
     description: dbVilla.description,
-    area: dbVilla.area,
-    areaSlug: dbVilla.areaSlug,
+    area: dbVilla.areaObj?.name || 'Unknown',
+    areaSlug: dbVilla.areaObj?.slug || 'unknown',
     address: dbVilla.address,
     images: dbVilla.images.map((img: any) => img.url),
     bedrooms: dbVilla.bedrooms,
@@ -65,20 +65,19 @@ export class VillasService {
   }
 
   async getDefaultFilters() {
-    const areasDb = await this.prisma.villa.groupBy({
-      by: ['areaSlug', 'area'],
-      _count: {
-        id: true,
+    const areasDb = await this.prisma.area.findMany({
+      include: {
+        _count: {
+          select: { villas: true },
+        },
       },
     });
 
-    const areas = areasDb
-      .filter((a) => a.areaSlug && a.area)
-      .map((a) => ({
-        slug: a.areaSlug,
-        name: a.area,
-        villaCount: a._count.id,
-      }));
+    const areas = areasDb.map((a) => ({
+      slug: a.slug,
+      name: a.name,
+      villaCount: a._count.villas,
+    }));
 
     const amenitiesDb = await this.prisma.villaAmenity.groupBy({
       by: ['name'],
@@ -114,13 +113,20 @@ export class VillasService {
   }
 
   async save(villa: Villa): Promise<Villa> {
+    const areaRecord = await this.prisma.area.findUnique({
+      where: { slug: villa.areaSlug },
+    });
+    
+    if (!areaRecord) {
+      throw new Error(`Area with slug ${villa.areaSlug} not found. Please create it first.`);
+    }
+
     const data = {
       slug: villa.slug,
       name: villa.name,
       tagline: villa.tagline,
       description: villa.description,
-      area: villa.area,
-      areaSlug: villa.areaSlug,
+      areaId: areaRecord.id,
       address: villa.address,
       bedrooms: villa.bedrooms,
       bathrooms: villa.bathrooms,
@@ -142,7 +148,6 @@ export class VillasService {
       where: { id: villa.id || '' },
       create: {
         id: villa.id || undefined,
-        tenantId: villa.tenantId || 'DEFAULT_TENANT_ID',
         ...data,
         images: {
           create: (villa.images || []).map((url, i) => ({ url, order: i })),

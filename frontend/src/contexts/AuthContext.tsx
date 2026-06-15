@@ -5,7 +5,7 @@ import { useNotification } from '@/contexts/NotificationContext';
 import { translateAuthError } from '@/lib/errorTranslator';
 
 // Helper: decode JWT payload (client-side only)
-export const decodeToken = (token: string): { userId: string; role?: string; tenantId?: string; exp?: number } | null => {
+export const decodeToken = (token: string): { userId: string; role?: string; exp?: number } | null => {
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
@@ -13,7 +13,6 @@ export const decodeToken = (token: string): { userId: string; role?: string; ten
     return {
       userId: payload.userId,
       role: payload.role,
-      tenantId: payload.tenantId,
       exp: payload.exp,
     };
   } catch {
@@ -49,6 +48,9 @@ export const authFetch = async (url: string, options: RequestInit = {}): Promise
   // Ensure Content-Type for POST/PATCH/PUT with body
   if (options.body && !(options.body instanceof FormData)) {
     headers['Content-Type'] = headers['Content-Type'] || 'application/json';
+  } else if (options.body instanceof FormData) {
+    // Let browser set the multipart/form-data Content-Type and boundary automatically
+    delete headers['Content-Type'];
   }
 
   return fetch(url, {
@@ -69,15 +71,6 @@ interface AuthContextType {
   loading: boolean;
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   register: (email: string, password: string, fullName: string, phone: string) => Promise<{ success: boolean; error?: string }>;
-  registerStartup: (
-    email: string,
-    password: string,
-    fullName: string,
-    phone: string,
-    startupName: string,
-    businessType: string,
-    activationCode?: string
-  ) => Promise<{ success: boolean; error?: string }>;
   logout: () => Promise<void>;
   changePassword: (password: string) => Promise<{ success: boolean; error?: string }>;
   sendPasswordReset: (email: string) => Promise<{ success: boolean; error?: string }>;
@@ -160,42 +153,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Register Startup
-  const registerStartup = async (
-    email: string,
-    password: string,
-    fullName: string,
-    phone: string,
-    startupName: string,
-    businessType: string,
-    activationCode?: string
-  ) => {
-    try {
-      const response = await fetch('/api/auth/register-startup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          email,
-          password,
-          fullName,
-          phone,
-          startupName,
-          businessType,
-          activationCode,
-        }),
-      });
 
-      const result = await response.json();
-      if (!response.ok) {
-        return { success: false, error: translateAuthError(result.error) };
-      }
-
-      return { success: true };
-    } catch (err: any) {
-      console.error('[AuthContext] Lỗi đăng ký Startup:', err);
-      return { success: false, error: translateAuthError(err.message) };
-    }
-  };
 
   // Logout
   const logout = async () => {
@@ -255,7 +213,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         loading,
         login,
         register,
-        registerStartup,
         logout,
         changePassword,
         sendPasswordReset,

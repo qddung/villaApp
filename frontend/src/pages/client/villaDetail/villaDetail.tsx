@@ -6,7 +6,6 @@ import VillaGallery from "@/components/villas/VillaGallery";
 import AmenityGrid from "@/components/villas/AmenityGrid";
 import BookingWidget from "@/components/villas/BookingWidget";
 import VillaCard from "@/components/villas/VillaCard";
-import { formatPrice } from "@/lib/utils";
 import { getVillaImages } from "@/lib/api";
 
 export default function VillaDetailPage() {
@@ -110,67 +109,15 @@ export default function VillaDetailPage() {
               </div>
             </div>
 
-            {/* Pricing table */}
-            <div className="mt-8">
-              <h2 className="font-heading text-xl font-semibold text-navy">
-                Bảng giá
-              </h2>
-              <div className="mt-4 overflow-hidden rounded-xl border border-gray-200">
-                <table className="w-full">
-                  <thead>
-                    <tr className="bg-sand">
-                      <th className="px-6 py-3 text-left text-sm font-semibold text-navy">
-                        Loại
-                      </th>
-                      <th className="px-6 py-3 text-right text-sm font-semibold text-navy">
-                        Giá / đêm
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-gray-100">
-                    <tr>
-                      <td className="px-6 py-3 text-sm text-gray-700">Ngày thường</td>
-                      <td className="px-6 py-3 text-right text-sm font-semibold text-navy">
-                        {formatPrice(villa.pricePerNight)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-3 text-sm text-gray-700">Cuối tuần (T6-CN)</td>
-                      <td className="px-6 py-3 text-right text-sm font-semibold text-navy">
-                        {formatPrice(villa.priceWeekend)}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td className="px-6 py-3 text-sm text-gray-700">Lễ / Tết</td>
-                      <td className="px-6 py-3 text-right text-sm font-semibold text-navy">
-                        {formatPrice(villa.priceHoliday)}
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+
 
             {/* Rules */}
-            <div className="mt-8">
+            <div className="mt-8 mb-2">
               <h2 className="font-heading text-xl font-semibold text-navy">
                 Quy tắc nhà
               </h2>
               <div className="mt-4 space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-gold" />
-                    <span className="text-sm text-gray-700">
-                      Check-in: <strong>{villa.rules.checkIn}</strong>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-5 w-5 text-gold" />
-                    <span className="text-sm text-gray-700">
-                      Check-out: <strong>{villa.rules.checkOut}</strong>
-                    </span>
-                  </div>
-                </div>
+
                 <div className="space-y-2">
                   {villa.rules.policies.map((policy) => (
                     <div key={policy} className="flex items-center gap-2">
@@ -183,7 +130,7 @@ export default function VillaDetailPage() {
             </div>
 
             {/* Reviews */}
-            <div className="mt-8">
+            {/* <div className="mt-8">
               <div className="flex items-center gap-3">
                 <h2 className="font-heading text-xl font-semibold text-navy">
                   Đánh giá
@@ -232,7 +179,7 @@ export default function VillaDetailPage() {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
           </div>
 
           {/* Booking sidebar */}

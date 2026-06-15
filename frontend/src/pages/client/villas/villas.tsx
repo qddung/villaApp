@@ -11,8 +11,6 @@ const ITEMS_PER_PAGE = 6;
 
 const sortOptions = [
   { value: "newest", label: "Mới nhất" },
-  { value: "price-asc", label: "Giá thấp → cao" },
-  { value: "price-desc", label: "Giá cao → thấp" },
   { value: "rating", label: "Đánh giá cao nhất" },
 ] as const;
 
@@ -26,6 +24,9 @@ export default function VillasPage() {
     area: initialArea,
     sortBy: "newest",
   });
+  const filterOptions = useVillaStore((state) => state.filterOptions);
+  const selectedArea = filterOptions?.areas?.find((a) => a.slug === filters.area);
+  const areaName = selectedArea ? selectedArea.name : "Vũng Tàu";
   const [filterOpen, setFilterOpen] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -35,12 +36,7 @@ export default function VillasPage() {
     if (filters.area) {
       result = result.filter((v) => v.areaSlug === filters.area);
     }
-    if (filters.minPrice !== undefined) {
-      result = result.filter((v) => v.pricePerNight >= filters.minPrice!);
-    }
-    if (filters.maxPrice !== undefined) {
-      result = result.filter((v) => v.pricePerNight <= filters.maxPrice!);
-    }
+
     if (filters.bedrooms) {
       result = result.filter((v) => v.bedrooms >= filters.bedrooms!);
     }
@@ -54,12 +50,7 @@ export default function VillasPage() {
     }
 
     switch (filters.sortBy) {
-      case "price-asc":
-        result.sort((a, b) => a.pricePerNight - b.pricePerNight);
-        break;
-      case "price-desc":
-        result.sort((a, b) => b.pricePerNight - a.pricePerNight);
-        break;
+
       case "rating":
         result.sort((a, b) => b.rating - a.rating);
         break;
@@ -83,7 +74,7 @@ export default function VillasPage() {
       <div className="bg-navy py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <h1 className="font-heading text-3xl font-bold text-white sm:text-4xl">
-            Villa Tại Vũng Tàu
+            Villa Tại {areaName}
           </h1>
           <p className="mt-2 text-white/60">
             Tìm thấy {filtered.length} villa phù hợp

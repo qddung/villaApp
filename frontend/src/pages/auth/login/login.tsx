@@ -8,10 +8,9 @@ export default function LoginPage() {
   const [loginPass, setLoginPass] = useState("");
   const [fullName, setFullName] = useState("");
   const [phone, setPhone] = useState("");
-  const [startupName, setStartupName] = useState("");
   const [authError, setAuthError] = useState("");
   
-  const { login, registerStartup } = useAuth();
+  const { login, register } = useAuth();
   const navigate = useNavigate();
 
   async function handleSubmit(e: React.FormEvent) {
@@ -26,13 +25,11 @@ export default function LoginPage() {
         setAuthError(result.error || "Sai tên đăng nhập hoặc mật khẩu.");
       }
     } else {
-      const result = await registerStartup(
+      const result = await register(
         loginUser, 
         loginPass, 
         fullName, 
-        phone, 
-        startupName, 
-        "villa_rental"
+        phone
       );
       if (result.success) {
         // After registering, we need to login
@@ -63,17 +60,6 @@ export default function LoginPage() {
         <form onSubmit={handleSubmit} className="mt-8 space-y-4">
           {!isLoginMode && (
             <>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700">Tên doanh nghiệp / Startup</label>
-                <input
-                  type="text"
-                  value={startupName}
-                  onChange={(e) => setStartupName(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-sm focus:border-gold focus:outline-none focus:ring-1 focus:ring-gold"
-                  placeholder="Villa Vũng Tàu Mới"
-                  required
-                />
-              </div>
               <div>
                 <label className="mb-1 block text-sm font-medium text-gray-700">Họ và tên</label>
                 <input

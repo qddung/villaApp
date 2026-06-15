@@ -26,6 +26,11 @@ export class BookingsController {
     return this.bookingsService.updateStatus(id, status);
   }
 
+  @Patch(':id')
+  update(@Param('id') id: string, @Body() updateDto: Record<string, any>) {
+    return this.bookingsService.update(id, updateDto);
+  }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.bookingsService.remove(id);

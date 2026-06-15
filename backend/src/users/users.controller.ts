@@ -1,4 +1,4 @@
-import { Controller, Get, Patch, Body, UseGuards, Req, Param, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Patch, Body, UseGuards, Req, NotFoundException } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 
@@ -20,7 +20,6 @@ export class UsersController {
         full_name: user.fullName,
         phone: user.phone,
         role: user.role,
-        tenant_id: user.tenantId,
         created_at: user.createdAt,
       }
     };
@@ -32,14 +31,5 @@ export class UsersController {
     const userId = req.user.userId;
     await this.usersService.updateProfile(userId, updateData);
     return { success: true };
-  }
-
-  // Not strictly needing auth for now as UI might need it, but adding guard is safe
-  @UseGuards(JwtAuthGuard)
-  @Get('tenants/:id')
-  async getTenant(@Param('id') id: string) {
-    const tenant = await this.usersService.getTenant(id);
-    if (!tenant) throw new NotFoundException('Tenant not found');
-    return tenant;
   }
 }

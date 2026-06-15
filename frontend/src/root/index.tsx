@@ -28,7 +28,6 @@ import DashboardPage from '@/pages/admin/dashboard/dashboard';
 import AdminPage from '@/pages/admin/villas/villas';
 import BookingsPage from '@/pages/admin/bookings/bookings';
 import CalendarPage from '@/pages/admin/calendar/calendar';
-import PricingPage from '@/pages/admin/pricing/pricing';
 import SettingsPage from '@/pages/admin/settings/settings';
 import LoginPage from '@/pages/auth/login/login';
 
@@ -80,7 +79,6 @@ function AppRoutes() {
         <Route path="villas" element={<AdminPage />} />
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="calendar" element={<CalendarPage />} />
-        <Route path="pricing" element={<PricingPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>

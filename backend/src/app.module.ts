@@ -7,12 +7,12 @@ import { PrismaModule } from './prisma/prisma.module';
 import { BookingsModule } from './bookings/bookings.module';
 import { AuthModule } from './auth/auth.module';
 import { UsersModule } from './users/users.module';
-import { PricingModule } from './pricing/pricing.module';
 import { SettingsModule } from './settings/settings.module';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { AreasModule } from './areas/areas.module';
 
 @Module({
-  imports: [PrismaModule, VillasModule, ImagesModule, BookingsModule, AuthModule, UsersModule, PricingModule, SettingsModule, DashboardModule],
+  imports: [PrismaModule, VillasModule, ImagesModule, BookingsModule, AuthModule, UsersModule, SettingsModule, DashboardModule, AreasModule],
   controllers: [AppController],
   providers: [AppService],
 })

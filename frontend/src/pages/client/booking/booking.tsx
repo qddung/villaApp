@@ -3,13 +3,8 @@ import { useState } from "react";
 import { CalendarDays, Users, MapPin, Check, Car, UtensilsCrossed, Compass } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
 import { formatPrice } from "@/lib/utils";
-import { createBooking } from "@/lib/api";
-
-const extras = [
-  { id: "transfer", name: "Xe đưa đón sân bay", price: 800000, icon: Car },
-  { id: "chef", name: "Chef riêng (1 bữa tối)", price: 2000000, icon: UtensilsCrossed },
-  { id: "tour", name: "Tour khám phá Vũng Tàu", price: 1500000, icon: Compass },
-];
+import { createBooking, fetchSettings } from "@/lib/api";
+import { toast } from "sonner";
 
 export default function BookingPage() {
   const [searchParams] = useSearchParams();
@@ -19,9 +14,16 @@ export default function BookingPage() {
   const checkIn = searchParams.get("checkIn") || "";
   const checkOut = searchParams.get("checkOut") || "";
   const guestsParam = searchParams.get("guests") || "2";
+  const bookingType = searchParams.get("type") === "zalo" ? "ZALO" : "APP";
+  const isZalo = bookingType === "ZALO";
 
   const getVillaBySlug = useVillaStore((state) => state.getVillaBySlug);
   const villa = getVillaBySlug(villaSlug);
+
+  const formatDateTime = (dt: string) => {
+    if (!dt) return "";
+    return dt.replace("T", " ");
+  };
 
   const [form, setForm] = useState({
     name: "",
@@ -48,18 +50,7 @@ export default function BookingPage() {
     )
   );
 
-  const subtotal = nights * villa.pricePerNight;
-  const extrasTotal = extras
-    .filter((e) => selectedExtras.includes(e.id))
-    .reduce((sum, e) => sum + e.price, 0);
-  const serviceFee = Math.round(subtotal * 0.1);
-  const total = subtotal + extrasTotal + serviceFee;
-
-  const toggleExtra = (id: string) => {
-    setSelectedExtras((prev) =>
-      prev.includes(id) ? prev.filter((e) => e !== id) : [...prev, id]
-    );
-  };
+  const total = nights * villa.pricePerNight;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,12 +66,19 @@ export default function BookingPage() {
         checkOut: checkOut,
         guests: parseInt(guestsParam, 10),
         total: total,
+        priceAtBooking: villa.pricePerNight,
+        bookingType: bookingType,
       });
+      if (isZalo) {
+        const settings = await fetchSettings();
+        const zaloPhone = settings?.contactPhone || '090000000';
+        window.open(`https://zalo.me/${zaloPhone}`, '_blank');
+      }
       navigate(
-        `/booking/confirmation?villa=${villa.slug}&name=${encodeURIComponent(form.name)}&total=${total}&nights=${nights}`
+        `/booking/confirmation?villa=${villa.slug}&name=${encodeURIComponent(form.name)}&total=${total}&nights=${nights}&type=${bookingType}`
       );
     } catch (error) {
-      alert("Đã có lỗi xảy ra khi đặt phòng. Vui lòng thử lại.");
+      toast.error("Đã có lỗi xảy ra khi đặt phòng. Vui lòng thử lại.");
       setSubmitting(false);
     }
   };
@@ -88,16 +86,83 @@ export default function BookingPage() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <h1 className="font-heading text-3xl font-bold text-navy">Đặt Phòng</h1>
-        <p className="mt-2 text-gray-500">Hoàn tất thông tin để đặt villa</p>
+        <h1 className="font-heading text-3xl font-bold text-navy">
+          {isZalo ? "Liên hệ Zalo đặt phòng" : "Xác nhận đặt phòng"}
+        </h1>
+        <p className="mt-2 text-gray-500">
+          {isZalo ? "Vui lòng để lại thông tin để nhận chiết khấu trước khi mở Zalo" : "Hoàn tất thông tin để giữ phòng cho chuyến đi của bạn"}
+        </p>
 
         <form onSubmit={handleSubmit} className="mt-8 grid gap-8 lg:grid-cols-5">
           {/* Form section */}
           <div className="space-y-8 lg:col-span-3">
+            {/* Booking details */}
+            <div className="rounded-2xl bg-white p-6 shadow-sm">
+              <h2 className="font-heading text-lg font-semibold text-navy">
+                Chi tiết yêu cầu tư vấn
+              </h2>
+
+              <div className="mt-4 flex gap-4">
+                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
+                  <img
+                    src={villa.images[0]}
+                    alt={villa.name}
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-navy">{villa.name}</h3>
+                  <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-400">
+                    <MapPin className="h-3 w-3" />
+                    {villa.area}
+                  </p>
+                </div>
+              </div>
+
+              <div className="mt-4 flex gap-4 rounded-xl bg-sand p-4">
+                <div className="flex items-center gap-2 text-sm">
+                  <CalendarDays className="h-4 w-4 text-gold" />
+                  <div>
+                    <div className="text-xs text-gray-400">Ngày đến</div>
+                    <div className="font-medium">{formatDateTime(checkIn)}</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <CalendarDays className="h-4 w-4 text-gold" />
+                  <div>
+                    <div className="text-xs text-gray-400">Ngày đi</div>
+                    <div className="font-medium">{formatDateTime(checkOut)}</div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-sm">
+                  <Users className="h-4 w-4 text-gold" />
+                  <div>
+                    <div className="text-xs text-gray-400">Số khách</div>
+                    <div className="font-medium">{guestsParam}</div>
+                  </div>
+                </div>
+              </div>
+              <div className="mt-4 border-t border-gray-100 pt-4">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">{formatPrice(villa.pricePerNight)} x {nights} ngày</span>
+                  <span className="font-medium text-navy">{formatPrice(total)}</span>
+                </div>
+                <div className="mt-4 flex justify-between font-heading text-lg font-bold">
+                  <span className="text-navy">Tổng tiền</span>
+                  <span className="text-gold">{formatPrice(total)}</span>
+                </div>
+                {isZalo && (
+                  <p className="mt-2 text-right text-xs italic text-blue-500">
+                    * Giá trên chưa bao gồm chiết khấu Zalo
+                  </p>
+                )}
+              </div>
+            </div>
+
             {/* Guest info */}
             <div className="rounded-2xl bg-white p-6 shadow-sm">
               <h2 className="font-heading text-lg font-semibold text-navy">
-                Thông tin khách
+                Thông tin liên hệ
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
                 <div>
@@ -154,142 +219,36 @@ export default function BookingPage() {
               </div>
             </div>
 
-            {/* Extra services */}
-            <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-lg font-semibold text-navy">
-                Dịch vụ thêm
-              </h2>
-              <div className="mt-4 space-y-3">
-                {extras.map((extra) => (
-                  <label
-                    key={extra.id}
-                    className="flex cursor-pointer items-center gap-4 rounded-xl border border-gray-200 p-4 transition-colors hover:border-gold/50"
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedExtras.includes(extra.id)}
-                      onChange={() => toggleExtra(extra.id)}
-                      className="accent-gold"
-                    />
-                    <extra.icon className="h-5 w-5 text-gold" />
-                    <div className="flex-1">
-                      <span className="text-sm font-medium text-gray-800">
-                        {extra.name}
-                      </span>
-                    </div>
-                    <span className="text-sm font-semibold text-navy">
-                      {formatPrice(extra.price)}
-                    </span>
-                  </label>
-                ))}
-              </div>
-            </div>
 
-            {/* Payment placeholder */}
-            <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-lg font-semibold text-navy">
-                Thanh toán
-              </h2>
-              <div className="mt-4 rounded-xl border-2 border-dashed border-gray-200 p-8 text-center">
-                <p className="text-sm text-gray-400">
-                  Tích hợp VNPay / Momo sẽ được thêm sau.
-                  <br />
-                  Hiện tại đặt phòng sẽ được xác nhận qua điện thoại.
-                </p>
-              </div>
-            </div>
           </div>
 
-          {/* Order summary */}
+          {/* Submit section */}
           <div className="lg:col-span-2">
             <div className="sticky top-28 rounded-2xl bg-white p-6 shadow-sm">
               <h2 className="font-heading text-lg font-semibold text-navy">
-                Tóm tắt đơn đặt
+                {isZalo ? "Chuyển sang Zalo" : "Xác nhận"}
               </h2>
-
-              <div className="mt-4 flex gap-4">
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
-                  <img
-                    src={villa.images[0]}
-                    alt={villa.name}
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                </div>
-                <div>
-                  <h3 className="font-semibold text-navy">{villa.name}</h3>
-                  <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-400">
-                    <MapPin className="h-3 w-3" />
-                    {villa.area}
-                  </p>
-                </div>
-              </div>
-
-              <div className="mt-4 flex gap-4 rounded-xl bg-sand p-4">
-                <div className="flex items-center gap-2 text-sm">
-                  <CalendarDays className="h-4 w-4 text-gold" />
-                  <div>
-                    <div className="text-xs text-gray-400">Ngày đến</div>
-                    <div className="font-medium">{checkIn}</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <CalendarDays className="h-4 w-4 text-gold" />
-                  <div>
-                    <div className="text-xs text-gray-400">Ngày đi</div>
-                    <div className="font-medium">{checkOut}</div>
-                  </div>
-                </div>
-                <div className="flex items-center gap-2 text-sm">
-                  <Users className="h-4 w-4 text-gold" />
-                  <div>
-                    <div className="text-xs text-gray-400">Khách</div>
-                    <div className="font-medium">{guestsParam}</div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 space-y-2 border-t border-gray-100 pt-4">
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">
-                    {formatPrice(villa.pricePerNight)} &times; {nights} đêm
-                  </span>
-                  <span className="font-medium">{formatPrice(subtotal)}</span>
-                </div>
-                {selectedExtras.length > 0 && (
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-500">Dịch vụ thêm</span>
-                    <span className="font-medium">
-                      {formatPrice(extrasTotal)}
-                    </span>
-                  </div>
-                )}
-                <div className="flex justify-between text-sm">
-                  <span className="text-gray-500">Phí dịch vụ</span>
-                  <span className="font-medium">{formatPrice(serviceFee)}</span>
-                </div>
-                <div className="flex justify-between border-t border-gray-100 pt-2 text-lg font-bold">
-                  <span>Tổng cộng</span>
-                  <span className="text-navy">{formatPrice(total)}</span>
-                </div>
-              </div>
-
-              <button
+              <p className="mt-2 text-sm text-gray-500">
+                {isZalo ? "Hệ thống sẽ ghi nhận thông tin và tự động mở Zalo để bạn chat trực tiếp với chủ trọ." : "Hãy kiểm tra lại thông tin và nhấn xác nhận để giữ phòng."}
+              </p>              <button
                 type="submit"
                 disabled={submitting}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-gold py-3.5 font-semibold text-navy transition-colors hover:bg-gold-light disabled:opacity-60"
+                className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-colors disabled:opacity-60 ${
+                  isZalo ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gold text-navy hover:bg-gold-light"
+                }`}
               >
                 {submitting ? (
                   "Đang xử lý..."
                 ) : (
                   <>
                     <Check className="h-5 w-5" />
-                    Xác nhận đặt phòng
+                    {isZalo ? "Gửi yêu cầu & Mở Zalo" : "Xác nhận đặt phòng"}
                   </>
                 )}
               </button>
 
               <p className="mt-3 text-center text-xs text-gray-400">
-                Đội ngũ sẽ liên hệ xác nhận trong vòng 30 phút
+                {isZalo ? "Vui lòng không chặn popup trên trình duyệt" : "Đội ngũ sẽ liên hệ xác nhận trong vòng 30 phút"}
               </p>
             </div>
           </div>

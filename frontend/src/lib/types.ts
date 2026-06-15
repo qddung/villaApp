@@ -35,8 +35,8 @@ export interface Review {
 }
 
 export interface VillaRules {
-  checkIn: string;
-  checkOut: string;
+  checkIn?: string;
+  checkOut?: string;
   policies: string[];
 }
 
@@ -76,6 +76,8 @@ export interface BookingDetails {
   subtotal: number;
   serviceFee: number;
   total: number;
+  priceAtBooking?: number;
+  bookingType?: "APP" | "ZALO";
   extras: BookingExtra[];
 }
 

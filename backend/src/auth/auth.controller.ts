@@ -15,9 +15,4 @@ export class AuthController {
   register(@Body() registerDto: Record<string, any>) {
     return this.authService.register(registerDto);
   }
-
-  @Post('register-startup')
-  registerStartup(@Body() registerDto: Record<string, any>) {
-    return this.authService.registerStartup(registerDto);
-  }
 }

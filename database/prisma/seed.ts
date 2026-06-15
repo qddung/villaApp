@@ -45,23 +45,7 @@ interface VillaJson {
 async function main() {
   console.log('🌱 Seeding database...');
 
-  // Create default tenant
-  let tenant = await prisma.tenant.findFirst({
-    where: { name: 'Villa Vung Tau Default' },
-  });
 
-  if (!tenant) {
-    tenant = await prisma.tenant.create({
-      data: {
-        name: 'Villa Vung Tau Default',
-        businessType: 'Villa Rental',
-        status: 'active',
-      },
-    });
-    console.log('Created default Tenant:', tenant.id);
-  }
-
-  // Insert initial admin user
   const adminExists = await prisma.user.findUnique({
     where: { username: 'admin' },
   });
@@ -75,14 +59,40 @@ async function main() {
         email: 'admin@villavungtau.com',
         password: hashedPassword,
         fullName: 'System Admin',
-        role: 'owner',
-        tenantId: tenant.id,
+        role: 'admin',
       },
     });
     console.log('Seeded initial admin user: admin / admin123');
   } else {
     console.log('Admin user already exists.');
   }
+
+  // Seed predefined areas first
+  const initialAreas = [
+    { slug: 'bai-sau', name: 'Bãi Sau', isFamous: true },
+    { slug: 'ho-tram', name: 'Hồ Tràm', isFamous: true },
+    { slug: 'long-hai', name: 'Long Hải', isFamous: true },
+    { slug: 'bai-truoc', name: 'Bãi Trước', isFamous: false },
+  ];
+
+  const areaMap = new Map<string, string>();
+
+  for (const area of initialAreas) {
+    const createdArea = await prisma.area.upsert({
+      where: { slug: area.slug },
+      update: {
+        name: area.name,
+        isFamous: area.isFamous,
+      },
+      create: {
+        slug: area.slug,
+        name: area.name,
+        isFamous: area.isFamous,
+      },
+    });
+    areaMap.set(area.slug, createdArea.id);
+  }
+  console.log(`✅ Seeded predefined areas successfully!`);
 
   // Read the existing JSON data
   const dataPath = path.join(__dirname, '..', '..', 'backend', 'src', 'data', 'villas.json');
@@ -92,18 +102,33 @@ async function main() {
   for (const villa of villas) {
     console.log(`  → Seeding villa: ${villa.name}`);
 
+    let areaId = areaMap.get(villa.areaSlug);
+    if (!areaId) {
+      // Create area if it doesn't exist
+      const newArea = await prisma.area.upsert({
+        where: { slug: villa.areaSlug },
+        update: {},
+        create: {
+          slug: villa.areaSlug,
+          name: villa.area,
+        },
+      });
+      areaId = newArea.id;
+      areaMap.set(villa.areaSlug, areaId);
+    }
+
     await prisma.villa.upsert({
       where: { slug: villa.slug },
-      update: {},
+      update: {
+        areaId: areaId
+      },
       create: {
         id: villa.id,
-        tenantId: tenant.id,
         slug: villa.slug,
         name: villa.name,
         tagline: villa.tagline,
         description: villa.description,
-        area: villa.area,
-        areaSlug: villa.areaSlug,
+        areaId: areaId,
         address: villa.address,
         bedrooms: villa.bedrooms,
         bathrooms: villa.bathrooms,

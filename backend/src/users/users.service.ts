@@ -27,8 +27,4 @@ export class UsersService {
       data,
     });
   }
-
-  async getTenant(id: string) {
-    return this.prisma.tenant.findUnique({ where: { id } });
-  }
 }

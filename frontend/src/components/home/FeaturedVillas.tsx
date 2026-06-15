@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 
 import { MapPin, Bed, Users, Star, ArrowRight } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
@@ -29,13 +30,25 @@ export default function FeaturedVillas() {
           </Link>
         </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((villa) => (
-            <Link
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
+        >
+          {featured.map((villa, index) => (
+            <motion.div
               key={villa.id}
-              to={`/villas/${villa.slug}`}
-              className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-xl"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
             >
+              <Link
+                to={`/villas/${villa.slug}`}
+                className="block group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-navy/10"
+              >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
                   src={villa.images[0]}
@@ -70,14 +83,14 @@ export default function FeaturedVillas() {
                 </div>
                 <div className="mt-4 flex items-baseline gap-1 border-t border-gray-50 pt-4">
                   <span className="text-lg font-bold text-navy">
-                    {formatPrice(villa.pricePerNight)}
+                    Liên hệ
                   </span>
-                  <span className="text-sm text-gray-400">/ đêm</span>
                 </div>
               </div>
-            </Link>
+              </Link>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

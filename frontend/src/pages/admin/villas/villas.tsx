@@ -123,8 +123,20 @@ export default function VillasPage() {
       editing.slug = slugify(editing.name);
     }
     setSaving(true);
+
+    // Clean up empty lines before saving
+    const cleanedVilla = {
+      ...editing,
+      amenities: editing.amenities?.map(s => s.trim()).filter(Boolean) || [],
+      highlights: editing.highlights?.map(s => s.trim()).filter(Boolean) || [],
+      rules: {
+        ...editing.rules,
+        policies: editing.rules?.policies?.map(s => s.trim()).filter(Boolean) || []
+      }
+    };
+
     try {
-      await saveVilla(editing);
+      await saveVilla(cleanedVilla);
       await loadVillas();
       setMessage("Đã lưu thành công!");
       setEditing(null);
@@ -144,8 +156,8 @@ export default function VillasPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between border-b border-gray-200 pb-4">
-        <h1 className="font-heading text-2xl font-bold text-navy">Quản Lý Villa</h1>
+      <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
+        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Quản Lý Villa</h1>
         {!editing && (
           <button onClick={startNew} className="flex items-center gap-2 rounded-xl bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-light">
             <Plus className="h-4 w-4" /> Thêm Villa Mới
@@ -158,13 +170,13 @@ export default function VillasPage() {
       {!editing ? (
         <div className="space-y-4">
           {villasList.map((villa) => (
-            <div key={villa.id} className="flex items-center justify-between rounded-2xl bg-white p-5 shadow-sm">
+            <div key={villa.id} className="flex items-center justify-between rounded-2xl bg-white dark:bg-slate-950 p-5 shadow-sm border border-transparent dark:border-slate-800 transition-colors">
               <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sand">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sand dark:bg-gold/10">
                   <Bed className="h-5 w-5 text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-navy">{villa.name}</h3>
+                  <h3 className="font-heading text-lg font-semibold text-navy dark:text-white">{villa.name}</h3>
                   <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400">
                     <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{villa.area}</span>
                     <span>{villa.bedrooms} PN &middot; {villa.maxGuests} khách</span>
@@ -172,22 +184,22 @@ export default function VillasPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={() => startEdit(villa)} className="rounded-lg border px-4 py-2 text-sm text-gray-700 hover:bg-gray-50">Sửa</button>
-                <button onClick={() => handleDelete(villa.id)} className="rounded-lg border border-red-200 px-3 py-2 text-red-500 hover:bg-red-50"><Trash2 className="h-4 w-4" /></button>
+                <button onClick={() => startEdit(villa)} className="rounded-lg border dark:border-slate-700 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">Sửa</button>
+                <button onClick={() => handleDelete(villa.id)} className="rounded-lg border border-red-200 dark:border-red-900 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"><Trash2 className="h-4 w-4" /></button>
               </div>
             </div>
           ))}
           {villasList.length === 0 && (
-            <div className="py-12 text-center text-gray-500 bg-white rounded-2xl shadow-sm">Chưa có villa nào.</div>
+            <div className="py-12 text-center text-gray-500 dark:text-slate-400 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-transparent dark:border-slate-800">Chưa có villa nào.</div>
           )}
         </div>
       ) : (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-heading text-xl font-semibold text-navy">{editing.id ? "Sửa Villa" : "Thêm Mới"}</h2>
-            <button onClick={() => setEditing(null)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-navy"><X className="h-4 w-4" />Hủy</button>
+            <h2 className="font-heading text-xl font-semibold text-navy dark:text-white">{editing.id ? "Sửa Villa" : "Thêm Mới"}</h2>
+            <button onClick={() => setEditing(null)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-navy dark:hover:text-white"><X className="h-4 w-4" />Hủy</button>
           </div>
-          
+
           <Section title="Thông tin cơ bản">
             <div className="grid gap-4 sm:grid-cols-2">
               <Field label="Tên villa *"><input type="text" value={editing.name} onChange={e => updateField("name", e.target.value)} className="input" /></Field>
@@ -199,20 +211,73 @@ export default function VillasPage() {
                 </select>
               </Field>
               <Field label="Địa chỉ *"><input type="text" value={editing.address} onChange={e => updateField("address", e.target.value)} className="input" /></Field>
+
+              <div className="sm:col-span-2">
+                <Field label="Mô tả"><textarea value={editing.description} onChange={e => updateField("description", e.target.value)} className="input" rows={3} /></Field>
+              </div>
+            </div>
+          </Section>
+
+          <Section title="Chi tiết & Giá cả">
+            <div className="grid gap-4 sm:grid-cols-4">
+              <Field label="Số phòng ngủ"><input type="number" value={editing.bedrooms} onChange={e => updateField("bedrooms", Number(e.target.value))} className="input" /></Field>
+              <Field label="Số phòng tắm"><input type="number" value={editing.bathrooms} onChange={e => updateField("bathrooms", Number(e.target.value))} className="input" /></Field>
+              <Field label="Số khách tối đa"><input type="number" value={editing.maxGuests} onChange={e => updateField("maxGuests", Number(e.target.value))} className="input" /></Field>
+              <Field label="Diện tích (m2)"><input type="number" value={editing.size} onChange={e => updateField("size", Number(e.target.value))} className="input" /></Field>
+
+              <Field label="Giá ngày thường"><input type="number" value={editing.pricePerNight} onChange={e => updateField("pricePerNight", Number(e.target.value))} className="input" /></Field>
+              <Field label="Giá cuối tuần"><input type="number" value={editing.priceWeekend} onChange={e => updateField("priceWeekend", Number(e.target.value))} className="input" /></Field>
+              <Field label="Giá ngày lễ"><input type="number" value={editing.priceHoliday} onChange={e => updateField("priceHoliday", Number(e.target.value))} className="input" /></Field>
+            </div>
+          </Section>
+
+          <Section title="Đặc điểm & Tiện nghi">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <Field label="Tiện nghi (mỗi dòng 1 tiện nghi)">
+                <textarea
+                  value={editing.amenities?.join("\n") || ""}
+                  onChange={e => updateField("amenities", e.target.value.split("\n"))}
+                  className="input" rows={4}
+                  placeholder="Hồ bơi riêng&#10;BBQ ngoài trời&#10;Karaoke..."
+                />
+              </Field>
+              <Field label="Điểm nổi bật (mỗi dòng 1 điểm)">
+                <textarea
+                  value={editing.highlights?.join("\n") || ""}
+                  onChange={e => updateField("highlights", e.target.value.split("\n"))}
+                  className="input" rows={4}
+                  placeholder="View biển tuyệt đẹp&#10;Thiết kế hiện đại..."
+                />
+              </Field>
+            </div>
+          </Section>
+
+          <Section title="Quy tắc nhà">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="sm:col-span-2">
+                <Field label="Chính sách khác (mỗi dòng 1 chính sách)">
+                  <textarea
+                    value={editing.rules?.policies?.join("\n") || ""}
+                    onChange={e => updateField("rules", { ...editing.rules, policies: e.target.value.split("\n") })}
+                    className="input" rows={4}
+                    placeholder="Không hút thuốc trong phòng&#10;Không mang theo thú cưng..."
+                  />
+                </Field>
+              </div>
             </div>
           </Section>
 
           <Section title="Hình ảnh">
             <div className="mb-6">
-              <p className="mb-2 text-sm font-medium text-gray-700">Ảnh chính (main)</p>
+              <p className="mb-2 text-sm font-medium text-gray-700 dark:text-slate-300">Ảnh chính (main)</p>
               <div className="flex items-start gap-4">
                 {mainImage ? (
                   <div className="group relative">
-                    <img src={getFullImageUrl(mainImage) || ""} className="h-40 w-60 rounded-xl object-cover" alt="Main" />
+                    <img src={getFullImageUrl(mainImage) || ""} className="h-40 w-60 rounded-xl object-cover border dark:border-slate-800" alt="Main" />
                     <button onClick={() => handleDeleteImage(mainImage)} className="absolute -right-2 -top-2 hidden rounded-full bg-red-500 p-1 text-white group-hover:block"><X className="h-3 w-3" /></button>
                   </div>
-                ) : <div className="flex h-40 w-60 items-center justify-center border-2 border-dashed text-gray-300 rounded-xl"><ImageIcon className="h-10 w-10" /></div>}
-                <label className="cursor-pointer rounded-lg border px-4 py-2 hover:bg-gray-50"><input type="file" className="hidden" onChange={e => e.target.files && uploadImage(e.target.files[0], "main")} />Upload ảnh chính</label>
+                ) : <div className="flex h-40 w-60 items-center justify-center border-2 border-dashed border-gray-300 dark:border-slate-700 text-gray-400 dark:text-slate-500 rounded-xl"><ImageIcon className="h-10 w-10" /></div>}
+                <label className="cursor-pointer rounded-lg border dark:border-slate-700 text-gray-700 dark:text-slate-300 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"><input type="file" className="hidden" onChange={e => e.target.files && uploadImage(e.target.files[0], "main")} />Upload ảnh chính</label>
               </div>
             </div>
           </Section>
@@ -224,7 +289,8 @@ export default function VillasPage() {
       )}
 
       <style>{`
-        .input { width: 100%; border-radius: 0.75rem; border: 1px solid #e5e7eb; padding: 0.625rem 1rem; font-size: 0.875rem; }
+        .input { width: 100%; border-radius: 0.75rem; border: 1px solid #e5e7eb; padding: 0.625rem 1rem; font-size: 0.875rem; background-color: transparent; }
+        .dark .input { border-color: #334155; color: #f1f5f9; background-color: rgba(15, 23, 42, 0.3); }
         .input:focus { border-color: #C5A572; box-shadow: 0 0 0 1px #C5A572; outline: none; }
       `}</style>
     </div>
@@ -232,9 +298,9 @@ export default function VillasPage() {
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return <div className="rounded-2xl bg-white p-6 shadow-sm"><h3 className="mb-4 font-heading text-lg font-semibold text-navy">{title}</h3>{children}</div>;
+  return <div className="rounded-2xl bg-white dark:bg-slate-950 p-6 shadow-sm border border-transparent dark:border-slate-800 transition-colors"><h3 className="mb-4 font-heading text-lg font-semibold text-navy dark:text-white">{title}</h3>{children}</div>;
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  return <div><label className="mb-1 block text-sm font-medium text-gray-700">{label}</label>{children}</div>;
+  return <div><label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">{label}</label>{children}</div>;
 }

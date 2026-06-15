@@ -8,11 +8,9 @@ import { translateAuthError } from '@/lib/errorTranslator';
 interface AdminContextType {
   profile: UserProfile | null;
   role: UserRole | null;
-  startupName: string | null;
   loading: boolean;
   updateProfile: (fullName: string, phone: string) => Promise<{ success: boolean; error?: string }>;
   refreshProfile: () => Promise<void>;
-  refreshStartup: () => Promise<void>;
 }
 
 const AdminContext = createContext<AdminContextType | undefined>(undefined);
@@ -20,7 +18,6 @@ const AdminContext = createContext<AdminContextType | undefined>(undefined);
 export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { user, token, logout, loading: authLoading } = useAuth();
   const [profile, setProfile] = useState<UserProfile | null>(null);
-  const [startupName, setStartupName] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   const { showToast } = useNotification();
@@ -51,7 +48,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
             full_name: '',
             phone: '',
             role: (decoded.role as UserRole) || 'pending',
-            tenant_id: decoded.tenantId,
             created_at: new Date().toISOString(),
           };
           return minimalProfile;
@@ -65,40 +61,10 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   };
 
-  const fetchStartupName = async (tenantId: string): Promise<string | null> => {
-    try {
-      const response = await authFetch(`/api/tenants/${tenantId}`);
-      if (response.ok) {
-        const data = await response.json();
-        return data.name || null;
-      }
-      return null;
-    } catch (err) {
-      console.error('[AdminContext] 💥 fetchStartupName error:', err);
-      return null;
-    }
-  };
-
   const refreshProfile = async () => {
     if (!token || !user) return;
     const prof = await fetchProfile(user.id, user.email);
     setProfile(prof);
-
-    if (prof?.tenant_id) {
-      const name = await fetchStartupName(prof.tenant_id);
-      setStartupName(name);
-    } else {
-      setStartupName(null);
-    }
-  };
-
-  const refreshStartup = async () => {
-    if (!profile?.tenant_id) {
-      setStartupName(null);
-      return;
-    }
-    const name = await fetchStartupName(profile.tenant_id);
-    setStartupName(name);
   };
 
   const updateProfile = async (fullName: string, phone: string) => {
@@ -136,13 +102,6 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       try {
         const prof = await fetchProfile(user.id, user.email);
         setProfile(prof);
-
-        if (prof?.tenant_id) {
-          const name = await fetchStartupName(prof.tenant_id);
-          setStartupName(name);
-        } else {
-          setStartupName(null);
-        }
       } catch (error) {
         console.error('[AdminContext] ❌ Error loading profile:', error);
         showToast('Không thể tải hồ sơ người dùng. Vui lòng thử lại.', 'error');
@@ -179,11 +138,9 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       value={{
         profile,
         role: profile ? profile.role : null,
-        startupName,
         loading,
         updateProfile,
         refreshProfile,
-        refreshStartup,
       }}
     >
       {children}

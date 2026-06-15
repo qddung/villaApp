@@ -12,7 +12,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
   return (
     <Link
       to={`/villas/${villa.slug}`}
-      className="group overflow-hidden rounded-2xl bg-white shadow-sm transition-all hover:shadow-xl"
+      className="group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-navy/10"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
@@ -20,11 +20,11 @@ export default function VillaCard({ villa }: VillaCardProps) {
           alt={villa.name}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold backdrop-blur-sm">
+        {/* <div className="absolute right-3 top-3 flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-xs font-semibold backdrop-blur-sm">
           <Star className="h-3.5 w-3.5 fill-yellow-400 text-yellow-400" />
           {villa.rating}
           <span className="text-gray-400">({villa.reviewCount})</span>
-        </div>
+        </div> */}
         {villa.featured && (
           <div className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">
             Nổi bật
@@ -39,7 +39,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
         <h3 className="mt-2 font-heading text-lg font-semibold text-navy transition-colors group-hover:text-gold">
           {villa.name}
         </h3>
-        <p className="mt-1 line-clamp-2 text-sm text-gray-500">{villa.tagline}</p>
+        <p className="mt-1 line-clamp-2 text-sm text-gray-500 font-light">{villa.tagline}</p>
 
         <div className="mt-4 flex flex-wrap items-center gap-4 text-xs text-gray-400">
           <span className="flex items-center gap-1">
@@ -61,7 +61,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
           <span className="text-lg font-bold text-navy">
             {formatPrice(villa.pricePerNight)}
           </span>
-          <span className="text-sm text-gray-400">/ đêm</span>
+          <span className="text-xs text-gray-500 font-medium">/ ngày</span>
         </div>
       </div>
     </Link>

@@ -3,17 +3,14 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class SettingsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
-  async getSettings(tenantId: string) {
-    let settings = await this.prisma.settings.findUnique({
-      where: { tenantId },
-    });
+  async getSettings() {
+    let settings = await this.prisma.settings.findFirst();
 
     if (!settings) {
       settings = await this.prisma.settings.create({
         data: {
-          tenantId,
           bookingConfirmationTemplate: "Xin chào {CustomerName},\n\nChúng tôi xin xác nhận đơn đặt phòng của bạn tại {VillaName} từ ngày {CheckIn} đến {CheckOut} đã được xác nhận.\n\nCảm ơn bạn đã tin tưởng dịch vụ của chúng tôi!",
         },
       });
@@ -22,19 +19,14 @@ export class SettingsService {
     return settings;
   }
 
-  async updateSettings(tenantId: string, data: any) {
-    return this.prisma.settings.upsert({
-      where: { tenantId },
-      update: {
+  async updateSettings(data: any) {
+    const settings = await this.getSettings();
+    return this.prisma.settings.update({
+      where: { id: settings.id },
+      data: {
         contactEmail: data.contactEmail,
         contactPhone: data.contactPhone,
         bookingConfirmationTemplate: data.bookingConfirmationTemplate,
-      },
-      create: {
-        tenantId,
-        contactEmail: data.contactEmail,
-        contactPhone: data.contactPhone,
-        bookingConfirmationTemplate: data.bookingConfirmationTemplate || "Xin chào {CustomerName},\n\nChúng tôi xin xác nhận đơn đặt phòng của bạn tại {VillaName} từ ngày {CheckIn} đến {CheckOut} đã được xác nhận.",
       },
     });
   }

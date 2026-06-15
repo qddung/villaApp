@@ -11,7 +11,10 @@
 /backend/dist
 /frontend/dist
 /database/dist
+note.txt
+/image
 
+/design-system
 /.pnp
 .pnp.*
 .yarn/*

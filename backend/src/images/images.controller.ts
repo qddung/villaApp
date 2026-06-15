@@ -29,8 +29,8 @@ export class ImagesController {
     return this.imagesService.deleteImage(slug, imageUrl);
   }
 
-  @Get('villa-image/*')
-  serveImage(@Param('0') imagePath: string, @Res() res: Response) {
+  @Get('villa-image/*path')
+  serveImage(@Param('path') imagePath: string, @Res() res: Response) {
     const { buffer, contentType } = this.imagesService.serveImage(imagePath);
     res.setHeader('Content-Type', contentType);
     res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');

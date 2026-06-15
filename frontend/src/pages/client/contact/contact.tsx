@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Phone, Mail, MapPin, Clock, Send, CheckCircle2 } from "lucide-react";
 
 export default function ContactPage() {
@@ -10,10 +10,40 @@ export default function ContactPage() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [settings, setSettings] = useState<any>(null);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  useEffect(() => {
+    import("@/lib/api").then(({ fetchSettings }) => {
+      fetchSettings().then((data) => {
+        if (data) setSettings(data);
+      });
+    });
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    try {
+      const { createBooking } = await import("@/lib/api");
+      const { toast } = await import("sonner");
+      
+      const now = new Date().toISOString();
+      await createBooking({
+        name: form.name,
+        email: form.email,
+        phone: form.phone || "N/A",
+        note: `[Liên hệ - ${form.subject || 'Khác'}] ${form.message}`,
+        checkIn: now,
+        checkOut: now,
+        guests: 1,
+        total: 0,
+        bookingType: "CONTACT"
+      });
+      setSubmitted(true);
+      toast.success("Đã gửi tin nhắn thành công!");
+    } catch (error) {
+      const { toast } = await import("sonner");
+      toast.error("Lỗi khi gửi tin nhắn, vui lòng thử lại sau.");
+    }
   };
 
   return (
@@ -48,14 +78,14 @@ export default function ContactPage() {
                 {
                   icon: Phone,
                   title: "Điện thoại / Zalo",
-                  value: "0909 123 456",
-                  href: "tel:+84909123456",
+                  value: settings?.contactPhone || "0909 123 456",
+                  href: `tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`,
                 },
                 {
                   icon: Mail,
                   title: "Email",
-                  value: "hello@villavungtau.vn",
-                  href: "mailto:hello@villavungtau.vn",
+                  value: settings?.contactEmail || "hello@villavungtau.vn",
+                  href: `mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`,
                 },
                 {
                   icon: MapPin,

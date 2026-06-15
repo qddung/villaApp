@@ -2,7 +2,7 @@ import { Injectable, BadRequestException, ForbiddenException, NotFoundException 
 import * as fs from 'fs';
 import * as path from 'path';
 
-const VILLA_DATA_DIR = path.join(process.cwd(), 'src/image/villa_data');
+const VILLA_DATA_DIR = path.join(process.cwd(), 'public/img/villa_data');
 const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
 
 function isImage(filename: string): boolean {
@@ -80,7 +80,7 @@ export class ImagesService {
 
     const villaDir = path.join(VILLA_DATA_DIR, slug);
     const prefix = `/api/villa-image/${slug}/`;
-    
+
     if (!imageUrl.startsWith(prefix)) {
       throw new BadRequestException('invalid imageUrl');
     }
@@ -99,8 +99,10 @@ export class ImagesService {
     return { success: true };
   }
 
-  serveImage(imagePath: string): { buffer: Buffer; contentType: string } {
-    const filePath = path.join(VILLA_DATA_DIR, imagePath);
+  serveImage(imagePath: string | string[]): { buffer: Buffer; contentType: string } {
+    const pathString = Array.isArray(imagePath) ? imagePath.join('/') : imagePath;
+    const filePath = path.join(VILLA_DATA_DIR, pathString);
+
     const resolved = path.resolve(filePath);
 
     if (!resolved.startsWith(path.resolve(VILLA_DATA_DIR))) {

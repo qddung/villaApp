@@ -9,10 +9,7 @@ export class JwtAuthGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const authHeader = request.headers.authorization;
     if (!authHeader) {
-      // For development, we can mock a tenantId if no token is provided
-      request.user = { tenantId: 'mock-tenant-id', role: 'owner' };
-      return true;
-      // throw new UnauthorizedException('No authorization header');
+      throw new UnauthorizedException('No authorization header');
     }
 
     const token = authHeader.split(' ')[1];
@@ -20,9 +17,7 @@ export class JwtAuthGuard implements CanActivate {
       const payload = await this.jwtService.verifyAsync(token);
       request.user = payload;
     } catch {
-      // For development, fallback mock
-      request.user = { tenantId: 'mock-tenant-id', role: 'owner' };
-      // throw new UnauthorizedException('Invalid token');
+      throw new UnauthorizedException('Invalid token');
     }
     return true;
   }

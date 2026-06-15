@@ -1,0 +1,15 @@
+version: "2.0"
+project:
+  name: "VillaVungTau"
+  type: "Luxury Villa Consultation & Lead Generation Platform"
+  tech_stack: "React 19 + Vite + TypeScript + Tailwind CSS v4 + Framer Motion"
+
+agent_constraints:
+  - "Always strictly adhere to the UI/UX Guidelines located in frontend-guidelines.md"
+  - "Enforce strict TypeScript types. Absolute ban on 'any'"
+  - "Use custom cn() utility for all dynamic Tailwind v4 classes"
+  - "Every component refactor must pass the Antigravity Browser visual check for WCAG AA contrast ratios"
+
+automation:
+  on_code_change:
+    - "Run linting and verify semantic HTML compliance"

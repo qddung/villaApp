@@ -15,6 +15,12 @@ export async function fetchFilterOptions(): Promise<FilterOptions> {
   return res.json();
 }
 
+export async function fetchFamousAreas() {
+  const res = await authFetch(`${API_BASE}/areas/famous`);
+  if (!res.ok) throw new Error('Failed to fetch famous areas');
+  return res.json();
+}
+
 export async function fetchVillaBySlug(slug: string): Promise<Villa | undefined> {
   try {
     const res = await authFetch(`${API_BASE}/villas/${slug}`);
@@ -110,6 +116,23 @@ export async function updateBookingStatus(id: string, status: string) {
   return res.json();
 }
 
+export async function updateBooking(id: string, data: Record<string, any>) {
+  const res = await authFetch(`${API_BASE}/bookings/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to update booking');
+  return res.json();
+}
+
+export async function deleteBooking(id: string) {
+  const res = await authFetch(`${API_BASE}/bookings/${id}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete booking');
+}
+
 export async function login(username: string, password: string) {
   const res = await authFetch(`${API_BASE}/auth/login`, {
     method: 'POST',
@@ -126,28 +149,6 @@ export function getFullImageUrl(url: string | null): string | null {
   return `http://localhost:3001${url}`;
 }
 
-export async function fetchPricing(villaId: string) {
-  const res = await authFetch(`${API_BASE}/villas/${villaId}/pricing`);
-  if (!res.ok) throw new Error('Failed to fetch pricing');
-  return res.json();
-}
-
-export async function createPricing(villaId: string, data: any) {
-  const res = await authFetch(`${API_BASE}/villas/${villaId}/pricing`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
-  });
-  if (!res.ok) throw new Error('Failed to create pricing');
-  return res.json();
-}
-
-export async function deletePricing(villaId: string, id: string) {
-  const res = await authFetch(`${API_BASE}/villas/${villaId}/pricing/${id}`, {
-    method: 'DELETE',
-  });
-  if (!res.ok) throw new Error('Failed to delete pricing');
-}
 
 export async function fetchSettings() {
   const res = await authFetch(`${API_BASE}/settings`);

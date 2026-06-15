@@ -11,7 +11,7 @@ export class BookingsService {
       data,
       include: {
         villa: {
-          select: { name: true, area: true }
+          select: { name: true, areaObj: { select: { name: true } } }
         }
       }
     });
@@ -33,7 +33,7 @@ export class BookingsService {
       where: { id },
       include: {
         villa: {
-          select: { name: true, area: true }
+          select: { name: true, areaObj: { select: { name: true } } }
         }
       }
     });
@@ -47,6 +47,18 @@ export class BookingsService {
     return this.prisma.booking.update({
       where: { id },
       data: { status }
+    });
+  }
+
+  async update(id: string, data: { name?: string; email?: string; phone?: string; checkIn?: string; checkOut?: string; guests?: number; villaId?: string; note?: string; total?: number; priceAtBooking?: number }) {
+    return this.prisma.booking.update({
+      where: { id },
+      data,
+      include: {
+        villa: {
+          select: { name: true, areaObj: { select: { name: true } } }
+        }
+      }
     });
   }
 

@@ -1,4 +1,5 @@
 import SearchForm from "@/components/shared/SearchForm";
+import { motion } from "framer-motion";
 
 export default function HeroSection() {
   return (
@@ -16,26 +17,41 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-amber-800/10 mix-blend-multiply" />
 
       {/* Content */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-6 lg:px-8">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-6 lg:px-8"
+      >
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-gold-light">
           Trải nghiệm nghỉ dưỡng đẳng cấp
         </p>
         <h1 className="mx-auto max-w-4xl font-heading text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
           Villa Cao Cấp
           <br />
-          <span className="text-gold-light">Tại Vũng Tàu</span>
+          <span className="text-gold">Tại Vũng Tàu</span>
         </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 sm:text-xl">
+        <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 sm:text-xl font-light">
           Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng,
           view biển tuyệt đẹp và dịch vụ concierge 24/7
         </p>
 
-        <div className="mt-10 flex justify-center">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="mt-10 flex justify-center"
+        >
           <SearchForm />
-        </div>
+        </motion.div>
 
         {/* Stats */}
-        <div className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16">
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="mt-16 flex flex-wrap items-center justify-center gap-8 sm:gap-16"
+        >
           {[
             { value: "50+", label: "Villa cao cấp" },
             { value: "1000+", label: "Khách hài lòng" },
@@ -49,8 +65,8 @@ export default function HeroSection() {
               <div className="mt-1 text-sm text-white/60">{stat.label}</div>
             </div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
