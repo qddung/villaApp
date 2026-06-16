@@ -100,13 +100,23 @@ export default function VillasPage() {
 
   // ─── Villa CRUD ────────────────────────────────────
   function startNew() {
-    setEditing({ ...emptyVilla, id: crypto.randomUUID().slice(0, 8) });
+    setEditing({ ...emptyVilla, id: "" }); // new villa should have empty id to trigger POST
     setMessage("");
   }
 
-  function startEdit(villa: Villa) {
-    setEditing({ ...villa });
+  const fetchVillaDetails = useVillaStore((state) => state.fetchVillaDetails);
+  const [loadingEdit, setLoadingEdit] = useState<string | null>(null);
+
+  async function startEdit(villaBasic: any) {
     setMessage("");
+    setLoadingEdit(villaBasic.id);
+    const fullVilla = await fetchVillaDetails(villaBasic.slug, true);
+    setLoadingEdit(null);
+    if (fullVilla) {
+      setEditing({ ...fullVilla });
+    } else {
+      setMessage("Không thể tải chi tiết villa.");
+    }
   }
 
   function updateField<K extends keyof Villa>(key: K, value: Villa[K]) {
@@ -204,7 +214,9 @@ export default function VillasPage() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <button onClick={() => startEdit(villa)} className="rounded-lg border dark:border-slate-700 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">Sửa</button>
+                <button onClick={() => startEdit(villa)} disabled={loadingEdit === villa.id} className="rounded-lg border dark:border-slate-700 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
+                  {loadingEdit === villa.id ? "Đang tải..." : "Sửa"}
+                </button>
                 <button onClick={() => handleDelete(villa.id)} className="rounded-lg border border-red-200 dark:border-red-900 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"><Trash2 className="h-4 w-4" /></button>
               </div>
             </div>
@@ -234,6 +246,19 @@ export default function VillasPage() {
 
               <div className="sm:col-span-2">
                 <Field label="Mô tả"><textarea value={editing.description} onChange={e => updateField("description", e.target.value)} className="input" rows={3} /></Field>
+              </div>
+
+              <div className="sm:col-span-2">
+                <label className="flex items-center gap-3 cursor-pointer p-4 border dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-900 transition-colors">
+                  <div className="relative flex items-center">
+                    <input type="checkbox" checked={editing.featured} onChange={e => updateField("featured", e.target.checked)} className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 dark:border-slate-700 checked:border-gold checked:bg-gold transition-all" />
+                    <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 text-navy opacity-0 peer-checked:opacity-100 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-navy dark:text-white">Villa Nổi Bật</div>
+                    <div className="text-xs text-gray-500">Hiển thị ở trang chủ và chân trang (footer).</div>
+                  </div>
+                </label>
               </div>
             </div>
           </Section>

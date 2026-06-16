@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { VillasService } from './villas.service';
 import type { Villa } from '../shared/types';
@@ -24,14 +24,20 @@ export class VillasController {
   }
 
   @Post()
-  save(@Body() villa: Villa) {
-    const savedVilla = this.villasService.save(villa);
+  async create(@Body() villa: Villa) {
+    const savedVilla = await this.villasService.create(villa);
     return { success: true, villa: savedVilla };
   }
 
-  @Delete()
-  remove(@Body('id') id: string) {
-    this.villasService.delete(id);
+  @Put(':id')
+  async update(@Param('id') id: string, @Body() villa: Villa) {
+    const savedVilla = await this.villasService.update(id, villa);
+    return { success: true, villa: savedVilla };
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    await this.villasService.delete(id);
     return { success: true };
   }
 }

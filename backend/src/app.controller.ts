@@ -4,7 +4,6 @@ import { join } from 'path';
 
 @Controller()
 export class AppController {
-
   @Get('*')
   renderHome(@Req() req: Request, @Res() res: Response, @Next() next: NextFunction) {
     if (req.path.startsWith('/api')) {
