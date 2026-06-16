@@ -3,7 +3,7 @@ import { useState } from "react";
 import { CalendarDays, Users, MapPin, Check, Car, UtensilsCrossed, Compass } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
 import { formatPrice } from "@/lib/utils";
-import { createBooking, fetchSettings } from "@/lib/api";
+import { createBooking, fetchSettings, getVillaMainImageUrl } from "@/lib/api";
 import { toast } from "sonner";
 
 export default function BookingPage() {
@@ -105,7 +105,7 @@ export default function BookingPage() {
               <div className="mt-4 flex gap-4">
                 <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl">
                   <img
-                    src={villa.images[0]}
+                    src={getVillaMainImageUrl(villa)}
                     alt={villa.name}
                     className="absolute inset-0 h-full w-full object-cover"
                   />

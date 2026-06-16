@@ -86,12 +86,14 @@ model Booking {
 }
 
 model VillaImage {
-  id      String @id @default(cuid())
-  url     String
-  order   Int    @default(0)
-  villaId String
+  id       String  @id @default(uuid())
+  villaId  String?
+  data     Bytes
+  mimeType String  @default("image/jpeg")
+  isMain   Boolean @default(false)
+  order    Int     @default(0)
 
-  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa Villa? @relation(fields: [villaId], references: [id], onDelete: Cascade)
 
   @@map("villa_images")
 }

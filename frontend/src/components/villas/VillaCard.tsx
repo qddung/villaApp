@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { MapPin, Bed, Bath, Users, Star } from "lucide-react";
 import { Villa } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
+import { getVillaMainImageUrl } from "@/lib/api";
 
 interface VillaCardProps {
   villa: Villa;
@@ -16,7 +17,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
-          src={villa.images[0]}
+          src={getVillaMainImageUrl(villa)}
           alt={villa.name}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
