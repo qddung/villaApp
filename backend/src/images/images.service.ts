@@ -1,129 +1,97 @@
-import { Injectable, BadRequestException, ForbiddenException, NotFoundException } from '@nestjs/common';
-import * as fs from 'fs';
-import * as path from 'path';
-
-const VILLA_DATA_DIR = path.join(process.cwd(), 'public/img/villa_data');
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp', '.avif'];
-
-function isImage(filename: string): boolean {
-  return IMAGE_EXTENSIONS.includes(path.extname(filename).toLowerCase());
-}
+import { Injectable, BadRequestException, NotFoundException } from '@nestjs/common';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class ImagesService {
-  constructor() {
-    if (!fs.existsSync(VILLA_DATA_DIR)) {
-      fs.mkdirSync(VILLA_DATA_DIR, { recursive: true });
+  constructor(private readonly prisma: PrismaService) { }
+
+  /**
+   * Upload a single image → save binary to DB → return { id, isMain }
+   */
+  async uploadImage(file: Express.Multer.File, isMain: boolean = false) {
+    if (!file) {
+      throw new BadRequestException('file is required');
     }
+
+    const image = await this.prisma.villaImage.create({
+      data: {
+        data: new Uint8Array(file.buffer),
+        mimeType: file.mimetype || 'image/jpeg',
+        isMain,
+      },
+      select: { id: true, isMain: true },
+    });
+
+    return image;
   }
 
-  getImagesForVilla(slug: string) {
-    if (!slug) throw new BadRequestException('slug required');
+  /**
+   * Serve an image binary by its ID
+   */
+  async serveImage(id: string): Promise<{ buffer: Buffer; contentType: string }> {
+    const image = await this.prisma.villaImage.findUnique({
+      where: { id },
+      select: { data: true, mimeType: true },
+    });
 
-    const villaDir = path.join(VILLA_DATA_DIR, slug);
-    const result: { main: string | null; details: string[] } = { main: null, details: [] };
-
-    if (!fs.existsSync(villaDir)) {
-      return result;
+    if (!image) {
+      throw new NotFoundException('Image not found');
     }
 
-    const rootFiles = fs.readdirSync(villaDir);
-    const mainFile = rootFiles.find((f) => f.startsWith('main') && isImage(f));
-    if (mainFile) {
-      result.main = `/api/villa-image/${slug}/${mainFile}`;
-    }
-
-    const detailsDir = path.join(villaDir, 'details');
-    if (fs.existsSync(detailsDir)) {
-      result.details = fs
-        .readdirSync(detailsDir)
-        .filter(isImage)
-        .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }))
-        .map((f) => `/api/villa-image/${slug}/details/${f}`);
-    }
-
-    return result;
+    return {
+      buffer: Buffer.from(image.data),
+      contentType: image.mimeType,
+    };
   }
 
-  uploadImage(slug: string, type: string, file: Express.Multer.File) {
-    if (!slug || !file) {
-      throw new BadRequestException('slug and file required');
+  /**
+   * Delete an image by ID
+   */
+  async deleteImage(id: string) {
+    const image = await this.prisma.villaImage.findUnique({ where: { id } });
+    if (!image) {
+      throw new NotFoundException('Image not found');
     }
-
-    const villaDir = path.join(VILLA_DATA_DIR, slug);
-    const detailsDir = path.join(villaDir, 'details');
-
-    fs.mkdirSync(villaDir, { recursive: true });
-    fs.mkdirSync(detailsDir, { recursive: true });
-
-    const ext = path.extname(file.originalname).toLowerCase() || '.jpg';
-
-    if (type === 'main') {
-      const existing = fs.readdirSync(villaDir).filter((f) => f.startsWith('main') && isImage(f));
-      for (const f of existing) {
-        fs.unlinkSync(path.join(villaDir, f));
-      }
-      const filename = `main${ext}`;
-      fs.writeFileSync(path.join(villaDir, filename), file.buffer);
-      return { url: `/api/villa-image/${slug}/${filename}` };
-    } else {
-      const filename = file.originalname.replace(/[^a-zA-Z0-9._-]/g, '_');
-      fs.writeFileSync(path.join(detailsDir, filename), file.buffer);
-      return { url: `/api/villa-image/${slug}/details/${filename}` };
-    }
-  }
-
-  deleteImage(slug: string, imageUrl: string) {
-    if (!slug || !imageUrl) {
-      throw new BadRequestException('slug and imageUrl required');
-    }
-
-    const villaDir = path.join(VILLA_DATA_DIR, slug);
-    const prefix = `/api/villa-image/${slug}/`;
-
-    if (!imageUrl.startsWith(prefix)) {
-      throw new BadRequestException('invalid imageUrl');
-    }
-
-    const relativePath = imageUrl.slice(prefix.length);
-    const fullPath = path.resolve(path.join(villaDir, relativePath));
-
-    if (!fullPath.startsWith(path.resolve(villaDir))) {
-      throw new ForbiddenException('forbidden');
-    }
-
-    if (fs.existsSync(fullPath)) {
-      fs.unlinkSync(fullPath);
-    }
-
+    await this.prisma.villaImage.delete({ where: { id } });
     return { success: true };
   }
 
-  serveImage(imagePath: string | string[]): { buffer: Buffer; contentType: string } {
-    const pathString = Array.isArray(imagePath) ? imagePath.join('/') : imagePath;
-    const filePath = path.join(VILLA_DATA_DIR, pathString);
-
-    const resolved = path.resolve(filePath);
-
-    if (!resolved.startsWith(path.resolve(VILLA_DATA_DIR))) {
-      throw new ForbiddenException('Forbidden');
+  /**
+   * Attach images to a villa. Called during villa save.
+   * - newImageIds: IDs of newly uploaded images to attach
+   * - deleteImageIds: IDs of images to remove
+   */
+  async syncVillaImages(villaId: string, newImageIds: string[], deleteImageIds: string[]) {
+    // Delete marked images
+    if (deleteImageIds.length > 0) {
+      await this.prisma.villaImage.deleteMany({
+        where: { id: { in: deleteImageIds } },
+      });
     }
 
-    if (!fs.existsSync(resolved)) {
-      throw new NotFoundException('Not found');
+    // Attach new images to the villa
+    if (newImageIds.length > 0) {
+      await this.prisma.villaImage.updateMany({
+        where: { id: { in: newImageIds } },
+        data: { villaId },
+      });
     }
+  }
 
-    const ext = path.extname(resolved).toLowerCase();
-    const MIME_TYPES: Record<string, string> = {
-      '.jpg': 'image/jpeg',
-      '.jpeg': 'image/jpeg',
-      '.png': 'image/png',
-      '.webp': 'image/webp',
-      '.avif': 'image/avif',
-    };
-    const contentType = MIME_TYPES[ext] || 'application/octet-stream';
+  /**
+   * Get all images for a villa (returns id + isMain, no binary data)
+   */
+  async getImagesForVilla(villaId: string) {
+    const images = await this.prisma.villaImage.findMany({
+      where: { villaId },
+      select: { id: true, isMain: true, order: true },
+      orderBy: [{ isMain: 'desc' }, { order: 'asc' }],
+    });
 
-    const buffer = fs.readFileSync(resolved);
-    return { buffer, contentType };
+    return images.map((img) => ({
+      id: img.id,
+      url: `/api/villa-image/${img.id}`,
+      isMain: img.isMain,
+    }));
   }
 }

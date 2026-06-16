@@ -7,7 +7,7 @@ export interface Villa {
   area: string;
   areaSlug: string;
   address: string;
-  images: string[];
+  images: VillaImageInfo[];
   bedrooms: number;
   bathrooms: number;
   maxGuests: number;
@@ -23,6 +23,13 @@ export interface Villa {
   rules: VillaRules;
   coordinates: { lat: number; lng: number };
   featured: boolean;
+}
+
+export interface VillaImageInfo {
+  id: string;
+  url: string;
+  isMain: boolean;
+  tag?: 'new' | 'delete';
 }
 
 export interface Review {

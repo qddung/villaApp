@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
+import { ImagesService } from '../images/images.service';
 import type { Villa } from '../shared/types';
 
 const villaIncludes = {
   areaObj: true,
-  images: { orderBy: { order: 'asc' as const } },
+  images: { orderBy: { order: 'asc' as const }, select: { id: true, isMain: true, order: true } },
   amenities: true,
   highlights: { orderBy: { order: 'asc' as const } },
   policies: { orderBy: { order: 'asc' as const } },
@@ -22,7 +23,11 @@ function toVillaDto(dbVilla: any): Villa {
     area: dbVilla.areaObj?.name || 'Unknown',
     areaSlug: dbVilla.areaObj?.slug || 'unknown',
     address: dbVilla.address,
-    images: dbVilla.images.map((img: any) => img.url),
+    images: dbVilla.images.map((img: any) => ({
+      id: img.id,
+      url: `/api/villa-image/${img.id}`,
+      isMain: img.isMain,
+    })),
     bedrooms: dbVilla.bedrooms,
     bathrooms: dbVilla.bathrooms,
     maxGuests: dbVilla.maxGuests,
@@ -54,7 +59,10 @@ function toVillaDto(dbVilla: any): Villa {
 
 @Injectable()
 export class VillasService {
-  constructor(private readonly prisma: PrismaService) { }
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly imagesService: ImagesService,
+  ) {}
 
   async findAll(): Promise<Villa[]> {
     const villas = await this.prisma.villa.findMany({
@@ -121,6 +129,15 @@ export class VillasService {
       throw new Error(`Area with slug ${villa.areaSlug} not found. Please create it first.`);
     }
 
+    // Process image tags from frontend
+    const newImageIds = (villa.images || [])
+      .filter((img) => img.tag === 'new')
+      .map((img) => img.id);
+    
+    const deleteImageIds = (villa.images || [])
+      .filter((img) => img.tag === 'delete')
+      .map((img) => img.id);
+
     const data = {
       slug: villa.slug,
       name: villa.name,
@@ -149,9 +166,6 @@ export class VillasService {
       create: {
         id: villa.id || undefined,
         ...data,
-        images: {
-          create: (villa.images || []).map((url, i) => ({ url, order: i })),
-        },
         amenities: {
           create: (villa.amenities || []).map((name) => ({ name })),
         },
@@ -174,10 +188,6 @@ export class VillasService {
       },
       update: {
         ...data,
-        images: {
-          deleteMany: {},
-          create: (villa.images || []).map((url, i) => ({ url, order: i })),
-        },
         amenities: {
           deleteMany: {},
           create: (villa.amenities || []).map((name) => ({ name })),
@@ -205,7 +215,16 @@ export class VillasService {
       include: villaIncludes,
     });
 
-    return toVillaDto(saved);
+    // Sync images: attach new ones, delete removed ones
+    await this.imagesService.syncVillaImages(saved.id, newImageIds, deleteImageIds);
+
+    // Re-fetch to get updated images
+    const result = await this.prisma.villa.findUnique({
+      where: { id: saved.id },
+      include: villaIncludes,
+    });
+
+    return toVillaDto(result);
   }
 
   async delete(id: string): Promise<void> {

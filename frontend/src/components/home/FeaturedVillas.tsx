@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { MapPin, Bed, Users, Star, ArrowRight } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
 import { formatPrice } from "@/lib/utils";
+import { getVillaMainImageUrl } from "@/lib/api";
 
 export default function FeaturedVillas() {
   const getFeaturedVillas = useVillaStore((state) => state.getFeaturedVillas);
@@ -51,7 +52,7 @@ export default function FeaturedVillas() {
               >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
-                  src={villa.images[0]}
+                  src={getVillaMainImageUrl(villa)}
                   alt={villa.name}
                   className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />

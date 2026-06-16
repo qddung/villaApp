@@ -1,12 +1,12 @@
-import { useState } from "react";
-import { Villa } from "@/lib/types";
+import { useState, useRef } from "react";
+import { Villa, VillaImageInfo } from "@/lib/types";
 import { areas } from "@/data/areas";
 import { slugify } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
-import { saveVilla, deleteVilla, getVillaImages, deleteVillaImage, uploadVillaImage, getFullImageUrl } from "@/lib/api";
+import { saveVilla, deleteVilla, uploadVillaImage, deleteVillaImage, getFullImageUrl } from "@/lib/api";
 import {
   Plus, Save, Trash2, X,
-  Bed, MapPin, ImageIcon
+  Bed, MapPin, ImageIcon, Upload
 } from "lucide-react";
 
 const emptyVilla: Villa = {
@@ -43,58 +43,69 @@ export default function VillasPage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
 
-  const [mainImage, setMainImage] = useState<string | null>(null);
-  const [, setDetailImages] = useState<string[]>([]);
-  const [, setUploading] = useState(false);
+  const [dragOver, setDragOver] = useState(false);
+  const [uploadingDetails, setUploadingDetails] = useState(false);
+  const detailInputRef = useRef<HTMLInputElement>(null);
 
-  async function fetchImages(slug: string) {
-    if (!slug) {
-      setMainImage(null);
-      setDetailImages([]);
-      return;
-    }
-    const res = await getVillaImages(slug);
-    setMainImage(res.main);
-    setDetailImages(res.details);
-  }
+  // ─── Image helpers ─────────────────────────────────
+  /** Visible images (not tagged for deletion) */
+  const visibleImages = (editing?.images || []).filter((img) => img.tag !== 'delete');
+  const mainImage = visibleImages.find((img) => img.isMain) || null;
+  const detailImages = visibleImages.filter((img) => !img.isMain);
 
-  async function uploadImage(file: File, type: "main" | "detail") {
+  /** Upload a file, add it to editing.images with tag='new' */
+  async function handleUpload(file: File, isMain: boolean) {
     if (!editing) return;
-    let slug = editing.slug;
-    if (!slug && editing.name) {
-      slug = slugify(editing.name);
-      setEditing({ ...editing, slug });
-    }
-    if (!slug) {
-      setMessage("Vui lòng điền tên villa trước khi upload ảnh.");
-      return;
-    }
-    setUploading(true);
     try {
-      await uploadVillaImage(slug, type, file);
-      await fetchImages(slug);
+      const imageInfo = await uploadVillaImage(file, isMain);
+      setEditing({
+        ...editing,
+        images: [...editing.images, imageInfo],
+      });
     } catch {
       setMessage("Lỗi upload ảnh.");
     }
-    setUploading(false);
   }
 
-  async function handleDeleteImage(imageUrl: string) {
-    if (!editing?.slug) return;
-    await deleteVillaImage(editing.slug, imageUrl);
-    await fetchImages(editing.slug);
+  /** Upload multiple detail files */
+  async function handleUploadMultiple(files: File[]) {
+    if (!editing) return;
+    setUploadingDetails(true);
+    const newImages: VillaImageInfo[] = [];
+    for (const file of files) {
+      try {
+        const imageInfo = await uploadVillaImage(file, false);
+        newImages.push(imageInfo);
+      } catch {
+        setMessage("Lỗi upload một số ảnh.");
+      }
+    }
+    setEditing((prev) => prev ? {
+      ...prev,
+      images: [...prev.images, ...newImages],
+    } : prev);
+    setUploadingDetails(false);
   }
 
+  /** Mark an image for deletion (tag='delete') */
+  function handleRemoveImage(imageId: string) {
+    if (!editing) return;
+    setEditing({
+      ...editing,
+      images: editing.images.map((img) =>
+        img.id === imageId ? { ...img, tag: 'delete' as const } : img
+      ),
+    });
+  }
+
+  // ─── Villa CRUD ────────────────────────────────────
   function startNew() {
     setEditing({ ...emptyVilla, id: crypto.randomUUID().slice(0, 8) });
-    setMainImage(null);
-    setDetailImages([]);
     setMessage("");
   }
 
   function startEdit(villa: Villa) {
     setEditing({ ...villa });
-    fetchImages(villa.slug);
     setMessage("");
   }
 
@@ -124,7 +135,6 @@ export default function VillasPage() {
     }
     setSaving(true);
 
-    // Clean up empty lines before saving
     const cleanedVilla = {
       ...editing,
       amenities: editing.amenities?.map(s => s.trim()).filter(Boolean) || [],
@@ -144,6 +154,16 @@ export default function VillasPage() {
       setMessage("Lỗi khi lưu. Vui lòng thử lại.");
     }
     setSaving(false);
+  }
+
+  async function handleCancel() {
+    if (!editing) return;
+    // Clean up orphaned uploads (new images that weren't saved to a villa)
+    const orphanedImages = editing.images.filter((img) => img.tag === 'new');
+    for (const img of orphanedImages) {
+      try { await deleteVillaImage(img.id); } catch { /* ignore */ }
+    }
+    setEditing(null);
   }
 
   async function handleDelete(id: string) {
@@ -197,7 +217,7 @@ export default function VillasPage() {
         <div className="space-y-6">
           <div className="flex items-center justify-between">
             <h2 className="font-heading text-xl font-semibold text-navy dark:text-white">{editing.id ? "Sửa Villa" : "Thêm Mới"}</h2>
-            <button onClick={() => setEditing(null)} className="flex items-center gap-1 text-sm text-gray-400 hover:text-navy dark:hover:text-white"><X className="h-4 w-4" />Hủy</button>
+            <button onClick={handleCancel} className="flex items-center gap-1 text-sm text-gray-400 hover:text-navy dark:hover:text-white"><X className="h-4 w-4" />Hủy</button>
           </div>
 
           <Section title="Thông tin cơ bản">
@@ -268,17 +288,87 @@ export default function VillasPage() {
           </Section>
 
           <Section title="Hình ảnh">
+            {/* Main Image */}
             <div className="mb-6">
               <p className="mb-2 text-sm font-medium text-gray-700 dark:text-slate-300">Ảnh chính (main)</p>
               <div className="flex items-start gap-4">
                 {mainImage ? (
                   <div className="group relative">
-                    <img src={getFullImageUrl(mainImage) || ""} className="h-40 w-60 rounded-xl object-cover border dark:border-slate-800" alt="Main" />
-                    <button onClick={() => handleDeleteImage(mainImage)} className="absolute -right-2 -top-2 hidden rounded-full bg-red-500 p-1 text-white group-hover:block"><X className="h-3 w-3" /></button>
+                    <img src={getFullImageUrl(mainImage.url) || ""} className="h-40 w-60 rounded-xl object-cover border dark:border-slate-800" alt="Main" />
+                    <button onClick={() => handleRemoveImage(mainImage.id)} className="absolute -right-2 -top-2 hidden rounded-full bg-red-500 p-1 text-white group-hover:block"><X className="h-3 w-3" /></button>
                   </div>
                 ) : <div className="flex h-40 w-60 items-center justify-center border-2 border-dashed border-gray-300 dark:border-slate-700 text-gray-400 dark:text-slate-500 rounded-xl"><ImageIcon className="h-10 w-10" /></div>}
-                <label className="cursor-pointer rounded-lg border dark:border-slate-700 text-gray-700 dark:text-slate-300 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors"><input type="file" className="hidden" onChange={e => e.target.files && uploadImage(e.target.files[0], "main")} />Upload ảnh chính</label>
+                <label className="cursor-pointer rounded-lg border dark:border-slate-700 text-gray-700 dark:text-slate-300 px-4 py-2 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors">
+                  <input type="file" className="hidden" accept="image/*" onChange={e => e.target.files && handleUpload(e.target.files[0], true)} />
+                  Upload ảnh chính
+                </label>
               </div>
+            </div>
+
+            {/* Detail Images — Drag & Drop */}
+            <div>
+              <p className="mb-2 text-sm font-medium text-gray-700 dark:text-slate-300">Ảnh chi tiết (detail)</p>
+
+              {/* Drop Zone */}
+              <div
+                className={`relative rounded-xl border-2 border-dashed p-6 text-center transition-colors cursor-pointer ${dragOver ? 'border-gold bg-gold/5 dark:bg-gold/10' : 'border-gray-300 dark:border-slate-700 hover:border-gold/50'}`}
+                onDragOver={(e) => { e.preventDefault(); setDragOver(true); }}
+                onDragLeave={() => setDragOver(false)}
+                onDrop={async (e) => {
+                  e.preventDefault();
+                  setDragOver(false);
+                  const files = Array.from(e.dataTransfer.files).filter(f => f.type.startsWith('image/'));
+                  if (files.length > 0) await handleUploadMultiple(files);
+                }}
+                onClick={() => detailInputRef.current?.click()}
+              >
+                <input
+                  ref={detailInputRef}
+                  type="file"
+                  className="hidden"
+                  accept="image/*"
+                  multiple
+                  onChange={async (e) => {
+                    const files = Array.from(e.target.files || []);
+                    if (files.length > 0) await handleUploadMultiple(files);
+                    e.target.value = '';
+                  }}
+                />
+                {uploadingDetails ? (
+                  <div className="flex flex-col items-center gap-2 py-4">
+                    <div className="h-8 w-8 animate-spin rounded-full border-4 border-gold border-t-transparent" />
+                    <p className="text-sm text-gold font-medium">Đang tải ảnh lên...</p>
+                  </div>
+                ) : (
+                  <div className="flex flex-col items-center gap-2 py-4">
+                    <Upload className="h-10 w-10 text-gray-400 dark:text-slate-500" />
+                    <p className="text-sm text-gray-500 dark:text-slate-400">
+                      <span className="font-semibold text-gold">Bấm để chọn</span> hoặc kéo thả nhiều ảnh vào đây
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-slate-500">JPG, PNG, WebP — Không giới hạn số lượng</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Detail Images Grid */}
+              {detailImages.length > 0 && (
+                <div className="mt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                  {detailImages.map((img, idx) => (
+                    <div key={img.id} className="group relative aspect-[4/3] overflow-hidden rounded-xl border dark:border-slate-800">
+                      <img src={getFullImageUrl(img.url) || ""} className="h-full w-full object-cover" alt={`Detail ${idx + 1}`} />
+                      <button
+                        onClick={() => handleRemoveImage(img.id)}
+                        className="absolute right-1.5 top-1.5 hidden rounded-full bg-red-500/90 p-1.5 text-white shadow-sm group-hover:flex items-center justify-center hover:bg-red-600 transition-colors"
+                      >
+                        <X className="h-3 w-3" />
+                      </button>
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <span className="text-xs text-white font-medium">Ảnh {idx + 1}</span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </Section>
 

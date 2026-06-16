@@ -1,4 +1,4 @@
-import { Villa, FilterOptions } from './types';
+import { Villa, VillaImageInfo, FilterOptions } from './types';
 import { authFetch } from '@/contexts/AuthContext';
 
 const API_BASE = '/api';
@@ -51,43 +51,63 @@ export async function deleteVilla(id: string): Promise<void> {
   if (!res.ok) throw new Error('Failed to delete villa');
 }
 
-export async function getVillaImages(slug: string): Promise<{ main: string | null; details: string[] }> {
-  try {
-    const res = await authFetch(`${API_BASE}/villa-images?slug=${slug}`);
-    if (!res.ok) return { main: null, details: [] };
-    const data = await res.json();
-    const backendUrl = 'http://localhost:3001';
-    return {
-      main: data.main ? backendUrl + data.main : null,
-      details: data.details ? data.details.map((d: string) => backendUrl + d) : [],
-    };
-  } catch {
-    return { main: null, details: [] };
-  }
-}
-
-export async function deleteVillaImage(slug: string, imageUrl: string) {
-  const res = await authFetch(`${API_BASE}/villa-images`, {
-    method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ slug, imageUrl: imageUrl.replace('http://localhost:3001', '') }),
-  });
-  if (!res.ok) throw new Error('Failed to delete image');
-}
-
-export async function uploadVillaImage(slug: string, type: 'main' | 'detail', file: File) {
+/**
+ * Upload a single image to the server. Returns { id, isMain }.
+ * The image is stored in DB immediately but NOT attached to any villa yet.
+ */
+export async function uploadVillaImage(file: File, isMain: boolean = false): Promise<VillaImageInfo> {
   const formData = new FormData();
-  formData.append('slug', slug);
-  formData.append('type', type);
   formData.append('file', file);
-  
+  formData.append('isMain', String(isMain));
+
   const res = await authFetch(`${API_BASE}/villa-images`, {
     method: 'POST',
     body: formData,
   });
   if (!res.ok) throw new Error('Failed to upload image');
   const data = await res.json();
-  return data;
+  return {
+    id: data.id,
+    url: `/api/villa-image/${data.id}`,
+    isMain: data.isMain,
+    tag: 'new' as const,
+  };
+}
+
+/**
+ * Delete an image by ID (used for cleanup of orphaned uploads)
+ */
+export async function deleteVillaImage(id: string) {
+  const res = await authFetch(`${API_BASE}/villa-images/${id}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete image');
+}
+
+export function getFullImageUrl(url: string | null): string | null {
+  if (!url) return null;
+  if (url.startsWith('http')) return url;
+  return `http://localhost:3001${url}`;
+}
+
+/** Get the URL of the first (main) image from a villa's images array */
+export function getVillaMainImageUrl(villa: { images: VillaImageInfo[] }): string {
+  const main = villa.images.find((img) => img.isMain && img.tag !== 'delete');
+  const first = villa.images.find((img) => img.tag !== 'delete');
+  const img = main || first;
+  if (!img) return '';
+  return getFullImageUrl(img.url) || '';
+}
+
+/** Get all image URLs for gallery display */
+export function getVillaImageUrls(villa: { images: VillaImageInfo[] }): string[] {
+  const visible = villa.images.filter((img) => img.tag !== 'delete');
+  // Put main image first
+  const sorted = [
+    ...visible.filter((img) => img.isMain),
+    ...visible.filter((img) => !img.isMain),
+  ];
+  return sorted.map((img) => getFullImageUrl(img.url) || '').filter(Boolean);
 }
 
 export async function fetchBookings() {
@@ -142,13 +162,6 @@ export async function login(username: string, password: string) {
   if (!res.ok) throw new Error('Invalid credentials');
   return res.json();
 }
-
-export function getFullImageUrl(url: string | null): string | null {
-  if (!url) return null;
-  if (url.startsWith('http')) return url;
-  return `http://localhost:3001${url}`;
-}
-
 
 export async function fetchSettings() {
   const res = await authFetch(`${API_BASE}/settings`);

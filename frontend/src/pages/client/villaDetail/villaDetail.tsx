@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MapPin, Bed, Bath, Users, Maximize2, Star, Clock, ShieldCheck } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
@@ -6,22 +5,12 @@ import VillaGallery from "@/components/villas/VillaGallery";
 import AmenityGrid from "@/components/villas/AmenityGrid";
 import BookingWidget from "@/components/villas/BookingWidget";
 import VillaCard from "@/components/villas/VillaCard";
-import { getVillaImages } from "@/lib/api";
+import { getVillaImageUrls } from "@/lib/api";
 
 export default function VillaDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const villa = useVillaStore((state) => state.getVillaBySlug(slug || ""));
   const villas = useVillaStore((state) => state.villas);
-  const [displayImages, setDisplayImages] = useState<string[]>([]);
-
-  useEffect(() => {
-    if (slug && villa) {
-      getVillaImages(slug).then((res) => {
-        const localImgs = res.main ? [res.main, ...res.details] : [];
-        setDisplayImages(localImgs.length > 0 ? localImgs : villa.images);
-      });
-    }
-  }, [slug, villa]);
 
   if (!villa) return <div className="pt-24 text-center">Không tìm thấy villa.</div>;
 
@@ -29,11 +18,13 @@ export default function VillaDetailPage() {
     .filter((v) => v.id !== villa.id && (v.areaSlug === villa.areaSlug || v.bedrooms === villa.bedrooms))
     .slice(0, 3);
 
+  const displayImages = getVillaImageUrls(villa);
+
   return (
     <div className="min-h-screen bg-white pt-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Gallery */}
-        <VillaGallery images={displayImages.length > 0 ? displayImages : villa.images} name={villa.name} />
+        <VillaGallery images={displayImages.length > 0 ? displayImages : []} name={villa.name} />
         {/* Content grid */}
         <div className="mt-8 grid gap-10 lg:grid-cols-3">
           {/* Main content */}

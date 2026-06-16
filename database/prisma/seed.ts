@@ -145,11 +145,36 @@ async function main() {
         lat: villa.coordinates.lat,
         lng: villa.coordinates.lng,
 
+        // Images: read from local files if available
         images: {
-          create: villa.images.map((url, index) => ({
-            url,
-            order: index,
-          })),
+          create: await (async () => {
+            const imgDir = path.join(__dirname, '..', '..', 'backend', 'public', 'img', 'villa_data', villa.slug);
+            const results: any[] = [];
+            
+            if (fs.existsSync(imgDir)) {
+              // Main image
+              const mainFiles = fs.readdirSync(imgDir).filter(f => f.startsWith('main') && /\.(jpg|jpeg|png|webp)$/i.test(f));
+              if (mainFiles.length > 0) {
+                const mainPath = path.join(imgDir, mainFiles[0]);
+                const ext = path.extname(mainFiles[0]).toLowerCase();
+                const mimeMap: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
+                results.push({ data: new Uint8Array(fs.readFileSync(mainPath)), mimeType: mimeMap[ext] || 'image/jpeg', isMain: true, order: 0 });
+              }
+              
+              // Detail images
+              const detailsDir = path.join(imgDir, 'details');
+              if (fs.existsSync(detailsDir)) {
+                const detailFiles = fs.readdirSync(detailsDir).filter(f => /\.(jpg|jpeg|png|webp)$/i.test(f)).sort();
+                detailFiles.forEach((f, i) => {
+                  const ext = path.extname(f).toLowerCase();
+                  const mimeMap: Record<string, string> = { '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.png': 'image/png', '.webp': 'image/webp' };
+                  results.push({ data: new Uint8Array(fs.readFileSync(path.join(detailsDir, f))), mimeType: mimeMap[ext] || 'image/jpeg', isMain: false, order: i + 1 });
+                });
+              }
+            }
+            
+            return results;
+          })(),
         },
 
         amenities: {

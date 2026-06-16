@@ -1,19 +1,21 @@
-# Kế hoạch triển khai: Chuyển đổi lưu trữ Cloudinary sang Google Drive + Weserv CDN
+# Kế hoạch triển khai: Chuyển đổi lưu trữ Local sang Google Drive + Weserv CDN
 
-Tài liệu này hướng dẫn chi tiết các bước chuyển đổi dịch vụ lưu trữ hình ảnh của dự án Rentify từ Cloudinary sang **Google Drive API** kết hợp **Weserv CDN (`wsrv.nl`)** để tối ưu hóa hiệu năng hiển thị và tiết kiệm chi phí.
+Tài liệu này hướng dẫn chi tiết các bước chuyển đổi dịch vụ lưu trữ hình ảnh của dự án Villa (NestJS backend) từ Local File System sang **Google Drive API** kết hợp **Weserv CDN (`wsrv.nl`)** để tối ưu hóa hiệu năng hiển thị và giảm tải cho server.
 
 ---
 
 ## 1. Yêu cầu chuẩn bị từ phía người dùng (User Review Required)
 
-Để kết nối với Google Drive API, bạn cần chuẩn bị các thông tin cấu hình và khai báo trong file cấu hình môi trường `.env`.
+Để kết nối với Google Drive API, tôi cần các thông tin cấu hình để thêm vào file `.env` của backend.
 
 > [!IMPORTANT]
-> **Các thông tin cấu hình bắt buộc:**
-> 1. **Google Service Account**: Tạo một Service Account trong Google Cloud Console, tạo và tải về file Key dạng JSON.
-> 2. **Google Drive API**: Kích hoạt (Enable) dịch vụ Google Drive API trên Google Cloud Console cho dự án.
-> 3. **Thư mục lưu trữ**: Tạo một thư mục trống trên Google Drive cá nhân của bạn, lấy **Folder ID** (chuỗi ký tự ở cuối đường dẫn thư mục trên trình duyệt) và **chia sẻ quyền "Editor"** cho địa chỉ email của Google Service Account vừa tạo.
-> 4. **Cập nhật file `.env`**: Khai báo các thông tin kết nối mới (chi tiết ở phần Proposed Changes).
+> **Các khóa (keys) tôi cần bạn cung cấp để tiếp tục:**
+> 1. `GOOGLE_PROJECT_ID`: ID của dự án trên Google Cloud.
+> 2. `GOOGLE_CLIENT_EMAIL`: Email của Service Account.
+> 3. `GOOGLE_PRIVATE_KEY`: Khóa Private Key của Service Account (bao gồm `-----BEGIN PRIVATE KEY-----...`).
+> 4. `GOOGLE_DRIVE_FOLDER_ID`: ID của thư mục trên Google Drive mà bạn đã cấp quyền "Editor" cho Service Account trên.
+
+Bạn có thể cung cấp trực tiếp cho tôi ở ô chat này, hoặc tự dán vào file `c:\DEV\villa\backend\.env`.
 
 ---
 
@@ -21,78 +23,47 @@ Tài liệu này hướng dẫn chi tiết các bước chuyển đổi dịch v
 
 > [!NOTE]
 > **Khả năng tương thích ngược cho dữ liệu cũ:**
-> - Chúng tôi đề xuất **giữ lại logic tối ưu ảnh của Cloudinary** trong hàm `getOptimizedImageUrl` để đảm bảo các homestay/villa đã tạo trước đây vẫn hiển thị bình thường.
-> - Tất cả các ảnh tải lên mới sẽ áp dụng luồng Google Drive + Weserv CDN.
+> Hệ thống hiện tại đọc file trực tiếp từ thư mục `public/img/villa_data`. Nếu chuyển sang Google Drive, bạn có muốn tôi viết một script nhỏ để **upload tự động toàn bộ ảnh cũ từ thư mục local lên Google Drive** để đồng bộ hóa hoàn toàn không? Hay chúng ta chỉ áp dụng Google Drive cho các ảnh upload mới từ giờ trở đi và dữ liệu cũ vẫn load từ thư mục public của server?
 
 ---
 
 ## 3. Các thay đổi đề xuất (Proposed Changes)
 
-### Phân hệ Cấu hình & Thư viện
+### Phân hệ Backend (`c:\DEV\villa\backend`)
 
-#### [MODIFY] [package.json](file:///c:/DEV/rentify-pure-sql/package.json)
-- Cài đặt thư viện Google API client:
-  ```json
-  "dependencies": {
-    "googleapis": "^140.0.0"
-  }
-  ```
+#### [MODIFY] [backend/package.json](file:///c:/DEV/villa/backend/package.json)
+- Thêm thư viện `googleapis` (Đã chạy npm install).
 
-#### [MODIFY] [.env](file:///c:/DEV/rentify-pure-sql/.env)
-- Loại bỏ/Đánh dấu ngưng sử dụng các biến Cloudinary.
-- Thêm cấu hình kết nối Google Drive:
-  ```env
-  # Google Drive Storage Config
-  GOOGLE_PROJECT_ID=tên-dự-án-google-cloud
-  GOOGLE_CLIENT_EMAIL=email-service-account@iam.gserviceaccount.com
-  GOOGLE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\nMã-khóa-private-key-của-bạn\n-----END PRIVATE KEY-----"
-  GOOGLE_DRIVE_FOLDER_ID=id-thư-mục-google-drive-đã-chia-sẻ
-  ```
+#### [MODIFY] [backend/.env](file:///c:/DEV/villa/backend/.env)
+- Thêm các biến môi trường kết nối Google Drive như yêu cầu ở phần 1.
+
+#### [MODIFY] [backend/src/images/images.service.ts](file:///c:/DEV/villa/backend/src/images/images.service.ts)
+- **Upload Image (`uploadImage`)**:
+  - Khởi tạo `google.auth.GoogleAuth` và `google.drive`.
+  - Thay vì lưu bằng `fs.writeFileSync`, hệ thống sẽ chuyển `file.buffer` thành luồng (stream) và gọi `drive.files.create`.
+  - Cập nhật quyền của file tải lên thành `anyone` (public reader) để mọi người có thể xem.
+  - URL trả về sẽ là định dạng Weserv CDN: `https://wsrv.nl/?url=drive.google.com/uc?export=download%26id%3DFILE_ID&output=webp`.
+- **Delete Image (`deleteImage`)**:
+  - Nhận URL có chứa File ID, tiến hành gọi API Google Drive để xóa file (di chuyển vào thùng rác).
+- **Get Images (`getImagesForVilla`)**:
+  - Vì ảnh lưu lên Drive không thể query nhanh chóng theo thư mục con giống local, ta sẽ đồng bộ các URL này vào cơ sở dữ liệu Postgres (bảng `VillaImage` hiện có). Khi cần lấy ảnh cho Villa, hệ thống sẽ truy vấn từ DB thay vì đọc file hệ thống.
 
 ---
 
-### Phân hệ Backend API & Client Helpers
+### Phân hệ Frontend (`c:\DEV\villa\frontend`)
 
-#### [MODIFY] [route.ts](file:///c:/DEV/rentify-pure-sql/src/app/api/upload/route.ts)
-*   **Thư viện sử dụng**: Thay thế `cloudinary` bằng `googleapis` và `stream`.
-*   **Luồng xử lý**:
-    1. Tiếp nhận file tải lên từ formData.
-    2. Khởi tạo đối tượng xác thực Google Auth và kết nối Google Drive.
-    3. Upload file dưới dạng luồng dữ liệu Buffer Stream vào thư mục `GOOGLE_DRIVE_FOLDER_ID`.
-    4. Cập nhật quyền của file vừa tải lên thành công thành **công khai** (`reader` cho `anyone`) bằng API `drive.permissions.create`.
-    5. Trả về URL ảnh trực tiếp dạng: `https://drive.google.com/uc?export=download&id=FILE_ID`.
-
-#### [MODIFY] [utils.ts](file:///c:/DEV/rentify-pure-sql/src/lib/utils.ts)
-*   **Hàm sử dụng**: Cập nhật hàm tối ưu hóa URL ảnh `getOptimizedImageUrl`.
-*   **Cơ chế tối ưu hóa**:
-    1. Giữ nguyên logic tối ưu hóa cho ảnh Cloudinary cũ (`cloudinary.com`).
-    2. Nhận biết các đường dẫn ảnh lưu trữ trên Google Drive (`drive.google.com`).
-    3. Chuyển đổi định dạng URL và định tuyến qua Weserv CDN để tự động nén, đổi đuôi thành WebP chất lượng cao và thay đổi kích thước theo yêu cầu:
-       `https://wsrv.nl/?url=drive.google.com/uc?export=download%26id%3DFILE_ID&w=WIDTH&output=webp&q=85&il`
-    4. Các URL nội bộ hoặc ảnh khác sử dụng Weserv làm fallback như cũ.
+#### [MODIFY] [frontend/src/lib/api.ts](file:///c:/DEV/villa/frontend/src/lib/api.ts)
+- Hàm `getFullImageUrl` hiện tại đã xử lý việc URL bắt đầu bằng `http` thì giữ nguyên. Điều này hoàn toàn tương thích với các URL CDN mới (sẽ là `https://wsrv.nl/...`). Không cần thay đổi lớn ở Frontend.
 
 ---
 
 ## 4. Kế hoạch xác minh & kiểm thử (Verification Plan)
 
 ### Automated Tests
-- Khởi chạy tiến trình cài đặt thư viện:
-  ```bash
-  npm install googleapis
-  ```
-- Kiểm tra lỗi biên dịch TypeScript để đảm bảo không phát sinh lỗi kiểu dữ liệu:
-  ```bash
-  npm run build
-  ```
+- Đảm bảo NestJS biên dịch không lỗi `npm run build`.
 
 ### Kiểm thử thủ công (Manual Verification)
-1. **Kiểm tra kết nối**: Cấu hình các biến môi trường Google Drive chính xác trong file `.env`.
-2. **Kiểm tra tải lên**:
-   - Truy cập vào trang Admin chỉnh sửa hoặc tạo mới Villa.
-   - Thêm một bức ảnh mới và nhấn lưu.
-   - Xác nhận API `/api/upload` trả về mã trạng thái 200 kèm URL ảnh Google Drive dạng `https://drive.google.com/uc?export=download&id=...`
-3. **Kiểm tra lưu trữ**:
-   - Truy cập vào thư mục Google Drive cá nhân của bạn, kiểm tra xem file ảnh mới đã xuất hiện trong thư mục chưa.
-4. **Kiểm tra hiển thị & Tốc độ**:
-   - Xem trang danh sách Villa và trang chi tiết Villa vừa tạo.
-   - Sử dụng Developer Tools (F12) trên trình duyệt -> Tab **Network** -> Kiểm tra xem các ảnh hiển thị có đường dẫn bắt đầu bằng `https://wsrv.nl/?url=drive.google.com...` và có định dạng hiển thị thực tế là **image/webp** với dung lượng siêu nhẹ (chỉ khoảng vài chục đến hơn trăm KB) hay không.
+1. **Kiểm tra kết nối**: Đảm bảo service account kết nối thành công tới folder Google Drive.
+2. **Kiểm tra tải lên**: Mở trang Admin sửa Villa, tải ảnh mới lên và kiểm tra xem ảnh có xuất hiện trên Google Drive hay không.
+3. **Kiểm tra hiển thị**: Truy cập trang chủ, inspect ảnh xem đã được format qua CDN WebP hay chưa.
+4. **Kiểm tra xóa**: Xóa ảnh từ trang admin và kiểm tra file tương ứng đã bị xóa khỏi thư mục Google Drive chưa.
