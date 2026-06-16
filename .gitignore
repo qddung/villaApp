@@ -2,6 +2,19 @@
 
 # dependencies
 /node_modules
+/backend/node_modules
+
+/frontend/node_modules
+/database/node_modules
+
+/dist
+/backend/dist
+/frontend/dist
+/database/dist
+note.txt
+/image
+
+/design-system
 /.pnp
 .pnp.*
 .yarn/*
