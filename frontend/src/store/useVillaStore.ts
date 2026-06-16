@@ -1,22 +1,25 @@
 import { create } from 'zustand';
-import { Villa, FilterOptions } from '@/lib/types';
-import { fetchVillas, fetchFilterOptions } from '@/lib/api';
+import { Villa, VillaBasic, FilterOptions } from '@/lib/types';
+import { fetchVillas, fetchFilterOptions, fetchVillaBySlug } from '@/lib/api';
 
 interface VillaState {
-  villas: Villa[];
+  villas: VillaBasic[];
+  fullVillas: Record<string, Villa>;
   filterOptions: FilterOptions | null;
   loading: boolean;
   loadingFilters: boolean;
   error: string | null;
   loadVillas: () => Promise<void>;
   loadFilterOptions: () => Promise<void>;
-  getVillaBySlug: (slug: string) => Villa | undefined;
-  getFeaturedVillas: () => Villa[];
-  getVillasByArea: (areaSlug: string) => Villa[];
+  getVillaBySlug: (slug: string) => VillaBasic | undefined;
+  fetchVillaDetails: (slug: string, force?: boolean) => Promise<Villa | undefined>;
+  getFeaturedVillas: () => VillaBasic[];
+  getVillasByArea: (areaSlug: string) => VillaBasic[];
 }
 
 export const useVillaStore = create<VillaState>((set, get) => ({
   villas: [],
+  fullVillas: {},
   filterOptions: null,
   loading: true,
   loadingFilters: true,
@@ -39,7 +42,25 @@ export const useVillaStore = create<VillaState>((set, get) => ({
       set({ error: err.message, loadingFilters: false });
     }
   },
-  getVillaBySlug: (slug) => get().villas.find((v) => v.slug === slug),
-  getFeaturedVillas: () => get().villas.filter((v) => v.featured),
-  getVillasByArea: (areaSlug) => get().villas.filter((v) => v.areaSlug === areaSlug),
+  getVillaBySlug: (slug) => {
+    return get().villas.find((v) => v.slug === slug);
+  },
+  fetchVillaDetails: async (slug, force = false) => {
+    const existing = get().fullVillas[slug];
+    if (existing && !force) return existing;
+    
+    const details = await fetchVillaBySlug(slug);
+    if (details) {
+      set((state) => ({
+        fullVillas: { ...state.fullVillas, [slug]: details }
+      }));
+    }
+    return details;
+  },
+  getFeaturedVillas: () => {
+    return get().villas.filter((v) => v.featured);
+  },
+  getVillasByArea: (areaSlug) => {
+    return get().villas.filter((v) => v.areaSlug === areaSlug);
+  },
 }));

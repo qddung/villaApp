@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
 import { fetchFamousAreas } from "@/lib/api";
+import { useVillaStore } from "@/store/useVillaStore";
 
 const companyLinks = [
   { href: "/about", label: "Về chúng tôi" },
@@ -11,6 +12,8 @@ const companyLinks = [
 
 export default function Footer() {
   const [famousAreas, setFamousAreas] = useState<any[]>([]);
+  const getFeaturedVillas = useVillaStore(state => state.getFeaturedVillas);
+  const featuredVillas = getFeaturedVillas().slice(0, 5);
 
   useEffect(() => {
     fetchFamousAreas().then(data => {
@@ -44,22 +47,29 @@ export default function Footer() {
             <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">
               Khám phá
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 mb-6">
               <li>
-                <Link
-                  to="/villas"
-                  className="text-sm text-sand/80 transition-colors hover:text-gold"
-                >
+                <Link to="/villas" className="text-sm text-sand/80 transition-colors hover:text-gold">
                   Tất cả Villa
                 </Link>
               </li>
               {famousAreas.map((area) => (
                 <li key={area.slug}>
-                  <Link
-                    to={`/villas?area=${area.slug}`}
-                    className="text-sm text-sand/80 transition-colors hover:text-gold"
-                  >
+                  <Link to={`/villas?area=${area.slug}`} className="text-sm text-sand/80 transition-colors hover:text-gold">
                     Villa {area.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <h3 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">
+              Villa Nổi Bật
+            </h3>
+            <ul className="space-y-3">
+              {featuredVillas.map((villa) => (
+                <li key={villa.id}>
+                  <Link to={`/villas/${villa.slug}`} className="text-sm text-sand/80 transition-colors hover:text-gold line-clamp-1">
+                    {villa.name}
                   </Link>
                 </li>
               ))}

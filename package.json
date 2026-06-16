@@ -15,7 +15,10 @@
   "type": "commonjs",
   "main": "fix.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:frontend": "npm run build --prefix frontend",
+    "build:backend": "npm run build --prefix backend",
+    "build": "npm run build:frontend && npm run build:backend",
+    "start": "npm run start:prod --prefix backend"
   },
   "dependencies": {
     "uipro-cli": "^2.2.3"

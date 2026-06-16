@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import { resolve } from 'path';
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
@@ -12,6 +12,7 @@ export default defineConfig({
     },
   },
   build: {
+    minify: mode === 'development' ? false : true,
     rollupOptions: {
       input: {
         main: resolve(__dirname, './html/index.html'),
@@ -27,4 +28,4 @@ export default defineConfig({
       },
     },
   },
-});
+}));

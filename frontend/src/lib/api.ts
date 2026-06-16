@@ -1,9 +1,9 @@
-import { Villa, VillaImageInfo, FilterOptions } from './types';
+import { Villa, VillaBasic, VillaImageInfo, FilterOptions } from './types';
 import { authFetch } from '@/contexts/AuthContext';
 
 const API_BASE = '/api';
 
-export async function fetchVillas(): Promise<Villa[]> {
+export async function fetchVillas(): Promise<VillaBasic[]> {
   const res = await authFetch(`${API_BASE}/villas`);
   if (!res.ok) throw new Error('Failed to fetch villas');
   return res.json();
@@ -23,7 +23,7 @@ export async function fetchFamousAreas() {
 
 export async function fetchVillaBySlug(slug: string): Promise<Villa | undefined> {
   try {
-    const res = await authFetch(`${API_BASE}/villas/${slug}`);
+    const res = await authFetch(`${API_BASE}/villas/${slug}`, { cache: 'no-store' });
     if (!res.ok) return undefined;
     return res.json();
   } catch {
@@ -31,11 +31,27 @@ export async function fetchVillaBySlug(slug: string): Promise<Villa | undefined>
   }
 }
 
-export async function saveVilla(villa: Villa): Promise<Villa> {
-  const res = await authFetch(`${API_BASE}/villas`, {
-    method: 'POST',
+export async function saveVilla(villa: Partial<Villa>): Promise<Villa> {
+  const isUpdate = !!villa.id;
+  const method = isUpdate ? 'PUT' : 'POST';
+  const url = isUpdate ? `${API_BASE}/villas/${villa.id}` : `${API_BASE}/villas`;
+
+  const newImages = (villa.images || []).filter((img: VillaImageInfo) => img.tag === 'new').map((img: VillaImageInfo) => img.id);
+  const deleteImages = (villa.images || []).filter((img: VillaImageInfo) => img.tag === 'delete').map((img: VillaImageInfo) => img.id);
+
+  const payload = {
+    ...villa,
+    newImages,
+    deleteImages,
+  };
+  
+  // Note: we remove images array from payload to let backend handle via newImages/deleteImages logic
+  delete payload.images;
+
+  const res = await authFetch(url, {
+    method,
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(villa),
+    body: JSON.stringify(payload),
   });
   if (!res.ok) throw new Error('Failed to save villa');
   const data = await res.json();
@@ -43,10 +59,8 @@ export async function saveVilla(villa: Villa): Promise<Villa> {
 }
 
 export async function deleteVilla(id: string): Promise<void> {
-  const res = await authFetch(`${API_BASE}/villas`, {
+  const res = await authFetch(`${API_BASE}/villas/${id}`, {
     method: 'DELETE',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ id }),
   });
   if (!res.ok) throw new Error('Failed to delete villa');
 }
