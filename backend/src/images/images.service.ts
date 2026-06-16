@@ -12,10 +12,15 @@ export class ImagesService {
     if (!file) {
       throw new BadRequestException('file is required');
     }
+    console.log(`[DEBUG] Uploading image. isMain=${isMain}, size=${file.size}, mimetype=${file.mimetype}`);
+
+    // Create an isolated ArrayBuffer to prevent Prisma from reading the 8KB shared pool
+    const isolatedCopy = new Uint8Array(new ArrayBuffer(file.buffer.length));
+    isolatedCopy.set(new Uint8Array(file.buffer.buffer, file.buffer.byteOffset, file.buffer.length));
 
     const image = await this.prisma.villaImage.create({
       data: {
-        data: new Uint8Array(file.buffer),
+        data: isolatedCopy,
         mimeType: file.mimetype || 'image/jpeg',
         isMain,
       },

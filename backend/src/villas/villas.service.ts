@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { ImagesService } from '../images/images.service';
-import type { Villa } from '../shared/types';
+import type { Villa, VillaBasic } from '../shared/types';
 
 const villaIncludes = {
   areaObj: true,
@@ -12,14 +12,31 @@ const villaIncludes = {
   reviews: true,
 };
 
-/** Map a Prisma villa (with relations) to the frontend Villa shape */
-function toVillaDto(dbVilla: any): Villa {
+const villaBasicSelect = {
+  id: true,
+  slug: true,
+  name: true,
+  tagline: true,
+  address: true,
+  bedrooms: true,
+  bathrooms: true,
+  maxGuests: true,
+  size: true,
+  pricePerNight: true,
+  rating: true,
+  reviewCount: true,
+  featured: true,
+  areaObj: { select: { name: true, slug: true } },
+  amenities: true,
+  images: { where: { isMain: true }, select: { id: true, isMain: true, order: true }, take: 1 },
+};
+
+function toVillaBasicDto(dbVilla: any): VillaBasic {
   return {
     id: dbVilla.id,
     slug: dbVilla.slug,
     name: dbVilla.name,
     tagline: dbVilla.tagline,
-    description: dbVilla.description,
     area: dbVilla.areaObj?.name || 'Unknown',
     areaSlug: dbVilla.areaObj?.slug || 'unknown',
     address: dbVilla.address,
@@ -33,12 +50,22 @@ function toVillaDto(dbVilla: any): Villa {
     maxGuests: dbVilla.maxGuests,
     size: dbVilla.size,
     pricePerNight: dbVilla.pricePerNight,
+    rating: dbVilla.rating,
+    reviewCount: dbVilla.reviewCount,
+    featured: dbVilla.featured,
+    amenities: (dbVilla.amenities || []).map((a: any) => a.name),
+  };
+}
+
+/** Map a Prisma villa (with relations) to the frontend Villa shape */
+function toVillaDto(dbVilla: any): Villa {
+  return {
+    ...toVillaBasicDto(dbVilla),
+    description: dbVilla.description,
     priceWeekend: dbVilla.priceWeekend,
     priceHoliday: dbVilla.priceHoliday,
     amenities: dbVilla.amenities.map((a: any) => a.name),
     highlights: dbVilla.highlights.map((h: any) => h.text),
-    rating: dbVilla.rating,
-    reviewCount: dbVilla.reviewCount,
     reviews: dbVilla.reviews.map((r: any) => ({
       id: r.id,
       author: r.author,
@@ -53,7 +80,6 @@ function toVillaDto(dbVilla: any): Villa {
       policies: dbVilla.policies.map((p: any) => p.text),
     },
     coordinates: { lat: dbVilla.lat, lng: dbVilla.lng },
-    featured: dbVilla.featured,
   };
 }
 
@@ -64,12 +90,12 @@ export class VillasService {
     private readonly imagesService: ImagesService,
   ) {}
 
-  async findAll(): Promise<Villa[]> {
+  async findAll(): Promise<VillaBasic[]> {
     const villas = await this.prisma.villa.findMany({
-      include: villaIncludes,
+      select: villaBasicSelect,
       orderBy: { createdAt: 'desc' },
     });
-    return villas.map(toVillaDto);
+    return villas.map(toVillaBasicDto);
   }
 
   async getDefaultFilters() {
@@ -120,7 +146,7 @@ export class VillasService {
     return toVillaDto(villa);
   }
 
-  async save(villa: Villa): Promise<Villa> {
+  async create(villa: any): Promise<Villa> {
     const areaRecord = await this.prisma.area.findUnique({
       where: { slug: villa.areaSlug },
     });
@@ -129,14 +155,7 @@ export class VillasService {
       throw new Error(`Area with slug ${villa.areaSlug} not found. Please create it first.`);
     }
 
-    // Process image tags from frontend
-    const newImageIds = (villa.images || [])
-      .filter((img) => img.tag === 'new')
-      .map((img) => img.id);
-    
-    const deleteImageIds = (villa.images || [])
-      .filter((img) => img.tag === 'delete')
-      .map((img) => img.id);
+    const newImageIds = villa.newImages || [];
 
     const data = {
       slug: villa.slug,
@@ -161,22 +180,21 @@ export class VillasService {
       lng: villa.coordinates?.lng ?? 107.08,
     };
 
-    const saved = await this.prisma.villa.upsert({
-      where: { id: villa.id || '' },
-      create: {
+    const saved = await this.prisma.villa.create({
+      data: {
         id: villa.id || undefined,
         ...data,
         amenities: {
-          create: (villa.amenities || []).map((name) => ({ name })),
+          create: (villa.amenities || []).map((name: string) => ({ name })),
         },
         highlights: {
-          create: (villa.highlights || []).map((text, i) => ({ text, order: i })),
+          create: (villa.highlights || []).map((text: string, i: number) => ({ text, order: i })),
         },
         policies: {
-          create: (villa.rules?.policies || []).map((text, i) => ({ text, order: i })),
+          create: (villa.rules?.policies || []).map((text: string, i: number) => ({ text, order: i })),
         },
         reviews: {
-          create: (villa.reviews || []).map((r) => ({
+          create: (villa.reviews || []).map((r: any) => ({
             id: r.id || undefined,
             author: r.author,
             avatar: r.avatar,
@@ -186,23 +204,68 @@ export class VillasService {
           })),
         },
       },
-      update: {
+      include: villaIncludes,
+    });
+
+    await this.imagesService.syncVillaImages(saved.id, newImageIds, []);
+    const result = await this.prisma.villa.findUnique({ where: { id: saved.id }, include: villaIncludes });
+    return toVillaDto(result);
+  }
+
+  async update(id: string, villa: any): Promise<Villa> {
+    const areaRecord = await this.prisma.area.findUnique({
+      where: { slug: villa.areaSlug },
+    });
+    
+    if (!areaRecord) {
+      throw new Error(`Area with slug ${villa.areaSlug} not found. Please create it first.`);
+    }
+
+    const newImageIds = villa.newImages || [];
+    const deleteImageIds = villa.deleteImages || [];
+
+    const data = {
+      slug: villa.slug,
+      name: villa.name,
+      tagline: villa.tagline,
+      description: villa.description,
+      areaId: areaRecord.id,
+      address: villa.address,
+      bedrooms: villa.bedrooms,
+      bathrooms: villa.bathrooms,
+      maxGuests: villa.maxGuests,
+      size: villa.size,
+      pricePerNight: villa.pricePerNight,
+      priceWeekend: villa.priceWeekend,
+      priceHoliday: villa.priceHoliday,
+      rating: villa.rating,
+      reviewCount: villa.reviewCount,
+      checkIn: villa.rules?.checkIn ?? '14:00',
+      checkOut: villa.rules?.checkOut ?? '12:00',
+      featured: villa.featured,
+      lat: villa.coordinates?.lat ?? 10.35,
+      lng: villa.coordinates?.lng ?? 107.08,
+    };
+
+    const saved = await this.prisma.villa.update({
+      where: { id },
+      data: {
         ...data,
         amenities: {
           deleteMany: {},
-          create: (villa.amenities || []).map((name) => ({ name })),
+          create: (villa.amenities || []).map((name: string) => ({ name })),
         },
         highlights: {
           deleteMany: {},
-          create: (villa.highlights || []).map((text, i) => ({ text, order: i })),
+          create: (villa.highlights || []).map((text: string, i: number) => ({ text, order: i })),
         },
         policies: {
           deleteMany: {},
-          create: (villa.rules?.policies || []).map((text, i) => ({ text, order: i })),
+          create: (villa.rules?.policies || []).map((text: string, i: number) => ({ text, order: i })),
         },
         reviews: {
           deleteMany: {},
-          create: (villa.reviews || []).map((r) => ({
+          create: (villa.reviews || []).map((r: any) => ({
             id: r.id || undefined,
             author: r.author,
             avatar: r.avatar,
@@ -215,15 +278,8 @@ export class VillasService {
       include: villaIncludes,
     });
 
-    // Sync images: attach new ones, delete removed ones
     await this.imagesService.syncVillaImages(saved.id, newImageIds, deleteImageIds);
-
-    // Re-fetch to get updated images
-    const result = await this.prisma.villa.findUnique({
-      where: { id: saved.id },
-      include: villaIncludes,
-    });
-
+    const result = await this.prisma.villa.findUnique({ where: { id: saved.id }, include: villaIncludes });
     return toVillaDto(result);
   }
 

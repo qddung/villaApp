@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 
 import { MapPin, Bed, Bath, Users, Star } from "lucide-react";
-import { Villa } from "@/lib/types";
+import { VillaBasic } from "@/lib/types";
 import { formatPrice } from "@/lib/utils";
 import { getVillaMainImageUrl } from "@/lib/api";
 
 interface VillaCardProps {
-  villa: Villa;
+  villa: VillaBasic;
 }
 
 export default function VillaCard({ villa }: VillaCardProps) {

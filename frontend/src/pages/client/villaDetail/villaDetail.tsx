@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { MapPin, Bed, Bath, Users, Maximize2, Star, Clock, ShieldCheck } from "lucide-react";
 import { useVillaStore } from "@/store/useVillaStore";
@@ -6,12 +7,26 @@ import AmenityGrid from "@/components/villas/AmenityGrid";
 import BookingWidget from "@/components/villas/BookingWidget";
 import VillaCard from "@/components/villas/VillaCard";
 import { getVillaImageUrls } from "@/lib/api";
+import { Villa } from "@/lib/types";
 
 export default function VillaDetailPage() {
   const { slug } = useParams<{ slug: string }>();
-  const villa = useVillaStore((state) => state.getVillaBySlug(slug || ""));
+  const [villa, setVilla] = useState<Villa | null>(null);
+  const [loading, setLoading] = useState(true);
+  const fetchVillaDetails = useVillaStore((state) => state.fetchVillaDetails);
   const villas = useVillaStore((state) => state.villas);
 
+  useEffect(() => {
+    if (slug) {
+      setLoading(true);
+      fetchVillaDetails(slug).then((data) => {
+        setVilla(data || null);
+        setLoading(false);
+      });
+    }
+  }, [slug, fetchVillaDetails]);
+
+  if (loading) return <div className="pt-24 text-center">Đang tải...</div>;
   if (!villa) return <div className="pt-24 text-center">Không tìm thấy villa.</div>;
 
   const similar = villas

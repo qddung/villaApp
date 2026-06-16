@@ -1,18 +1,17 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16-alpine
-    container_name: villa_postgres
+  mysql:
+    image: mysql:8.0
+    container_name: villa_mysql
     restart: unless-stopped
     ports:
-      - '5432:5432'
+      - '3306:3306'
     environment:
-      POSTGRES_USER: villa_user
-      POSTGRES_PASSWORD: villa_pass
-      POSTGRES_DB: villa_db
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: villa_db
     volumes:
-      - villa_pgdata:/var/lib/postgresql/data
+      - villa_mysqldata:/var/lib/mysql
 
 volumes:
-  villa_pgdata:
+  villa_mysqldata:

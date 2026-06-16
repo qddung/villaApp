@@ -1,28 +1,31 @@
-export interface Villa {
+export interface VillaBasic {
   id: string;
   slug: string;
   name: string;
   tagline: string;
-  description: string;
   area: string;
   areaSlug: string;
   address: string;
-  images: VillaImageInfo[];
+  images: VillaImageInfo[]; // Will primarily contain the main image for lists
   bedrooms: number;
   bathrooms: number;
   maxGuests: number;
   size: number; // m²
   pricePerNight: number;
-  priceWeekend: number;
-  priceHoliday: number;
-  amenities: string[];
-  highlights: string[];
   rating: number;
   reviewCount: number;
+  featured: boolean;
+  amenities: string[];
+}
+
+export interface Villa extends VillaBasic {
+  description: string;
+  priceWeekend: number;
+  priceHoliday: number;
+  highlights: string[];
   reviews: Review[];
   rules: VillaRules;
   coordinates: { lat: number; lng: number };
-  featured: boolean;
 }
 
 export interface VillaImageInfo {
