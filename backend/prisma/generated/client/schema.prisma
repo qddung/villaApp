@@ -13,7 +13,7 @@ generator backendClient {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -32,8 +32,8 @@ model Villa {
   id            String   @id @default(uuid())
   slug          String   @unique
   name          String
-  tagline       String   @db.Text
-  description   String   @db.Text
+  tagline       String
+  description   String
   areaId        String?
   areaObj       Area?    @relation(fields: [areaId], references: [id])
   address       String
@@ -71,7 +71,7 @@ model Booking {
   name           String
   email          String
   phone          String
-  note           String?  @db.Text
+  note           String?
   checkIn        String
   checkOut       String
   guests         Int
@@ -136,7 +136,7 @@ model Review {
   avatar  String @default("")
   date    String
   rating  Float
-  comment String @db.Text
+  comment String
   villaId String
 
   villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)

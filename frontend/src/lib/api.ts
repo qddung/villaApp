@@ -21,6 +21,32 @@ export async function fetchFamousAreas() {
   return res.json();
 }
 
+export async function fetchAllAreas() {
+  const res = await authFetch(`${API_BASE}/areas`);
+  if (!res.ok) throw new Error('Failed to fetch all areas');
+  return res.json();
+}
+
+export async function createArea(data: any) {
+  const res = await authFetch(`${API_BASE}/areas`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create area');
+  return res.json();
+}
+
+export async function updateArea(id: string, data: any) {
+  const res = await authFetch(`${API_BASE}/areas/${id}`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to update area');
+  return res.json();
+}
+
 export async function fetchVillaBySlug(slug: string): Promise<Villa | undefined> {
   try {
     const res = await authFetch(`${API_BASE}/villas/${slug}`, { cache: 'no-store' });

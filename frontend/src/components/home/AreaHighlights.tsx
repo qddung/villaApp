@@ -1,9 +1,15 @@
 import { Link } from "react-router-dom";
 
+import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import { areas } from "@/data/areas";
+import { fetchFamousAreas } from "@/lib/api";
 
 export default function AreaHighlights() {
+  const [areas, setAreas] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchFamousAreas().then(setAreas).catch(console.error);
+  }, []);
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

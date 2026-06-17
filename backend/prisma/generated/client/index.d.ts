@@ -786,6 +786,10 @@ export namespace Prisma {
             args: Prisma.SettingsCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.SettingsCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>[]
+          }
           delete: {
             args: Prisma.SettingsDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$SettingsPayload>
@@ -801,6 +805,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.SettingsUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SettingsUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SettingsPayload>[]
           }
           upsert: {
             args: Prisma.SettingsUpsertArgs<ExtArgs>
@@ -852,6 +860,10 @@ export namespace Prisma {
             args: Prisma.VillaCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.VillaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaPayload>[]
+          }
           delete: {
             args: Prisma.VillaDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$VillaPayload>
@@ -867,6 +879,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.VillaUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VillaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaPayload>[]
           }
           upsert: {
             args: Prisma.VillaUpsertArgs<ExtArgs>
@@ -918,6 +934,10 @@ export namespace Prisma {
             args: Prisma.BookingCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.BookingCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>[]
+          }
           delete: {
             args: Prisma.BookingDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$BookingPayload>
@@ -933,6 +953,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.BookingUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.BookingUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$BookingPayload>[]
           }
           upsert: {
             args: Prisma.BookingUpsertArgs<ExtArgs>
@@ -984,6 +1008,10 @@ export namespace Prisma {
             args: Prisma.VillaImageCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.VillaImageCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaImagePayload>[]
+          }
           delete: {
             args: Prisma.VillaImageDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$VillaImagePayload>
@@ -999,6 +1027,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.VillaImageUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VillaImageUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaImagePayload>[]
           }
           upsert: {
             args: Prisma.VillaImageUpsertArgs<ExtArgs>
@@ -1050,6 +1082,10 @@ export namespace Prisma {
             args: Prisma.VillaAmenityCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.VillaAmenityCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaAmenityPayload>[]
+          }
           delete: {
             args: Prisma.VillaAmenityDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$VillaAmenityPayload>
@@ -1065,6 +1101,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.VillaAmenityUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VillaAmenityUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaAmenityPayload>[]
           }
           upsert: {
             args: Prisma.VillaAmenityUpsertArgs<ExtArgs>
@@ -1116,6 +1156,10 @@ export namespace Prisma {
             args: Prisma.VillaHighlightCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.VillaHighlightCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaHighlightPayload>[]
+          }
           delete: {
             args: Prisma.VillaHighlightDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$VillaHighlightPayload>
@@ -1131,6 +1175,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.VillaHighlightUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VillaHighlightUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaHighlightPayload>[]
           }
           upsert: {
             args: Prisma.VillaHighlightUpsertArgs<ExtArgs>
@@ -1182,6 +1230,10 @@ export namespace Prisma {
             args: Prisma.VillaPolicyCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.VillaPolicyCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaPolicyPayload>[]
+          }
           delete: {
             args: Prisma.VillaPolicyDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$VillaPolicyPayload>
@@ -1197,6 +1249,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.VillaPolicyUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.VillaPolicyUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$VillaPolicyPayload>[]
           }
           upsert: {
             args: Prisma.VillaPolicyUpsertArgs<ExtArgs>
@@ -1248,6 +1304,10 @@ export namespace Prisma {
             args: Prisma.ReviewCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.ReviewCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
+          }
           delete: {
             args: Prisma.ReviewDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$ReviewPayload>
@@ -1263,6 +1323,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.ReviewUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ReviewUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ReviewPayload>[]
           }
           upsert: {
             args: Prisma.ReviewUpsertArgs<ExtArgs>
@@ -1314,6 +1378,10 @@ export namespace Prisma {
             args: Prisma.UserCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.UserCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
+          }
           delete: {
             args: Prisma.UserDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$UserPayload>
@@ -1329,6 +1397,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.UserUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserPayload>[]
           }
           upsert: {
             args: Prisma.UserUpsertArgs<ExtArgs>
@@ -1380,6 +1452,10 @@ export namespace Prisma {
             args: Prisma.AreaCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
+          createManyAndReturn: {
+            args: Prisma.AreaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AreaPayload>[]
+          }
           delete: {
             args: Prisma.AreaDeleteArgs<ExtArgs>
             result: $Utils.PayloadToResult<Prisma.$AreaPayload>
@@ -1395,6 +1471,10 @@ export namespace Prisma {
           updateMany: {
             args: Prisma.AreaUpdateManyArgs<ExtArgs>
             result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.AreaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$AreaPayload>[]
           }
           upsert: {
             args: Prisma.AreaUpsertArgs<ExtArgs>
@@ -1880,7 +1960,23 @@ export namespace Prisma {
     updatedAt?: boolean
   }, ExtArgs["result"]["settings"]>
 
+  export type SettingsSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingConfirmationTemplate?: boolean
+    contactEmail?: boolean
+    contactPhone?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["settings"]>
 
+  export type SettingsSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    bookingConfirmationTemplate?: boolean
+    contactEmail?: boolean
+    contactPhone?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["settings"]>
 
   export type SettingsSelectScalar = {
     id?: boolean
@@ -2021,6 +2117,30 @@ export namespace Prisma {
     createMany<T extends SettingsCreateManyArgs>(args?: SelectSubset<T, SettingsCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Settings and returns the data saved in the database.
+     * @param {SettingsCreateManyAndReturnArgs} args - Arguments to create many Settings.
+     * @example
+     * // Create many Settings
+     * const settings = await prisma.settings.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Settings and only return the `id`
+     * const settingsWithIdOnly = await prisma.settings.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SettingsCreateManyAndReturnArgs>(args?: SelectSubset<T, SettingsCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Settings.
      * @param {SettingsDeleteArgs} args - Arguments to delete one Settings.
      * @example
@@ -2083,6 +2203,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends SettingsUpdateManyArgs>(args: SelectSubset<T, SettingsUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Settings and returns the data updated in the database.
+     * @param {SettingsUpdateManyAndReturnArgs} args - Arguments to update many Settings.
+     * @example
+     * // Update many Settings
+     * const settings = await prisma.settings.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Settings and only return the `id`
+     * const settingsWithIdOnly = await prisma.settings.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SettingsUpdateManyAndReturnArgs>(args: SelectSubset<T, SettingsUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SettingsPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Settings.
@@ -2487,6 +2637,25 @@ export namespace Prisma {
   }
 
   /**
+   * Settings createManyAndReturn
+   */
+  export type SettingsCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
+    /**
+     * The data used to create many Settings.
+     */
+    data: SettingsCreateManyInput | SettingsCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Settings update
    */
   export type SettingsUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2512,6 +2681,32 @@ export namespace Prisma {
    * Settings updateMany
    */
   export type SettingsUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Settings.
+     */
+    data: XOR<SettingsUpdateManyMutationInput, SettingsUncheckedUpdateManyInput>
+    /**
+     * Filter which Settings to update
+     */
+    where?: SettingsWhereInput
+    /**
+     * Limit how many Settings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Settings updateManyAndReturn
+   */
+  export type SettingsUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Settings
+     */
+    select?: SettingsSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Settings
+     */
+    omit?: SettingsOmit<ExtArgs> | null
     /**
      * The data used to update Settings.
      */
@@ -2991,7 +3186,59 @@ export namespace Prisma {
     _count?: boolean | VillaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["villa"]>
 
+  export type VillaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    tagline?: boolean
+    description?: boolean
+    areaId?: boolean
+    address?: boolean
+    bedrooms?: boolean
+    bathrooms?: boolean
+    maxGuests?: boolean
+    size?: boolean
+    pricePerNight?: boolean
+    priceWeekend?: boolean
+    priceHoliday?: boolean
+    rating?: boolean
+    reviewCount?: boolean
+    checkIn?: boolean
+    checkOut?: boolean
+    featured?: boolean
+    lat?: boolean
+    lng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    areaObj?: boolean | Villa$areaObjArgs<ExtArgs>
+  }, ExtArgs["result"]["villa"]>
 
+  export type VillaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    tagline?: boolean
+    description?: boolean
+    areaId?: boolean
+    address?: boolean
+    bedrooms?: boolean
+    bathrooms?: boolean
+    maxGuests?: boolean
+    size?: boolean
+    pricePerNight?: boolean
+    priceWeekend?: boolean
+    priceHoliday?: boolean
+    rating?: boolean
+    reviewCount?: boolean
+    checkIn?: boolean
+    checkOut?: boolean
+    featured?: boolean
+    lat?: boolean
+    lng?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    areaObj?: boolean | Villa$areaObjArgs<ExtArgs>
+  }, ExtArgs["result"]["villa"]>
 
   export type VillaSelectScalar = {
     id?: boolean
@@ -3029,6 +3276,12 @@ export namespace Prisma {
     reviews?: boolean | Villa$reviewsArgs<ExtArgs>
     bookings?: boolean | Villa$bookingsArgs<ExtArgs>
     _count?: boolean | VillaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type VillaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    areaObj?: boolean | Villa$areaObjArgs<ExtArgs>
+  }
+  export type VillaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    areaObj?: boolean | Villa$areaObjArgs<ExtArgs>
   }
 
   export type $VillaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3184,6 +3437,30 @@ export namespace Prisma {
     createMany<T extends VillaCreateManyArgs>(args?: SelectSubset<T, VillaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Villas and returns the data saved in the database.
+     * @param {VillaCreateManyAndReturnArgs} args - Arguments to create many Villas.
+     * @example
+     * // Create many Villas
+     * const villa = await prisma.villa.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Villas and only return the `id`
+     * const villaWithIdOnly = await prisma.villa.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VillaCreateManyAndReturnArgs>(args?: SelectSubset<T, VillaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Villa.
      * @param {VillaDeleteArgs} args - Arguments to delete one Villa.
      * @example
@@ -3246,6 +3523,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends VillaUpdateManyArgs>(args: SelectSubset<T, VillaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Villas and returns the data updated in the database.
+     * @param {VillaUpdateManyAndReturnArgs} args - Arguments to update many Villas.
+     * @example
+     * // Update many Villas
+     * const villa = await prisma.villa.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Villas and only return the `id`
+     * const villaWithIdOnly = await prisma.villa.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VillaUpdateManyAndReturnArgs>(args: SelectSubset<T, VillaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Villa.
@@ -3698,6 +4005,29 @@ export namespace Prisma {
   }
 
   /**
+   * Villa createManyAndReturn
+   */
+  export type VillaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Villa
+     */
+    select?: VillaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Villa
+     */
+    omit?: VillaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Villas.
+     */
+    data: VillaCreateManyInput | VillaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * Villa update
    */
   export type VillaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3739,6 +4069,36 @@ export namespace Prisma {
      * Limit how many Villas to update.
      */
     limit?: number
+  }
+
+  /**
+   * Villa updateManyAndReturn
+   */
+  export type VillaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Villa
+     */
+    select?: VillaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Villa
+     */
+    omit?: VillaOmit<ExtArgs> | null
+    /**
+     * The data used to update Villas.
+     */
+    data: XOR<VillaUpdateManyMutationInput, VillaUncheckedUpdateManyInput>
+    /**
+     * Filter which Villas to update
+     */
+    where?: VillaWhereInput
+    /**
+     * Limit how many Villas to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -4278,7 +4638,43 @@ export namespace Prisma {
     villa?: boolean | Booking$villaArgs<ExtArgs>
   }, ExtArgs["result"]["booking"]>
 
+  export type BookingSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    villaId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    note?: boolean
+    checkIn?: boolean
+    checkOut?: boolean
+    guests?: boolean
+    total?: boolean
+    priceAtBooking?: boolean
+    bookingType?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    villa?: boolean | Booking$villaArgs<ExtArgs>
+  }, ExtArgs["result"]["booking"]>
 
+  export type BookingSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    villaId?: boolean
+    name?: boolean
+    email?: boolean
+    phone?: boolean
+    note?: boolean
+    checkIn?: boolean
+    checkOut?: boolean
+    guests?: boolean
+    total?: boolean
+    priceAtBooking?: boolean
+    bookingType?: boolean
+    status?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    villa?: boolean | Booking$villaArgs<ExtArgs>
+  }, ExtArgs["result"]["booking"]>
 
   export type BookingSelectScalar = {
     id?: boolean
@@ -4300,6 +4696,12 @@ export namespace Prisma {
 
   export type BookingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "villaId" | "name" | "email" | "phone" | "note" | "checkIn" | "checkOut" | "guests" | "total" | "priceAtBooking" | "bookingType" | "status" | "createdAt" | "updatedAt", ExtArgs["result"]["booking"]>
   export type BookingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | Booking$villaArgs<ExtArgs>
+  }
+  export type BookingIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | Booking$villaArgs<ExtArgs>
+  }
+  export type BookingIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | Booking$villaArgs<ExtArgs>
   }
 
@@ -4442,6 +4844,30 @@ export namespace Prisma {
     createMany<T extends BookingCreateManyArgs>(args?: SelectSubset<T, BookingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Bookings and returns the data saved in the database.
+     * @param {BookingCreateManyAndReturnArgs} args - Arguments to create many Bookings.
+     * @example
+     * // Create many Bookings
+     * const booking = await prisma.booking.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Bookings and only return the `id`
+     * const bookingWithIdOnly = await prisma.booking.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends BookingCreateManyAndReturnArgs>(args?: SelectSubset<T, BookingCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Booking.
      * @param {BookingDeleteArgs} args - Arguments to delete one Booking.
      * @example
@@ -4504,6 +4930,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends BookingUpdateManyArgs>(args: SelectSubset<T, BookingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Bookings and returns the data updated in the database.
+     * @param {BookingUpdateManyAndReturnArgs} args - Arguments to update many Bookings.
+     * @example
+     * // Update many Bookings
+     * const booking = await prisma.booking.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Bookings and only return the `id`
+     * const bookingWithIdOnly = await prisma.booking.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends BookingUpdateManyAndReturnArgs>(args: SelectSubset<T, BookingUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BookingPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Booking.
@@ -4942,6 +5398,29 @@ export namespace Prisma {
   }
 
   /**
+   * Booking createManyAndReturn
+   */
+  export type BookingCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * The data used to create many Bookings.
+     */
+    data: BookingCreateManyInput | BookingCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * Booking update
    */
   export type BookingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4983,6 +5462,36 @@ export namespace Prisma {
      * Limit how many Bookings to update.
      */
     limit?: number
+  }
+
+  /**
+   * Booking updateManyAndReturn
+   */
+  export type BookingUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Booking
+     */
+    select?: BookingSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Booking
+     */
+    omit?: BookingOmit<ExtArgs> | null
+    /**
+     * The data used to update Bookings.
+     */
+    data: XOR<BookingUpdateManyMutationInput, BookingUncheckedUpdateManyInput>
+    /**
+     * Filter which Bookings to update
+     */
+    where?: BookingWhereInput
+    /**
+     * Limit how many Bookings to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: BookingIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5298,7 +5807,25 @@ export namespace Prisma {
     villa?: boolean | VillaImage$villaArgs<ExtArgs>
   }, ExtArgs["result"]["villaImage"]>
 
+  export type VillaImageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    villaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    isMain?: boolean
+    order?: boolean
+    villa?: boolean | VillaImage$villaArgs<ExtArgs>
+  }, ExtArgs["result"]["villaImage"]>
 
+  export type VillaImageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    villaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    isMain?: boolean
+    order?: boolean
+    villa?: boolean | VillaImage$villaArgs<ExtArgs>
+  }, ExtArgs["result"]["villaImage"]>
 
   export type VillaImageSelectScalar = {
     id?: boolean
@@ -5311,6 +5838,12 @@ export namespace Prisma {
 
   export type VillaImageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "villaId" | "data" | "mimeType" | "isMain" | "order", ExtArgs["result"]["villaImage"]>
   export type VillaImageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaImage$villaArgs<ExtArgs>
+  }
+  export type VillaImageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaImage$villaArgs<ExtArgs>
+  }
+  export type VillaImageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | VillaImage$villaArgs<ExtArgs>
   }
 
@@ -5444,6 +5977,30 @@ export namespace Prisma {
     createMany<T extends VillaImageCreateManyArgs>(args?: SelectSubset<T, VillaImageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many VillaImages and returns the data saved in the database.
+     * @param {VillaImageCreateManyAndReturnArgs} args - Arguments to create many VillaImages.
+     * @example
+     * // Create many VillaImages
+     * const villaImage = await prisma.villaImage.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VillaImages and only return the `id`
+     * const villaImageWithIdOnly = await prisma.villaImage.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VillaImageCreateManyAndReturnArgs>(args?: SelectSubset<T, VillaImageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaImagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a VillaImage.
      * @param {VillaImageDeleteArgs} args - Arguments to delete one VillaImage.
      * @example
@@ -5506,6 +6063,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends VillaImageUpdateManyArgs>(args: SelectSubset<T, VillaImageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VillaImages and returns the data updated in the database.
+     * @param {VillaImageUpdateManyAndReturnArgs} args - Arguments to update many VillaImages.
+     * @example
+     * // Update many VillaImages
+     * const villaImage = await prisma.villaImage.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VillaImages and only return the `id`
+     * const villaImageWithIdOnly = await prisma.villaImage.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VillaImageUpdateManyAndReturnArgs>(args: SelectSubset<T, VillaImageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaImagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one VillaImage.
@@ -5935,6 +6522,29 @@ export namespace Prisma {
   }
 
   /**
+   * VillaImage createManyAndReturn
+   */
+  export type VillaImageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaImage
+     */
+    select?: VillaImageSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaImage
+     */
+    omit?: VillaImageOmit<ExtArgs> | null
+    /**
+     * The data used to create many VillaImages.
+     */
+    data: VillaImageCreateManyInput | VillaImageCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaImageIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * VillaImage update
    */
   export type VillaImageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5976,6 +6586,36 @@ export namespace Prisma {
      * Limit how many VillaImages to update.
      */
     limit?: number
+  }
+
+  /**
+   * VillaImage updateManyAndReturn
+   */
+  export type VillaImageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaImage
+     */
+    select?: VillaImageSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaImage
+     */
+    omit?: VillaImageOmit<ExtArgs> | null
+    /**
+     * The data used to update VillaImages.
+     */
+    data: XOR<VillaImageUpdateManyMutationInput, VillaImageUncheckedUpdateManyInput>
+    /**
+     * Filter which VillaImages to update
+     */
+    where?: VillaImageWhereInput
+    /**
+     * Limit how many VillaImages to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaImageIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -6233,7 +6873,19 @@ export namespace Prisma {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["villaAmenity"]>
 
+  export type VillaAmenitySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaAmenity"]>
 
+  export type VillaAmenitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaAmenity"]>
 
   export type VillaAmenitySelectScalar = {
     id?: boolean
@@ -6243,6 +6895,12 @@ export namespace Prisma {
 
   export type VillaAmenityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "villaId", ExtArgs["result"]["villaAmenity"]>
   export type VillaAmenityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaAmenityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaAmenityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }
 
@@ -6373,6 +7031,30 @@ export namespace Prisma {
     createMany<T extends VillaAmenityCreateManyArgs>(args?: SelectSubset<T, VillaAmenityCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many VillaAmenities and returns the data saved in the database.
+     * @param {VillaAmenityCreateManyAndReturnArgs} args - Arguments to create many VillaAmenities.
+     * @example
+     * // Create many VillaAmenities
+     * const villaAmenity = await prisma.villaAmenity.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VillaAmenities and only return the `id`
+     * const villaAmenityWithIdOnly = await prisma.villaAmenity.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VillaAmenityCreateManyAndReturnArgs>(args?: SelectSubset<T, VillaAmenityCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaAmenityPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a VillaAmenity.
      * @param {VillaAmenityDeleteArgs} args - Arguments to delete one VillaAmenity.
      * @example
@@ -6435,6 +7117,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends VillaAmenityUpdateManyArgs>(args: SelectSubset<T, VillaAmenityUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VillaAmenities and returns the data updated in the database.
+     * @param {VillaAmenityUpdateManyAndReturnArgs} args - Arguments to update many VillaAmenities.
+     * @example
+     * // Update many VillaAmenities
+     * const villaAmenity = await prisma.villaAmenity.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VillaAmenities and only return the `id`
+     * const villaAmenityWithIdOnly = await prisma.villaAmenity.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VillaAmenityUpdateManyAndReturnArgs>(args: SelectSubset<T, VillaAmenityUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaAmenityPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one VillaAmenity.
@@ -6861,6 +7573,29 @@ export namespace Prisma {
   }
 
   /**
+   * VillaAmenity createManyAndReturn
+   */
+  export type VillaAmenityCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaAmenity
+     */
+    select?: VillaAmenitySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaAmenity
+     */
+    omit?: VillaAmenityOmit<ExtArgs> | null
+    /**
+     * The data used to create many VillaAmenities.
+     */
+    data: VillaAmenityCreateManyInput | VillaAmenityCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaAmenityIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * VillaAmenity update
    */
   export type VillaAmenityUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -6902,6 +7637,36 @@ export namespace Prisma {
      * Limit how many VillaAmenities to update.
      */
     limit?: number
+  }
+
+  /**
+   * VillaAmenity updateManyAndReturn
+   */
+  export type VillaAmenityUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaAmenity
+     */
+    select?: VillaAmenitySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaAmenity
+     */
+    omit?: VillaAmenityOmit<ExtArgs> | null
+    /**
+     * The data used to update VillaAmenities.
+     */
+    data: XOR<VillaAmenityUpdateManyMutationInput, VillaAmenityUncheckedUpdateManyInput>
+    /**
+     * Filter which VillaAmenities to update
+     */
+    where?: VillaAmenityWhereInput
+    /**
+     * Limit how many VillaAmenities to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaAmenityIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -7182,7 +7947,21 @@ export namespace Prisma {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["villaHighlight"]>
 
+  export type VillaHighlightSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    order?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaHighlight"]>
 
+  export type VillaHighlightSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    order?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaHighlight"]>
 
   export type VillaHighlightSelectScalar = {
     id?: boolean
@@ -7193,6 +7972,12 @@ export namespace Prisma {
 
   export type VillaHighlightOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "order" | "villaId", ExtArgs["result"]["villaHighlight"]>
   export type VillaHighlightInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaHighlightIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaHighlightIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }
 
@@ -7324,6 +8109,30 @@ export namespace Prisma {
     createMany<T extends VillaHighlightCreateManyArgs>(args?: SelectSubset<T, VillaHighlightCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many VillaHighlights and returns the data saved in the database.
+     * @param {VillaHighlightCreateManyAndReturnArgs} args - Arguments to create many VillaHighlights.
+     * @example
+     * // Create many VillaHighlights
+     * const villaHighlight = await prisma.villaHighlight.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VillaHighlights and only return the `id`
+     * const villaHighlightWithIdOnly = await prisma.villaHighlight.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VillaHighlightCreateManyAndReturnArgs>(args?: SelectSubset<T, VillaHighlightCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaHighlightPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a VillaHighlight.
      * @param {VillaHighlightDeleteArgs} args - Arguments to delete one VillaHighlight.
      * @example
@@ -7386,6 +8195,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends VillaHighlightUpdateManyArgs>(args: SelectSubset<T, VillaHighlightUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VillaHighlights and returns the data updated in the database.
+     * @param {VillaHighlightUpdateManyAndReturnArgs} args - Arguments to update many VillaHighlights.
+     * @example
+     * // Update many VillaHighlights
+     * const villaHighlight = await prisma.villaHighlight.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VillaHighlights and only return the `id`
+     * const villaHighlightWithIdOnly = await prisma.villaHighlight.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VillaHighlightUpdateManyAndReturnArgs>(args: SelectSubset<T, VillaHighlightUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaHighlightPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one VillaHighlight.
@@ -7813,6 +8652,29 @@ export namespace Prisma {
   }
 
   /**
+   * VillaHighlight createManyAndReturn
+   */
+  export type VillaHighlightCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaHighlight
+     */
+    select?: VillaHighlightSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaHighlight
+     */
+    omit?: VillaHighlightOmit<ExtArgs> | null
+    /**
+     * The data used to create many VillaHighlights.
+     */
+    data: VillaHighlightCreateManyInput | VillaHighlightCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaHighlightIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * VillaHighlight update
    */
   export type VillaHighlightUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -7854,6 +8716,36 @@ export namespace Prisma {
      * Limit how many VillaHighlights to update.
      */
     limit?: number
+  }
+
+  /**
+   * VillaHighlight updateManyAndReturn
+   */
+  export type VillaHighlightUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaHighlight
+     */
+    select?: VillaHighlightSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaHighlight
+     */
+    omit?: VillaHighlightOmit<ExtArgs> | null
+    /**
+     * The data used to update VillaHighlights.
+     */
+    data: XOR<VillaHighlightUpdateManyMutationInput, VillaHighlightUncheckedUpdateManyInput>
+    /**
+     * Filter which VillaHighlights to update
+     */
+    where?: VillaHighlightWhereInput
+    /**
+     * Limit how many VillaHighlights to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaHighlightIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8134,7 +9026,21 @@ export namespace Prisma {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["villaPolicy"]>
 
+  export type VillaPolicySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    order?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaPolicy"]>
 
+  export type VillaPolicySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    text?: boolean
+    order?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["villaPolicy"]>
 
   export type VillaPolicySelectScalar = {
     id?: boolean
@@ -8145,6 +9051,12 @@ export namespace Prisma {
 
   export type VillaPolicyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "text" | "order" | "villaId", ExtArgs["result"]["villaPolicy"]>
   export type VillaPolicyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaPolicyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type VillaPolicyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }
 
@@ -8276,6 +9188,30 @@ export namespace Prisma {
     createMany<T extends VillaPolicyCreateManyArgs>(args?: SelectSubset<T, VillaPolicyCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many VillaPolicies and returns the data saved in the database.
+     * @param {VillaPolicyCreateManyAndReturnArgs} args - Arguments to create many VillaPolicies.
+     * @example
+     * // Create many VillaPolicies
+     * const villaPolicy = await prisma.villaPolicy.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many VillaPolicies and only return the `id`
+     * const villaPolicyWithIdOnly = await prisma.villaPolicy.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends VillaPolicyCreateManyAndReturnArgs>(args?: SelectSubset<T, VillaPolicyCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaPolicyPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a VillaPolicy.
      * @param {VillaPolicyDeleteArgs} args - Arguments to delete one VillaPolicy.
      * @example
@@ -8338,6 +9274,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends VillaPolicyUpdateManyArgs>(args: SelectSubset<T, VillaPolicyUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more VillaPolicies and returns the data updated in the database.
+     * @param {VillaPolicyUpdateManyAndReturnArgs} args - Arguments to update many VillaPolicies.
+     * @example
+     * // Update many VillaPolicies
+     * const villaPolicy = await prisma.villaPolicy.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more VillaPolicies and only return the `id`
+     * const villaPolicyWithIdOnly = await prisma.villaPolicy.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends VillaPolicyUpdateManyAndReturnArgs>(args: SelectSubset<T, VillaPolicyUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaPolicyPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one VillaPolicy.
@@ -8765,6 +9731,29 @@ export namespace Prisma {
   }
 
   /**
+   * VillaPolicy createManyAndReturn
+   */
+  export type VillaPolicyCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaPolicy
+     */
+    select?: VillaPolicySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaPolicy
+     */
+    omit?: VillaPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to create many VillaPolicies.
+     */
+    data: VillaPolicyCreateManyInput | VillaPolicyCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaPolicyIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * VillaPolicy update
    */
   export type VillaPolicyUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -8806,6 +9795,36 @@ export namespace Prisma {
      * Limit how many VillaPolicies to update.
      */
     limit?: number
+  }
+
+  /**
+   * VillaPolicy updateManyAndReturn
+   */
+  export type VillaPolicyUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the VillaPolicy
+     */
+    select?: VillaPolicySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the VillaPolicy
+     */
+    omit?: VillaPolicyOmit<ExtArgs> | null
+    /**
+     * The data used to update VillaPolicies.
+     */
+    data: XOR<VillaPolicyUpdateManyMutationInput, VillaPolicyUncheckedUpdateManyInput>
+    /**
+     * Filter which VillaPolicies to update
+     */
+    where?: VillaPolicyWhereInput
+    /**
+     * Limit how many VillaPolicies to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: VillaPolicyIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -9110,7 +10129,27 @@ export namespace Prisma {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["review"]>
 
+  export type ReviewSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    author?: boolean
+    avatar?: boolean
+    date?: boolean
+    rating?: boolean
+    comment?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["review"]>
 
+  export type ReviewSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    author?: boolean
+    avatar?: boolean
+    date?: boolean
+    rating?: boolean
+    comment?: boolean
+    villaId?: boolean
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["review"]>
 
   export type ReviewSelectScalar = {
     id?: boolean
@@ -9124,6 +10163,12 @@ export namespace Prisma {
 
   export type ReviewOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "author" | "avatar" | "date" | "rating" | "comment" | "villaId", ExtArgs["result"]["review"]>
   export type ReviewInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type ReviewIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    villa?: boolean | VillaDefaultArgs<ExtArgs>
+  }
+  export type ReviewIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villa?: boolean | VillaDefaultArgs<ExtArgs>
   }
 
@@ -9258,6 +10303,30 @@ export namespace Prisma {
     createMany<T extends ReviewCreateManyArgs>(args?: SelectSubset<T, ReviewCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Reviews and returns the data saved in the database.
+     * @param {ReviewCreateManyAndReturnArgs} args - Arguments to create many Reviews.
+     * @example
+     * // Create many Reviews
+     * const review = await prisma.review.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Reviews and only return the `id`
+     * const reviewWithIdOnly = await prisma.review.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ReviewCreateManyAndReturnArgs>(args?: SelectSubset<T, ReviewCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Review.
      * @param {ReviewDeleteArgs} args - Arguments to delete one Review.
      * @example
@@ -9320,6 +10389,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends ReviewUpdateManyArgs>(args: SelectSubset<T, ReviewUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Reviews and returns the data updated in the database.
+     * @param {ReviewUpdateManyAndReturnArgs} args - Arguments to update many Reviews.
+     * @example
+     * // Update many Reviews
+     * const review = await prisma.review.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Reviews and only return the `id`
+     * const reviewWithIdOnly = await prisma.review.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ReviewUpdateManyAndReturnArgs>(args: SelectSubset<T, ReviewUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Review.
@@ -9750,6 +10849,29 @@ export namespace Prisma {
   }
 
   /**
+   * Review createManyAndReturn
+   */
+  export type ReviewCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * The data used to create many Reviews.
+     */
+    data: ReviewCreateManyInput | ReviewCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
    * Review update
    */
   export type ReviewUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9791,6 +10913,36 @@ export namespace Prisma {
      * Limit how many Reviews to update.
      */
     limit?: number
+  }
+
+  /**
+   * Review updateManyAndReturn
+   */
+  export type ReviewUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Review
+     */
+    select?: ReviewSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Review
+     */
+    omit?: ReviewOmit<ExtArgs> | null
+    /**
+     * The data used to update Reviews.
+     */
+    data: XOR<ReviewUpdateManyMutationInput, ReviewUncheckedUpdateManyInput>
+    /**
+     * Filter which Reviews to update
+     */
+    where?: ReviewWhereInput
+    /**
+     * Limit how many Reviews to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ReviewIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -10076,7 +11228,29 @@ export namespace Prisma {
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
 
+  export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    email?: boolean
+    password?: boolean
+    fullName?: boolean
+    phone?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["user"]>
 
+  export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    username?: boolean
+    email?: boolean
+    password?: boolean
+    fullName?: boolean
+    phone?: boolean
+    role?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
     id?: boolean
@@ -10223,6 +11397,30 @@ export namespace Prisma {
     createMany<T extends UserCreateManyArgs>(args?: SelectSubset<T, UserCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Users and returns the data saved in the database.
+     * @param {UserCreateManyAndReturnArgs} args - Arguments to create many Users.
+     * @example
+     * // Create many Users
+     * const user = await prisma.user.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserCreateManyAndReturnArgs>(args?: SelectSubset<T, UserCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a User.
      * @param {UserDeleteArgs} args - Arguments to delete one User.
      * @example
@@ -10285,6 +11483,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends UserUpdateManyArgs>(args: SelectSubset<T, UserUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Users and returns the data updated in the database.
+     * @param {UserUpdateManyAndReturnArgs} args - Arguments to update many Users.
+     * @example
+     * // Update many Users
+     * const user = await prisma.user.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Users and only return the `id`
+     * const userWithIdOnly = await prisma.user.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserUpdateManyAndReturnArgs>(args: SelectSubset<T, UserUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one User.
@@ -10692,6 +11920,25 @@ export namespace Prisma {
   }
 
   /**
+   * User createManyAndReturn
+   */
+  export type UserCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * The data used to create many Users.
+     */
+    data: UserCreateManyInput | UserCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * User update
    */
   export type UserUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -10717,6 +11964,32 @@ export namespace Prisma {
    * User updateMany
    */
   export type UserUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Users.
+     */
+    data: XOR<UserUpdateManyMutationInput, UserUncheckedUpdateManyInput>
+    /**
+     * Filter which Users to update
+     */
+    where?: UserWhereInput
+    /**
+     * Limit how many Users to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * User updateManyAndReturn
+   */
+  export type UserUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
     /**
      * The data used to update Users.
      */
@@ -10818,6 +12091,8 @@ export namespace Prisma {
     id: string | null
     slug: string | null
     name: string | null
+    description: string | null
+    imageUrl: string | null
     isFamous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -10827,6 +12102,8 @@ export namespace Prisma {
     id: string | null
     slug: string | null
     name: string | null
+    description: string | null
+    imageUrl: string | null
     isFamous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -10836,6 +12113,8 @@ export namespace Prisma {
     id: number
     slug: number
     name: number
+    description: number
+    imageUrl: number
     isFamous: number
     createdAt: number
     updatedAt: number
@@ -10847,6 +12126,8 @@ export namespace Prisma {
     id?: true
     slug?: true
     name?: true
+    description?: true
+    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -10856,6 +12137,8 @@ export namespace Prisma {
     id?: true
     slug?: true
     name?: true
+    description?: true
+    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -10865,6 +12148,8 @@ export namespace Prisma {
     id?: true
     slug?: true
     name?: true
+    description?: true
+    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -10947,6 +12232,8 @@ export namespace Prisma {
     id: string
     slug: string
     name: string
+    description: string | null
+    imageUrl: string | null
     isFamous: boolean
     createdAt: Date
     updatedAt: Date
@@ -10973,6 +12260,8 @@ export namespace Prisma {
     id?: boolean
     slug?: boolean
     name?: boolean
+    description?: boolean
+    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -10980,22 +12269,46 @@ export namespace Prisma {
     _count?: boolean | AreaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["area"]>
 
+  export type AreaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    isFamous?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["area"]>
 
+  export type AreaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    slug?: boolean
+    name?: boolean
+    description?: boolean
+    imageUrl?: boolean
+    isFamous?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["area"]>
 
   export type AreaSelectScalar = {
     id?: boolean
     slug?: boolean
     name?: boolean
+    description?: boolean
+    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "isFamous" | "createdAt" | "updatedAt", ExtArgs["result"]["area"]>
+  export type AreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "imageUrl" | "isFamous" | "createdAt" | "updatedAt", ExtArgs["result"]["area"]>
   export type AreaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villas?: boolean | Area$villasArgs<ExtArgs>
     _count?: boolean | AreaCountOutputTypeDefaultArgs<ExtArgs>
   }
+  export type AreaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AreaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $AreaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Area"
@@ -11006,6 +12319,8 @@ export namespace Prisma {
       id: string
       slug: string
       name: string
+      description: string | null
+      imageUrl: string | null
       isFamous: boolean
       createdAt: Date
       updatedAt: Date
@@ -11127,6 +12442,30 @@ export namespace Prisma {
     createMany<T extends AreaCreateManyArgs>(args?: SelectSubset<T, AreaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
+     * Create many Areas and returns the data saved in the database.
+     * @param {AreaCreateManyAndReturnArgs} args - Arguments to create many Areas.
+     * @example
+     * // Create many Areas
+     * const area = await prisma.area.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Areas and only return the `id`
+     * const areaWithIdOnly = await prisma.area.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends AreaCreateManyAndReturnArgs>(args?: SelectSubset<T, AreaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AreaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
      * Delete a Area.
      * @param {AreaDeleteArgs} args - Arguments to delete one Area.
      * @example
@@ -11189,6 +12528,36 @@ export namespace Prisma {
      * 
      */
     updateMany<T extends AreaUpdateManyArgs>(args: SelectSubset<T, AreaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Areas and returns the data updated in the database.
+     * @param {AreaUpdateManyAndReturnArgs} args - Arguments to update many Areas.
+     * @example
+     * // Update many Areas
+     * const area = await prisma.area.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Areas and only return the `id`
+     * const areaWithIdOnly = await prisma.area.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends AreaUpdateManyAndReturnArgs>(args: SelectSubset<T, AreaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AreaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Area.
@@ -11382,6 +12751,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Area", 'String'>
     readonly slug: FieldRef<"Area", 'String'>
     readonly name: FieldRef<"Area", 'String'>
+    readonly description: FieldRef<"Area", 'String'>
+    readonly imageUrl: FieldRef<"Area", 'String'>
     readonly isFamous: FieldRef<"Area", 'Boolean'>
     readonly createdAt: FieldRef<"Area", 'DateTime'>
     readonly updatedAt: FieldRef<"Area", 'DateTime'>
@@ -11618,6 +12989,25 @@ export namespace Prisma {
   }
 
   /**
+   * Area createManyAndReturn
+   */
+  export type AreaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Area
+     */
+    select?: AreaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Area
+     */
+    omit?: AreaOmit<ExtArgs> | null
+    /**
+     * The data used to create many Areas.
+     */
+    data: AreaCreateManyInput | AreaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
    * Area update
    */
   export type AreaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -11647,6 +13037,32 @@ export namespace Prisma {
    * Area updateMany
    */
   export type AreaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Areas.
+     */
+    data: XOR<AreaUpdateManyMutationInput, AreaUncheckedUpdateManyInput>
+    /**
+     * Filter which Areas to update
+     */
+    where?: AreaWhereInput
+    /**
+     * Limit how many Areas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Area updateManyAndReturn
+   */
+  export type AreaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Area
+     */
+    select?: AreaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Area
+     */
+    omit?: AreaOmit<ExtArgs> | null
     /**
      * The data used to update Areas.
      */
@@ -11919,6 +13335,8 @@ export namespace Prisma {
     id: 'id',
     slug: 'slug',
     name: 'name',
+    description: 'description',
+    imageUrl: 'imageUrl',
     isFamous: 'isFamous',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
@@ -11935,123 +13353,20 @@ export namespace Prisma {
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
 
 
+  export const QueryMode: {
+    default: 'default',
+    insensitive: 'insensitive'
+  };
+
+  export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
   export const NullsOrder: {
     first: 'first',
     last: 'last'
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
-
-
-  export const SettingsOrderByRelevanceFieldEnum: {
-    id: 'id',
-    bookingConfirmationTemplate: 'bookingConfirmationTemplate',
-    contactEmail: 'contactEmail',
-    contactPhone: 'contactPhone'
-  };
-
-  export type SettingsOrderByRelevanceFieldEnum = (typeof SettingsOrderByRelevanceFieldEnum)[keyof typeof SettingsOrderByRelevanceFieldEnum]
-
-
-  export const VillaOrderByRelevanceFieldEnum: {
-    id: 'id',
-    slug: 'slug',
-    name: 'name',
-    tagline: 'tagline',
-    description: 'description',
-    areaId: 'areaId',
-    address: 'address',
-    checkIn: 'checkIn',
-    checkOut: 'checkOut'
-  };
-
-  export type VillaOrderByRelevanceFieldEnum = (typeof VillaOrderByRelevanceFieldEnum)[keyof typeof VillaOrderByRelevanceFieldEnum]
-
-
-  export const BookingOrderByRelevanceFieldEnum: {
-    id: 'id',
-    villaId: 'villaId',
-    name: 'name',
-    email: 'email',
-    phone: 'phone',
-    note: 'note',
-    checkIn: 'checkIn',
-    checkOut: 'checkOut',
-    bookingType: 'bookingType',
-    status: 'status'
-  };
-
-  export type BookingOrderByRelevanceFieldEnum = (typeof BookingOrderByRelevanceFieldEnum)[keyof typeof BookingOrderByRelevanceFieldEnum]
-
-
-  export const VillaImageOrderByRelevanceFieldEnum: {
-    id: 'id',
-    villaId: 'villaId',
-    mimeType: 'mimeType'
-  };
-
-  export type VillaImageOrderByRelevanceFieldEnum = (typeof VillaImageOrderByRelevanceFieldEnum)[keyof typeof VillaImageOrderByRelevanceFieldEnum]
-
-
-  export const VillaAmenityOrderByRelevanceFieldEnum: {
-    id: 'id',
-    name: 'name',
-    villaId: 'villaId'
-  };
-
-  export type VillaAmenityOrderByRelevanceFieldEnum = (typeof VillaAmenityOrderByRelevanceFieldEnum)[keyof typeof VillaAmenityOrderByRelevanceFieldEnum]
-
-
-  export const VillaHighlightOrderByRelevanceFieldEnum: {
-    id: 'id',
-    text: 'text',
-    villaId: 'villaId'
-  };
-
-  export type VillaHighlightOrderByRelevanceFieldEnum = (typeof VillaHighlightOrderByRelevanceFieldEnum)[keyof typeof VillaHighlightOrderByRelevanceFieldEnum]
-
-
-  export const VillaPolicyOrderByRelevanceFieldEnum: {
-    id: 'id',
-    text: 'text',
-    villaId: 'villaId'
-  };
-
-  export type VillaPolicyOrderByRelevanceFieldEnum = (typeof VillaPolicyOrderByRelevanceFieldEnum)[keyof typeof VillaPolicyOrderByRelevanceFieldEnum]
-
-
-  export const ReviewOrderByRelevanceFieldEnum: {
-    id: 'id',
-    author: 'author',
-    avatar: 'avatar',
-    date: 'date',
-    comment: 'comment',
-    villaId: 'villaId'
-  };
-
-  export type ReviewOrderByRelevanceFieldEnum = (typeof ReviewOrderByRelevanceFieldEnum)[keyof typeof ReviewOrderByRelevanceFieldEnum]
-
-
-  export const UserOrderByRelevanceFieldEnum: {
-    id: 'id',
-    username: 'username',
-    email: 'email',
-    password: 'password',
-    fullName: 'fullName',
-    phone: 'phone',
-    role: 'role'
-  };
-
-  export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
-
-
-  export const AreaOrderByRelevanceFieldEnum: {
-    id: 'id',
-    slug: 'slug',
-    name: 'name'
-  };
-
-  export type AreaOrderByRelevanceFieldEnum = (typeof AreaOrderByRelevanceFieldEnum)[keyof typeof AreaOrderByRelevanceFieldEnum]
 
 
   /**
@@ -12067,9 +13382,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'String[]'
+   */
+  export type ListStringFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'String[]'>
+    
+
+
+  /**
    * Reference to a field of type 'DateTime'
    */
   export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
+   * Reference to a field of type 'DateTime[]'
+   */
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -12081,9 +13410,23 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Int[]'
+   */
+  export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
 
@@ -12098,6 +13441,13 @@ export namespace Prisma {
    * Reference to a field of type 'Bytes'
    */
   export type BytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes'>
+    
+
+
+  /**
+   * Reference to a field of type 'Bytes[]'
+   */
+  export type ListBytesFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Bytes[]'>
     
   /**
    * Deep Input Types
@@ -12123,7 +13473,6 @@ export namespace Prisma {
     contactPhone?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _relevance?: SettingsOrderByRelevanceInput
   }
 
   export type SettingsWhereUniqueInput = Prisma.AtLeast<{
@@ -12229,7 +13578,6 @@ export namespace Prisma {
     policies?: VillaPolicyOrderByRelationAggregateInput
     reviews?: ReviewOrderByRelationAggregateInput
     bookings?: BookingOrderByRelationAggregateInput
-    _relevance?: VillaOrderByRelevanceInput
   }
 
   export type VillaWhereUniqueInput = Prisma.AtLeast<{
@@ -12367,7 +13715,6 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: BookingOrderByRelevanceInput
   }
 
   export type BookingWhereUniqueInput = Prisma.AtLeast<{
@@ -12457,7 +13804,6 @@ export namespace Prisma {
     isMain?: SortOrder
     order?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: VillaImageOrderByRelevanceInput
   }
 
   export type VillaImageWhereUniqueInput = Prisma.AtLeast<{
@@ -12514,7 +13860,6 @@ export namespace Prisma {
     name?: SortOrder
     villaId?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: VillaAmenityOrderByRelevanceInput
   }
 
   export type VillaAmenityWhereUniqueInput = Prisma.AtLeast<{
@@ -12562,7 +13907,6 @@ export namespace Prisma {
     order?: SortOrder
     villaId?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: VillaHighlightOrderByRelevanceInput
   }
 
   export type VillaHighlightWhereUniqueInput = Prisma.AtLeast<{
@@ -12615,7 +13959,6 @@ export namespace Prisma {
     order?: SortOrder
     villaId?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: VillaPolicyOrderByRelevanceInput
   }
 
   export type VillaPolicyWhereUniqueInput = Prisma.AtLeast<{
@@ -12674,7 +14017,6 @@ export namespace Prisma {
     comment?: SortOrder
     villaId?: SortOrder
     villa?: VillaOrderByWithRelationInput
-    _relevance?: ReviewOrderByRelevanceInput
   }
 
   export type ReviewWhereUniqueInput = Prisma.AtLeast<{
@@ -12744,7 +14086,6 @@ export namespace Prisma {
     role?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _relevance?: UserOrderByRelevanceInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -12799,6 +14140,8 @@ export namespace Prisma {
     id?: StringFilter<"Area"> | string
     slug?: StringFilter<"Area"> | string
     name?: StringFilter<"Area"> | string
+    description?: StringNullableFilter<"Area"> | string | null
+    imageUrl?: StringNullableFilter<"Area"> | string | null
     isFamous?: BoolFilter<"Area"> | boolean
     createdAt?: DateTimeFilter<"Area"> | Date | string
     updatedAt?: DateTimeFilter<"Area"> | Date | string
@@ -12809,11 +14152,12 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     villas?: VillaOrderByRelationAggregateInput
-    _relevance?: AreaOrderByRelevanceInput
   }
 
   export type AreaWhereUniqueInput = Prisma.AtLeast<{
@@ -12823,6 +14167,8 @@ export namespace Prisma {
     OR?: AreaWhereInput[]
     NOT?: AreaWhereInput | AreaWhereInput[]
     name?: StringFilter<"Area"> | string
+    description?: StringNullableFilter<"Area"> | string | null
+    imageUrl?: StringNullableFilter<"Area"> | string | null
     isFamous?: BoolFilter<"Area"> | boolean
     createdAt?: DateTimeFilter<"Area"> | Date | string
     updatedAt?: DateTimeFilter<"Area"> | Date | string
@@ -12833,6 +14179,8 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    description?: SortOrderInput | SortOrder
+    imageUrl?: SortOrderInput | SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -12848,6 +14196,8 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Area"> | string
     slug?: StringWithAggregatesFilter<"Area"> | string
     name?: StringWithAggregatesFilter<"Area"> | string
+    description?: StringNullableWithAggregatesFilter<"Area"> | string | null
+    imageUrl?: StringNullableWithAggregatesFilter<"Area"> | string | null
     isFamous?: BoolWithAggregatesFilter<"Area"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Area"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Area"> | Date | string
@@ -13602,6 +14952,8 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    description?: string | null
+    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13612,6 +14964,8 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    description?: string | null
+    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13622,6 +14976,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13632,6 +14988,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13642,6 +15000,8 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    description?: string | null
+    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -13651,6 +15011,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13660,6 +15022,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13667,8 +15031,8 @@ export namespace Prisma {
 
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -13676,14 +15040,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
+    mode?: QueryMode
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -13691,14 +15055,14 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
+    mode?: QueryMode
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type DateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -13709,12 +15073,6 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
-  }
-
-  export type SettingsOrderByRelevanceInput = {
-    fields: SettingsOrderByRelevanceFieldEnum | SettingsOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type SettingsCountOrderByAggregateInput = {
@@ -13746,8 +15104,8 @@ export namespace Prisma {
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -13755,7 +15113,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
+    mode?: QueryMode
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -13764,8 +15122,8 @@ export namespace Prisma {
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -13773,7 +15131,7 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
+    mode?: QueryMode
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -13782,8 +15140,8 @@ export namespace Prisma {
 
   export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -13796,8 +15154,8 @@ export namespace Prisma {
 
   export type IntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -13807,8 +15165,8 @@ export namespace Prisma {
 
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -13884,12 +15242,6 @@ export namespace Prisma {
 
   export type BookingOrderByRelationAggregateInput = {
     _count?: SortOrder
-  }
-
-  export type VillaOrderByRelevanceInput = {
-    fields: VillaOrderByRelevanceFieldEnum | VillaOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type VillaCountOrderByAggregateInput = {
@@ -14000,8 +15352,8 @@ export namespace Prisma {
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -14016,8 +15368,8 @@ export namespace Prisma {
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -14040,8 +15392,8 @@ export namespace Prisma {
 
   export type FloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -14052,12 +15404,6 @@ export namespace Prisma {
   export type VillaNullableScalarRelationFilter = {
     is?: VillaWhereInput | null
     isNot?: VillaWhereInput | null
-  }
-
-  export type BookingOrderByRelevanceInput = {
-    fields: BookingOrderByRelevanceFieldEnum | BookingOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type BookingCountOrderByAggregateInput = {
@@ -14128,8 +15474,8 @@ export namespace Prisma {
 
   export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -14144,15 +15490,9 @@ export namespace Prisma {
 
   export type BytesFilter<$PrismaModel = never> = {
     equals?: Bytes | BytesFieldRefInput<$PrismaModel>
-    in?: Bytes[]
-    notIn?: Bytes[]
+    in?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
+    notIn?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
     not?: NestedBytesFilter<$PrismaModel> | Bytes
-  }
-
-  export type VillaImageOrderByRelevanceInput = {
-    fields: VillaImageOrderByRelevanceFieldEnum | VillaImageOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type VillaImageCountOrderByAggregateInput = {
@@ -14192,8 +15532,8 @@ export namespace Prisma {
 
   export type BytesWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Bytes | BytesFieldRefInput<$PrismaModel>
-    in?: Bytes[]
-    notIn?: Bytes[]
+    in?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
+    notIn?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
     not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Bytes
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBytesFilter<$PrismaModel>
@@ -14203,12 +15543,6 @@ export namespace Prisma {
   export type VillaScalarRelationFilter = {
     is?: VillaWhereInput
     isNot?: VillaWhereInput
-  }
-
-  export type VillaAmenityOrderByRelevanceInput = {
-    fields: VillaAmenityOrderByRelevanceFieldEnum | VillaAmenityOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type VillaAmenityCountOrderByAggregateInput = {
@@ -14227,12 +15561,6 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     villaId?: SortOrder
-  }
-
-  export type VillaHighlightOrderByRelevanceInput = {
-    fields: VillaHighlightOrderByRelevanceFieldEnum | VillaHighlightOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type VillaHighlightCountOrderByAggregateInput = {
@@ -14264,12 +15592,6 @@ export namespace Prisma {
     order?: SortOrder
   }
 
-  export type VillaPolicyOrderByRelevanceInput = {
-    fields: VillaPolicyOrderByRelevanceFieldEnum | VillaPolicyOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type VillaPolicyCountOrderByAggregateInput = {
     id?: SortOrder
     text?: SortOrder
@@ -14297,12 +15619,6 @@ export namespace Prisma {
 
   export type VillaPolicySumOrderByAggregateInput = {
     order?: SortOrder
-  }
-
-  export type ReviewOrderByRelevanceInput = {
-    fields: ReviewOrderByRelevanceFieldEnum | ReviewOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type ReviewCountOrderByAggregateInput = {
@@ -14341,12 +15657,6 @@ export namespace Prisma {
 
   export type ReviewSumOrderByAggregateInput = {
     rating?: SortOrder
-  }
-
-  export type UserOrderByRelevanceInput = {
-    fields: UserOrderByRelevanceFieldEnum | UserOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -14395,16 +15705,12 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type AreaOrderByRelevanceInput = {
-    fields: AreaOrderByRelevanceFieldEnum | AreaOrderByRelevanceFieldEnum[]
-    sort: SortOrder
-    search: string
-  }
-
   export type AreaCountOrderByAggregateInput = {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14414,6 +15720,8 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14423,6 +15731,8 @@ export namespace Prisma {
     id?: SortOrder
     slug?: SortOrder
     name?: SortOrder
+    description?: SortOrder
+    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14872,8 +16182,8 @@ export namespace Prisma {
 
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -14881,14 +16191,13 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringFilter<$PrismaModel> | string
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -14896,14 +16205,13 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type NestedDateTimeFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -14913,8 +16221,8 @@ export namespace Prisma {
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
-    in?: string[]
-    notIn?: string[]
+    in?: string[] | ListStringFieldRefInput<$PrismaModel>
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel>
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -14922,7 +16230,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringWithAggregatesFilter<$PrismaModel> | string
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedStringFilter<$PrismaModel>
@@ -14931,8 +16238,8 @@ export namespace Prisma {
 
   export type NestedIntFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -14942,8 +16249,8 @@ export namespace Prisma {
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | null
-    notIn?: string[] | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
     lt?: string | StringFieldRefInput<$PrismaModel>
     lte?: string | StringFieldRefInput<$PrismaModel>
     gt?: string | StringFieldRefInput<$PrismaModel>
@@ -14951,7 +16258,6 @@ export namespace Prisma {
     contains?: string | StringFieldRefInput<$PrismaModel>
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
-    search?: string
     not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedStringNullableFilter<$PrismaModel>
@@ -14960,8 +16266,8 @@ export namespace Prisma {
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -14971,8 +16277,8 @@ export namespace Prisma {
 
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
     lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
@@ -14985,8 +16291,8 @@ export namespace Prisma {
 
   export type NestedFloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -15001,8 +16307,8 @@ export namespace Prisma {
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
     lt?: number | IntFieldRefInput<$PrismaModel>
     lte?: number | IntFieldRefInput<$PrismaModel>
     gt?: number | IntFieldRefInput<$PrismaModel>
@@ -15017,8 +16323,8 @@ export namespace Prisma {
 
   export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -15041,8 +16347,8 @@ export namespace Prisma {
 
   export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -15052,8 +16358,8 @@ export namespace Prisma {
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | null
-    notIn?: number[] | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
@@ -15068,15 +16374,15 @@ export namespace Prisma {
 
   export type NestedBytesFilter<$PrismaModel = never> = {
     equals?: Bytes | BytesFieldRefInput<$PrismaModel>
-    in?: Bytes[]
-    notIn?: Bytes[]
+    in?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
+    notIn?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
     not?: NestedBytesFilter<$PrismaModel> | Bytes
   }
 
   export type NestedBytesWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Bytes | BytesFieldRefInput<$PrismaModel>
-    in?: Bytes[]
-    notIn?: Bytes[]
+    in?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
+    notIn?: Bytes[] | ListBytesFieldRefInput<$PrismaModel>
     not?: NestedBytesWithAggregatesFilter<$PrismaModel> | Bytes
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBytesFilter<$PrismaModel>
@@ -15087,6 +16393,8 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    description?: string | null
+    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15096,6 +16404,8 @@ export namespace Prisma {
     id?: string
     slug: string
     name: string
+    description?: string | null
+    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15283,6 +16593,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15292,6 +16604,8 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
