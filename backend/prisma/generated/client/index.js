@@ -333,11 +333,25 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-1.1.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "debian-openssl-3.0.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-1.0.x"
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
-    "previewFeatures": [
-      "driverAdapters"
-    ],
+    "previewFeatures": [],
     "sourceFilePath": "C:\\DEV\\villa\\database\\prisma\\schema.prisma",
     "isCustomOutput": true
   },
@@ -361,8 +375,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../node_modules/.prisma/client\"\n}\n\ngenerator backendClient {\n  provider        = \"prisma-client-js\"\n  output          = \"../../backend/prisma/generated/client\"\n  previewFeatures = [\"driverAdapters\"]\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Settings {\n  id                          String   @id @default(uuid())\n  bookingConfirmationTemplate String?\n  contactEmail                String?\n  contactPhone                String?\n  createdAt                   DateTime @default(now())\n  updatedAt                   DateTime @updatedAt\n\n  @@map(\"settings\")\n}\n\nmodel Villa {\n  id            String   @id @default(uuid())\n  slug          String   @unique\n  name          String\n  tagline       String   @db.Text\n  description   String   @db.Text\n  areaId        String?\n  areaObj       Area?    @relation(fields: [areaId], references: [id])\n  address       String\n  bedrooms      Int\n  bathrooms     Int\n  maxGuests     Int\n  size          Int // m2\n  pricePerNight Float\n  priceWeekend  Float\n  priceHoliday  Float\n  rating        Float\n  reviewCount   Int\n  checkIn       String\n  checkOut      String\n  featured      Boolean\n  lat           Float\n  lng           Float\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  images     VillaImage[]\n  amenities  VillaAmenity[]\n  highlights VillaHighlight[]\n  policies   VillaPolicy[]\n  reviews    Review[]\n  bookings   Booking[]\n\n  @@map(\"villas\")\n}\n\nmodel Booking {\n  id             String   @id @default(uuid())\n  villaId        String?\n  villa          Villa?   @relation(fields: [villaId], references: [id], onDelete: Cascade)\n  name           String\n  email          String\n  phone          String\n  note           String?  @db.Text\n  checkIn        String\n  checkOut       String\n  guests         Int\n  total          Float\n  priceAtBooking Float?\n  bookingType    String   @default(\"APP\") // APP hoặc ZALO\n  status         String   @default(\"PENDING\") // PENDING, CONFIRMED, CANCELLED\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@map(\"bookings\")\n}\n\nmodel VillaImage {\n  id       String  @id @default(uuid())\n  villaId  String?\n  data     Bytes\n  mimeType String  @default(\"image/jpeg\")\n  isMain   Boolean @default(false)\n  order    Int     @default(0)\n\n  villa Villa? @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_images\")\n}\n\nmodel VillaAmenity {\n  id      String @id @default(cuid())\n  name    String\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_amenities\")\n}\n\nmodel VillaHighlight {\n  id      String @id @default(cuid())\n  text    String\n  order   Int    @default(0)\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_highlights\")\n}\n\nmodel VillaPolicy {\n  id      String @id @default(cuid())\n  text    String\n  order   Int    @default(0)\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_policies\")\n}\n\nmodel Review {\n  id      String @id @default(cuid())\n  author  String\n  avatar  String @default(\"\")\n  date    String\n  rating  Float\n  comment String @db.Text\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"reviews\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  username  String   @unique\n  email     String?  @unique\n  password  String\n  fullName  String?\n  phone     String?\n  role      String   @default(\"pending\") // pending, pending_owner, owner, admin, staff\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Area {\n  id        String   @id @default(uuid())\n  slug      String   @unique\n  name      String\n  isFamous  Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  villas Villa[]\n\n  @@map(\"areas\")\n}\n",
-  "inlineSchemaHash": "dc0ebc6b0a1e7ec2ad2c6948133f6f14e82452124caa23ccdab4c36e6b84fac9",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../node_modules/.prisma/client\"\n}\n\ngenerator backendClient {\n  provider      = \"prisma-client-js\"\n  output        = \"../../backend/prisma/generated/client\"\n  binaryTargets = [\"native\", \"debian-openssl-1.1.x\", \"debian-openssl-3.0.x\", \"rhel-openssl-1.0.x\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"mysql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Settings {\n  id                          String   @id @default(uuid())\n  bookingConfirmationTemplate String?\n  contactEmail                String?\n  contactPhone                String?\n  createdAt                   DateTime @default(now())\n  updatedAt                   DateTime @updatedAt\n\n  @@map(\"settings\")\n}\n\nmodel Villa {\n  id            String   @id @default(uuid())\n  slug          String   @unique\n  name          String\n  tagline       String   @db.Text\n  description   String   @db.Text\n  areaId        String?\n  areaObj       Area?    @relation(fields: [areaId], references: [id])\n  address       String\n  bedrooms      Int\n  bathrooms     Int\n  maxGuests     Int\n  size          Int // m2\n  pricePerNight Float\n  priceWeekend  Float\n  priceHoliday  Float\n  rating        Float\n  reviewCount   Int\n  checkIn       String\n  checkOut      String\n  featured      Boolean\n  lat           Float\n  lng           Float\n  createdAt     DateTime @default(now())\n  updatedAt     DateTime @updatedAt\n\n  images     VillaImage[]\n  amenities  VillaAmenity[]\n  highlights VillaHighlight[]\n  policies   VillaPolicy[]\n  reviews    Review[]\n  bookings   Booking[]\n\n  @@map(\"villas\")\n}\n\nmodel Booking {\n  id             String   @id @default(uuid())\n  villaId        String?\n  villa          Villa?   @relation(fields: [villaId], references: [id], onDelete: Cascade)\n  name           String\n  email          String\n  phone          String\n  note           String?  @db.Text\n  checkIn        String\n  checkOut       String\n  guests         Int\n  total          Float\n  priceAtBooking Float?\n  bookingType    String   @default(\"APP\") // APP hoặc ZALO\n  status         String   @default(\"PENDING\") // PENDING, CONFIRMED, CANCELLED\n  createdAt      DateTime @default(now())\n  updatedAt      DateTime @updatedAt\n\n  @@map(\"bookings\")\n}\n\nmodel VillaImage {\n  id       String  @id @default(uuid())\n  villaId  String?\n  data     Bytes\n  mimeType String  @default(\"image/jpeg\")\n  isMain   Boolean @default(false)\n  order    Int     @default(0)\n\n  villa Villa? @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_images\")\n}\n\nmodel VillaAmenity {\n  id      String @id @default(cuid())\n  name    String\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_amenities\")\n}\n\nmodel VillaHighlight {\n  id      String @id @default(cuid())\n  text    String\n  order   Int    @default(0)\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_highlights\")\n}\n\nmodel VillaPolicy {\n  id      String @id @default(cuid())\n  text    String\n  order   Int    @default(0)\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"villa_policies\")\n}\n\nmodel Review {\n  id      String @id @default(cuid())\n  author  String\n  avatar  String @default(\"\")\n  date    String\n  rating  Float\n  comment String @db.Text\n  villaId String\n\n  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)\n\n  @@map(\"reviews\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  username  String   @unique\n  email     String?  @unique\n  password  String\n  fullName  String?\n  phone     String?\n  role      String   @default(\"pending\") // pending, pending_owner, owner, admin, staff\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@map(\"users\")\n}\n\nmodel Area {\n  id        String   @id @default(uuid())\n  slug      String   @unique\n  name      String\n  isFamous  Boolean  @default(false)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  villas Villa[]\n\n  @@map(\"areas\")\n}\n",
+  "inlineSchemaHash": "71c8934571524fb61ff981b441771f79060e1f8fd1a0140c621398ae353eba32",
   "copyEngine": true
 }
 
@@ -403,6 +417,22 @@ Object.assign(exports, Prisma)
 // file annotations for bundling tools to include these files
 path.join(__dirname, "query_engine-windows.dll.node");
 path.join(process.cwd(), "../backend/prisma/generated/client/query_engine-windows.dll.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-1.1.x.so.node");
+path.join(process.cwd(), "../backend/prisma/generated/client/libquery_engine-debian-openssl-1.1.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-debian-openssl-3.0.x.so.node");
+path.join(process.cwd(), "../backend/prisma/generated/client/libquery_engine-debian-openssl-3.0.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-1.0.x.so.node");
+path.join(process.cwd(), "../backend/prisma/generated/client/libquery_engine-rhel-openssl-1.0.x.so.node")
+
+// file annotations for bundling tools to include these files
+path.join(__dirname, "libquery_engine-rhel-openssl-3.0.x.so.node");
+path.join(process.cwd(), "../backend/prisma/generated/client/libquery_engine-rhel-openssl-3.0.x.so.node")
 // file annotations for bundling tools to include these files
 path.join(__dirname, "schema.prisma");
 path.join(process.cwd(), "../backend/prisma/generated/client/schema.prisma")
