@@ -7,10 +7,11 @@
 /frontend/node_modules
 /database/node_modules
 
-/dist
-/backend/dist
+# Commented out to allow committing built files for server deployment
+# /dist
+# /backend/dist
 /frontend/dist
-/database/dist
+# /database/dist
 note.txt
 /image
 
