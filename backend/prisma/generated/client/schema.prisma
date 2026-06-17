@@ -1,0 +1,172 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../node_modules/.prisma/client"
+}
+
+generator backendClient {
+  provider      = "prisma-client-js"
+  output        = "../../backend/prisma/generated/client"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Settings {
+  id                          String   @id @default(uuid())
+  bookingConfirmationTemplate String?
+  contactEmail                String?
+  contactPhone                String?
+  createdAt                   DateTime @default(now())
+  updatedAt                   DateTime @updatedAt
+
+  @@map("settings")
+}
+
+model Villa {
+  id            String   @id @default(uuid())
+  slug          String   @unique
+  name          String
+  tagline       String   @db.Text
+  description   String   @db.Text
+  areaId        String?
+  areaObj       Area?    @relation(fields: [areaId], references: [id])
+  address       String
+  bedrooms      Int
+  bathrooms     Int
+  maxGuests     Int
+  size          Int // m2
+  pricePerNight Float
+  priceWeekend  Float
+  priceHoliday  Float
+  rating        Float
+  reviewCount   Int
+  checkIn       String
+  checkOut      String
+  featured      Boolean
+  lat           Float
+  lng           Float
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  images     VillaImage[]
+  amenities  VillaAmenity[]
+  highlights VillaHighlight[]
+  policies   VillaPolicy[]
+  reviews    Review[]
+  bookings   Booking[]
+
+  @@map("villas")
+}
+
+model Booking {
+  id             String   @id @default(uuid())
+  villaId        String?
+  villa          Villa?   @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  name           String
+  email          String
+  phone          String
+  note           String?  @db.Text
+  checkIn        String
+  checkOut       String
+  guests         Int
+  total          Float
+  priceAtBooking Float?
+  bookingType    String   @default("APP") // APP hoặc ZALO
+  status         String   @default("PENDING") // PENDING, CONFIRMED, CANCELLED
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@map("bookings")
+}
+
+model VillaImage {
+  id       String  @id @default(uuid())
+  villaId  String?
+  data     Bytes
+  mimeType String  @default("image/jpeg")
+  isMain   Boolean @default(false)
+  order    Int     @default(0)
+
+  villa Villa? @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_images")
+}
+
+model VillaAmenity {
+  id      String @id @default(cuid())
+  name    String
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_amenities")
+}
+
+model VillaHighlight {
+  id      String @id @default(cuid())
+  text    String
+  order   Int    @default(0)
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_highlights")
+}
+
+model VillaPolicy {
+  id      String @id @default(cuid())
+  text    String
+  order   Int    @default(0)
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("villa_policies")
+}
+
+model Review {
+  id      String @id @default(cuid())
+  author  String
+  avatar  String @default("")
+  date    String
+  rating  Float
+  comment String @db.Text
+  villaId String
+
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String   @unique
+  email     String?  @unique
+  password  String
+  fullName  String?
+  phone     String?
+  role      String   @default("pending") // pending, pending_owner, owner, admin, staff
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Area {
+  id        String   @id @default(uuid())
+  slug      String   @unique
+  name      String
+  isFamous  Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  villas Villa[]
+
+  @@map("areas")
+}
