@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingsController = void 0;
 const common_1 = require("@nestjs/common");
 const bookings_service_1 = require("./bookings.service");
-const client_1 = require("@prisma/client");
+const client_1 = require("../../prisma/generated/client");
 let BookingsController = class BookingsController {
     bookingsService;
     constructor(bookingsService) {

@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { BookingsService } from './bookings.service';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../../prisma/generated/client';
 
 @Controller('api/bookings')
 export class BookingsController {

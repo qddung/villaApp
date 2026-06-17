@@ -1,5 +1,5 @@
 import { BookingsService } from './bookings.service';
-import { Prisma } from '@prisma/client';
+import { Prisma } from '../../prisma/generated/client';
 export declare class BookingsController {
     private readonly bookingsService;
     constructor(bookingsService: BookingsService);
