@@ -1,9 +1,8 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Villa, VillaImageInfo } from "@/lib/types";
-import { areas } from "@/data/areas";
 import { slugify } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
-import { saveVilla, deleteVilla, uploadVillaImage, deleteVillaImage, getFullImageUrl } from "@/lib/api";
+import { fetchAllAreas, saveVilla, deleteVilla, uploadVillaImage, deleteVillaImage, getFullImageUrl } from "@/lib/api";
 import {
   Plus, Save, Trash2, X,
   Bed, MapPin, ImageIcon, Upload
@@ -46,6 +45,12 @@ export default function VillasPage() {
   const [dragOver, setDragOver] = useState(false);
   const [uploadingDetails, setUploadingDetails] = useState(false);
   const detailInputRef = useRef<HTMLInputElement>(null);
+
+  const [areas, setAreas] = useState<any[]>([]);
+
+  useEffect(() => {
+    fetchAllAreas().then(setAreas).catch(console.error);
+  }, []);
 
   // ─── Image helpers ─────────────────────────────────
   /** Visible images (not tagged for deletion) */

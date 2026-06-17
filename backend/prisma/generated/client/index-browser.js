@@ -229,6 +229,8 @@ exports.Prisma.AreaScalarFieldEnum = {
   id: 'id',
   slug: 'slug',
   name: 'name',
+  description: 'description',
+  imageUrl: 'imageUrl',
   isFamous: 'isFamous',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -239,90 +241,14 @@ exports.Prisma.SortOrder = {
   desc: 'desc'
 };
 
+exports.Prisma.QueryMode = {
+  default: 'default',
+  insensitive: 'insensitive'
+};
+
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
-};
-
-exports.Prisma.SettingsOrderByRelevanceFieldEnum = {
-  id: 'id',
-  bookingConfirmationTemplate: 'bookingConfirmationTemplate',
-  contactEmail: 'contactEmail',
-  contactPhone: 'contactPhone'
-};
-
-exports.Prisma.VillaOrderByRelevanceFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  name: 'name',
-  tagline: 'tagline',
-  description: 'description',
-  areaId: 'areaId',
-  address: 'address',
-  checkIn: 'checkIn',
-  checkOut: 'checkOut'
-};
-
-exports.Prisma.BookingOrderByRelevanceFieldEnum = {
-  id: 'id',
-  villaId: 'villaId',
-  name: 'name',
-  email: 'email',
-  phone: 'phone',
-  note: 'note',
-  checkIn: 'checkIn',
-  checkOut: 'checkOut',
-  bookingType: 'bookingType',
-  status: 'status'
-};
-
-exports.Prisma.VillaImageOrderByRelevanceFieldEnum = {
-  id: 'id',
-  villaId: 'villaId',
-  mimeType: 'mimeType'
-};
-
-exports.Prisma.VillaAmenityOrderByRelevanceFieldEnum = {
-  id: 'id',
-  name: 'name',
-  villaId: 'villaId'
-};
-
-exports.Prisma.VillaHighlightOrderByRelevanceFieldEnum = {
-  id: 'id',
-  text: 'text',
-  villaId: 'villaId'
-};
-
-exports.Prisma.VillaPolicyOrderByRelevanceFieldEnum = {
-  id: 'id',
-  text: 'text',
-  villaId: 'villaId'
-};
-
-exports.Prisma.ReviewOrderByRelevanceFieldEnum = {
-  id: 'id',
-  author: 'author',
-  avatar: 'avatar',
-  date: 'date',
-  comment: 'comment',
-  villaId: 'villaId'
-};
-
-exports.Prisma.UserOrderByRelevanceFieldEnum = {
-  id: 'id',
-  username: 'username',
-  email: 'email',
-  password: 'password',
-  fullName: 'fullName',
-  phone: 'phone',
-  role: 'role'
-};
-
-exports.Prisma.AreaOrderByRelevanceFieldEnum = {
-  id: 'id',
-  slug: 'slug',
-  name: 'name'
 };
 
 

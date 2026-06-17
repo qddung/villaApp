@@ -29,6 +29,7 @@ import AdminPage from '@/pages/admin/villas/villas';
 import BookingsPage from '@/pages/admin/bookings/bookings';
 import CalendarPage from '@/pages/admin/calendar/calendar';
 import SettingsPage from '@/pages/admin/settings/settings';
+import AreasPage from '@/pages/admin/areas/areas';
 import LoginPage from '@/pages/auth/login/login';
 
 // Wrapper for Client routes to include Header and Footer
@@ -79,6 +80,7 @@ function AppRoutes() {
         <Route path="villas" element={<AdminPage />} />
         <Route path="bookings" element={<BookingsPage />} />
         <Route path="calendar" element={<CalendarPage />} />
+        <Route path="areas" element={<AreasPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>
