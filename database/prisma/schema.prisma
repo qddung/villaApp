@@ -8,7 +8,8 @@ generator client {
 
 generator backendClient {
   provider = "prisma-client-js"
-  output   = "../../backend/node_modules/.prisma/client"
+  output   = "../../backend/prisma/generated/client"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "rhel-openssl-1.0.x", "rhel-openssl-3.0.x"]
 }
 
 datasource db {
