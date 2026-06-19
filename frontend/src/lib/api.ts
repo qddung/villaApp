@@ -28,20 +28,22 @@ export async function fetchAllAreas() {
 }
 
 export async function createArea(data: any) {
+  const isFormData = data instanceof FormData;
   const res = await authFetch(`${API_BASE}/areas`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    body: isFormData ? data : JSON.stringify(data),
   });
   if (!res.ok) throw new Error('Failed to create area');
   return res.json();
 }
 
 export async function updateArea(id: string, data: any) {
+  const isFormData = data instanceof FormData;
   const res = await authFetch(`${API_BASE}/areas/${id}`, {
     method: 'PATCH',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data),
+    headers: isFormData ? {} : { 'Content-Type': 'application/json' },
+    body: isFormData ? data : JSON.stringify(data),
   });
   if (!res.ok) throw new Error('Failed to update area');
   return res.json();

@@ -230,10 +230,16 @@ exports.Prisma.AreaScalarFieldEnum = {
   slug: 'slug',
   name: 'name',
   description: 'description',
-  imageUrl: 'imageUrl',
   isFamous: 'isFamous',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
+};
+
+exports.Prisma.ImageAreaScalarFieldEnum = {
+  id: 'id',
+  areaId: 'areaId',
+  data: 'data',
+  mimeType: 'mimeType'
 };
 
 exports.Prisma.SortOrder = {
@@ -262,7 +268,8 @@ exports.Prisma.ModelName = {
   VillaPolicy: 'VillaPolicy',
   Review: 'Review',
   User: 'User',
-  Area: 'Area'
+  Area: 'Area',
+  ImageArea: 'ImageArea'
 };
 
 /**

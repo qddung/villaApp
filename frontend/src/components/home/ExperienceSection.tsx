@@ -35,7 +35,7 @@ const experiences = [
 
 export default function ExperienceSection() {
   return (
-    <section className="bg-navy py-20 lg:py-28">
+    <section className="bg-primary py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
@@ -70,3 +70,4 @@ export default function ExperienceSection() {
     </section>
   );
 }
+

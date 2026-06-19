@@ -86,7 +86,7 @@ export default function BookingPage() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
       <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-        <h1 className="font-heading text-3xl font-bold text-navy">
+        <h1 className="font-heading text-3xl font-bold text-primary">
           {isZalo ? "Liên hệ Zalo đặt phòng" : "Xác nhận đặt phòng"}
         </h1>
         <p className="mt-2 text-gray-500">
@@ -98,7 +98,7 @@ export default function BookingPage() {
           <div className="space-y-8 lg:col-span-3">
             {/* Booking details */}
             <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-lg font-semibold text-navy">
+              <h2 className="font-heading text-lg font-semibold text-primary">
                 Chi tiết yêu cầu tư vấn
               </h2>
 
@@ -111,7 +111,7 @@ export default function BookingPage() {
                   />
                 </div>
                 <div>
-                  <h3 className="font-semibold text-navy">{villa.name}</h3>
+                  <h3 className="font-semibold text-primary">{villa.name}</h3>
                   <p className="mt-0.5 flex items-center gap-1 text-xs text-gray-400">
                     <MapPin className="h-3 w-3" />
                     {villa.area}
@@ -145,10 +145,10 @@ export default function BookingPage() {
               <div className="mt-4 border-t border-gray-100 pt-4">
                 <div className="flex justify-between text-sm">
                   <span className="text-gray-500">{formatPrice(villa.pricePerNight)} x {nights} ngày</span>
-                  <span className="font-medium text-navy">{formatPrice(total)}</span>
+                  <span className="font-medium text-primary">{formatPrice(total)}</span>
                 </div>
                 <div className="mt-4 flex justify-between font-heading text-lg font-bold">
-                  <span className="text-navy">Tổng tiền</span>
+                  <span className="text-primary">Tổng tiền</span>
                   <span className="text-gold">{formatPrice(total)}</span>
                 </div>
                 {isZalo && (
@@ -161,7 +161,7 @@ export default function BookingPage() {
 
             {/* Guest info */}
             <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-lg font-semibold text-navy">
+              <h2 className="font-heading text-lg font-semibold text-primary">
                 Thông tin liên hệ
               </h2>
               <div className="mt-4 grid gap-4 sm:grid-cols-2">
@@ -225,7 +225,7 @@ export default function BookingPage() {
           {/* Submit section */}
           <div className="lg:col-span-2">
             <div className="sticky top-28 rounded-2xl bg-white p-6 shadow-sm">
-              <h2 className="font-heading text-lg font-semibold text-navy">
+              <h2 className="font-heading text-lg font-semibold text-primary">
                 {isZalo ? "Chuyển sang Zalo" : "Xác nhận"}
               </h2>
               <p className="mt-2 text-sm text-gray-500">
@@ -234,7 +234,7 @@ export default function BookingPage() {
                 type="submit"
                 disabled={submitting}
                 className={`mt-6 flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-semibold transition-colors disabled:opacity-60 ${
-                  isZalo ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gold text-navy hover:bg-gold-light"
+                  isZalo ? "bg-blue-600 text-white hover:bg-blue-700" : "bg-gold text-primary hover:bg-gold-light"
                 }`}
               >
                 {submitting ? (
@@ -257,3 +257,4 @@ export default function BookingPage() {
     </div>
   );
 }
+

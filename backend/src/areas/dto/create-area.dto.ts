@@ -1,4 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { Transform } from 'class-transformer';
 import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateAreaDto {
@@ -17,12 +18,8 @@ export class CreateAreaDto {
   @IsOptional()
   description?: string;
 
-  @ApiPropertyOptional({ example: 'https://...', description: 'Link hình ảnh đại diện' })
-  @IsString()
-  @IsOptional()
-  imageUrl?: string;
-
   @ApiPropertyOptional({ example: false, description: 'Đánh dấu khu vực nổi bật' })
+  @Transform(({ value }) => value === 'true' || value === true)
   @IsBoolean()
   @IsOptional()
   isFamous?: boolean;

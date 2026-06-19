@@ -51,7 +51,7 @@ export default function VillaDetailPage() {
                   <MapPin className="h-4 w-4" />
                   {villa.area} &middot; {villa.address}
                 </div>
-                <h1 className="mt-2 font-heading text-3xl font-bold text-navy sm:text-4xl">
+                <h1 className="mt-2 font-heading text-3xl font-bold text-primary sm:text-4xl">
                   {villa.name}
                 </h1>
                 <p className="mt-2 text-lg text-gray-500">{villa.tagline}</p>
@@ -72,7 +72,7 @@ export default function VillaDetailPage() {
                   </div>
                   <div>
                     <div className="text-xs text-gray-400">{stat.label}</div>
-                    <div className="font-semibold text-navy">{stat.value}</div>
+                    <div className="font-semibold text-primary">{stat.value}</div>
                   </div>
                 </div>
               ))}
@@ -81,7 +81,7 @@ export default function VillaDetailPage() {
             {/* Highlights */}
             {villa.highlights.length > 0 && (
               <div className="mt-8">
-                <h2 className="font-heading text-xl font-semibold text-navy">
+                <h2 className="font-heading text-xl font-semibold text-primary">
                   Điểm nổi bật
                 </h2>
                 <div className="mt-4 space-y-3">
@@ -97,7 +97,7 @@ export default function VillaDetailPage() {
 
             {/* Description */}
             <div className="mt-8">
-              <h2 className="font-heading text-xl font-semibold text-navy">
+              <h2 className="font-heading text-xl font-semibold text-primary">
                 Giới thiệu
               </h2>
               <p className="mt-4 leading-relaxed text-gray-600">
@@ -107,7 +107,7 @@ export default function VillaDetailPage() {
 
             {/* Amenities */}
             <div className="mt-8">
-              <h2 className="font-heading text-xl font-semibold text-navy">
+              <h2 className="font-heading text-xl font-semibold text-primary">
                 Tiện nghi
               </h2>
               <div className="mt-4">
@@ -119,7 +119,7 @@ export default function VillaDetailPage() {
 
             {/* Rules */}
             <div className="mt-8 mb-2">
-              <h2 className="font-heading text-xl font-semibold text-navy">
+              <h2 className="font-heading text-xl font-semibold text-primary">
                 Quy tắc nhà
               </h2>
               <div className="mt-4 space-y-4">
@@ -138,7 +138,7 @@ export default function VillaDetailPage() {
             {/* Reviews */}
             {/* <div className="mt-8">
               <div className="flex items-center gap-3">
-                <h2 className="font-heading text-xl font-semibold text-navy">
+                <h2 className="font-heading text-xl font-semibold text-primary">
                   Đánh giá
                 </h2>
                 <div className="flex items-center gap-1 rounded-full bg-sand px-3 py-1">
@@ -161,7 +161,7 @@ export default function VillaDetailPage() {
                         />
                       </div>
                       <div>
-                        <p className="text-sm font-semibold text-navy">
+                        <p className="text-sm font-semibold text-primary">
                           {review.author}
                         </p>
                         <p className="text-xs text-gray-400">{review.date}</p>
@@ -197,7 +197,7 @@ export default function VillaDetailPage() {
         {/* Similar villas */}
         {similar.length > 0 && (
           <div className="mt-16 border-t border-gray-100 py-16">
-            <h2 className="font-heading text-2xl font-bold text-navy">
+            <h2 className="font-heading text-2xl font-bold text-primary">
               Villa Tương Tự
             </h2>
             <div className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -211,3 +211,4 @@ export default function VillaDetailPage() {
     </div>
   );
 }
+

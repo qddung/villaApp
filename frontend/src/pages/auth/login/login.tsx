@@ -50,7 +50,7 @@ export default function LoginPage() {
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 shadow-sm">
         <div className="text-center">
-          <span className="font-heading text-2xl font-bold text-navy">
+          <span className="font-heading text-2xl font-bold text-primary">
             Villa<span className="text-gold">VungTau</span>
           </span>
           <p className="mt-2 text-sm text-gray-500">
@@ -111,7 +111,7 @@ export default function LoginPage() {
 
           {authError && <p className="text-sm font-medium text-red-500">{authError}</p>}
           
-          <button type="submit" className="w-full rounded-xl bg-navy py-3 text-sm font-semibold text-white hover:bg-navy-light">
+          <button type="submit" className="w-full rounded-xl bg-primary py-3 text-sm font-semibold text-white hover:bg-primary-light">
             {isLoginMode ? "Đăng nhập" : "Đăng ký"}
           </button>
         </form>
@@ -132,3 +132,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

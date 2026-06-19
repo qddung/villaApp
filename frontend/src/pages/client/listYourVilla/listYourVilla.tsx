@@ -51,7 +51,7 @@ export default function ListYourVillaPage() {
   return (
     <div className="min-h-screen bg-white pt-24">
       {/* Hero */}
-      <section className="relative bg-navy py-20 lg:py-28">
+      <section className="relative bg-primary py-20 lg:py-28">
         <div className="absolute -right-40 -top-40 h-96 w-96 rounded-full bg-gold/5" />
         <div className="absolute -bottom-20 -left-20 h-72 w-72 rounded-full bg-gold/5" />
 
@@ -73,7 +73,7 @@ export default function ListYourVillaPage() {
       <section className="py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-3xl font-bold text-navy sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-primary sm:text-4xl">
               Tại Sao Hợp Tác Với Chúng Tôi?
             </h2>
           </div>
@@ -83,7 +83,7 @@ export default function ListYourVillaPage() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-sand">
                   <b.icon className="h-6 w-6 text-gold" />
                 </div>
-                <h3 className="mt-4 font-heading text-lg font-semibold text-navy">
+                <h3 className="mt-4 font-heading text-lg font-semibold text-primary">
                   {b.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-500">
@@ -102,7 +102,7 @@ export default function ListYourVillaPage() {
             {submitted ? (
               <div className="py-12 text-center">
                 <CheckCircle2 className="mx-auto h-16 w-16 text-green-500" />
-                <h3 className="mt-6 font-heading text-2xl font-bold text-navy">
+                <h3 className="mt-6 font-heading text-2xl font-bold text-primary">
                   Đăng ký thành công!
                 </h3>
                 <p className="mt-3 text-gray-500">
@@ -113,7 +113,7 @@ export default function ListYourVillaPage() {
             ) : (
               <>
                 <div className="text-center">
-                  <h2 className="font-heading text-2xl font-bold text-navy">
+                  <h2 className="font-heading text-2xl font-bold text-primary">
                     Đăng Ký Ngay
                   </h2>
                   <p className="mt-2 text-gray-500">
@@ -216,7 +216,7 @@ export default function ListYourVillaPage() {
                   </div>
                   <button
                     type="submit"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gold py-3.5 font-semibold text-navy transition-colors hover:bg-gold-light"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gold py-3.5 font-semibold text-primary transition-colors hover:bg-gold-light"
                   >
                     <Send className="h-4 w-4" />
                     Gửi đăng ký
@@ -230,3 +230,4 @@ export default function ListYourVillaPage() {
     </div>
   );
 }
+

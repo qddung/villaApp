@@ -35,7 +35,7 @@ export default function Highlights() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
             Tại sao chọn chúng tôi
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="mt-3 font-heading text-3xl font-bold text-primary sm:text-4xl">
             Nghỉ dưỡng đẳng cấp, dịch vụ hoàn hảo
           </h2>
         </div>
@@ -49,7 +49,7 @@ export default function Highlights() {
               <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-sand transition-colors group-hover:bg-gold/10">
                 <item.icon className="h-7 w-7 text-gold" />
               </div>
-              <h3 className="mt-6 font-heading text-lg font-semibold text-navy">
+              <h3 className="mt-6 font-heading text-lg font-semibold text-primary">
                 {item.title}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-gray-500">
@@ -62,3 +62,4 @@ export default function Highlights() {
     </section>
   );
 }
+

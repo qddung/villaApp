@@ -42,7 +42,7 @@ export default function BookingWidget({ villa }: BookingWidgetProps) {
     <div className="sticky top-28 rounded-3xl border border-gray-100 bg-white p-6 shadow-xl shadow-black/5">
       {/* Price */}
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-navy">
+        <span className="text-2xl font-bold text-primary">
           {formatPrice(villa.pricePerNight)}
         </span>
         <span className="text-sm text-gray-500">/ ngày</span>
@@ -113,7 +113,7 @@ export default function BookingWidget({ villa }: BookingWidgetProps) {
         <button
           onClick={() => handleBook("app")}
           disabled={!checkIn || !checkOut}
-          className="w-full rounded-xl bg-gold py-3.5 text-center font-semibold text-navy transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
+          className="w-full rounded-xl bg-gold py-3.5 text-center font-semibold text-primary transition-all duration-300 hover:bg-gold-light hover:scale-[1.02] disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:scale-100"
         >
           Đặt ngay
         </button>
@@ -133,3 +133,4 @@ export default function BookingWidget({ villa }: BookingWidgetProps) {
     </div>
   );
 }
+

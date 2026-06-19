@@ -38,7 +38,7 @@ export default function AdminLayout() {
       {/* Sidebar */}
       <aside className="w-64 border-r border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-950 transition-colors duration-300 relative">
         <div className="flex h-16 items-center px-6 border-b border-gray-100 dark:border-slate-800">
-          <span className="font-heading text-xl font-bold text-navy dark:text-white">
+          <span className="font-heading text-xl font-bold text-primary dark:text-white">
             Villa<span className="text-gold">VungTau</span>
           </span>
         </div>
@@ -50,7 +50,7 @@ export default function AdminLayout() {
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${isActive ? "bg-navy dark:bg-slate-800 text-white" : "text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-navy dark:hover:text-white"
+                className={`flex items-center gap-3 rounded-xl px-4 py-3 text-sm font-medium transition-colors ${isActive ? "bg-primary dark:bg-slate-800 text-white" : "text-gray-600 dark:text-slate-400 hover:bg-gray-50 dark:hover:bg-slate-800 hover:text-primary dark:hover:text-white"
                   }`}
               >
                 <Icon className="h-4 w-4" />
@@ -68,7 +68,7 @@ export default function AdminLayout() {
               {isDarkMode ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
               {isDarkMode ? "Chế độ tối" : "Chế độ sáng"}
             </div>
-            <div className={`w-8 h-4 rounded-full transition-colors flex items-center ${isDarkMode ? 'bg-navy' : 'bg-gray-300'}`}>
+            <div className={`w-8 h-4 rounded-full transition-colors flex items-center ${isDarkMode ? 'bg-primary' : 'bg-gray-300'}`}>
               <div className={`w-3 h-3 rounded-full bg-white transform transition-transform ${isDarkMode ? 'translate-x-4' : 'translate-x-1'}`} />
             </div>
           </button>
@@ -90,3 +90,4 @@ export default function AdminLayout() {
     </div>
   );
 }
+

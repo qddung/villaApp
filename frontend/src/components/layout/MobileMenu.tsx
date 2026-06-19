@@ -41,7 +41,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       {/* Panel */}
       <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl">
         <div className="flex items-center justify-between p-6">
-          <span className="font-heading text-xl font-bold text-navy">
+          <span className="font-heading text-xl font-bold text-primary">
             Villa<span className="text-gold">VungTau</span>
           </span>
           <button
@@ -59,7 +59,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
               key={link.href}
               to={link.href}
               onClick={onClose}
-              className="rounded-lg px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-sand hover:text-navy"
+              className="rounded-lg px-4 py-3 text-base font-medium text-gray-700 transition-colors hover:bg-sand hover:text-primary"
             >
               {link.label}
             </Link>
@@ -72,14 +72,14 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
           </p>
           <a
             href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
-            className="mb-3 flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
+            className="mb-3 flex items-center gap-3 text-sm text-gray-600 hover:text-primary"
           >
             <Phone className="h-4 w-4" />
             {settings?.contactPhone || "0909 123 456"}
           </a>
           <a
             href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}
-            className="flex items-center gap-3 text-sm text-gray-600 hover:text-navy"
+            className="flex items-center gap-3 text-sm text-gray-600 hover:text-primary"
           >
             <Mail className="h-4 w-4" />
             {settings?.contactEmail || "hello@villavungtau.vn"}
@@ -89,7 +89,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <a
             href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-navy py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-light"
           >
             <Phone className="h-4 w-4" />
             Gọi ngay
@@ -99,3 +99,4 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
     </div>
   );
 }
+

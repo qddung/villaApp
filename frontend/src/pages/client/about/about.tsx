@@ -34,7 +34,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white pt-24">
       {/* Hero */}
-      <section className="relative bg-navy py-20 lg:py-28">
+      <section className="relative bg-primary py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
@@ -75,7 +75,7 @@ export default function AboutPage() {
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-sand">
                   <stat.icon className="h-6 w-6 text-gold" />
                 </div>
-                <div className="mt-4 font-heading text-3xl font-bold text-navy">
+                <div className="mt-4 font-heading text-3xl font-bold text-primary">
                   {stat.value}
                 </div>
                 <div className="mt-1 text-sm text-gray-500">{stat.label}</div>
@@ -92,7 +92,7 @@ export default function AboutPage() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
               Quy trình
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-navy sm:text-4xl">
+            <h2 className="mt-3 font-heading text-3xl font-bold text-primary sm:text-4xl">
               Quy Trình Chọn Lọc Villa
             </h2>
             <p className="mx-auto mt-4 max-w-2xl text-gray-500">
@@ -107,7 +107,7 @@ export default function AboutPage() {
                 <div className="font-heading text-5xl font-bold text-gold/20">
                   {item.step}
                 </div>
-                <h3 className="mt-2 font-heading text-lg font-semibold text-navy">
+                <h3 className="mt-2 font-heading text-lg font-semibold text-primary">
                   {item.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-gray-500">
@@ -123,7 +123,7 @@ export default function AboutPage() {
       <section className="bg-white py-20 lg:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h2 className="font-heading text-3xl font-bold text-navy sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-primary sm:text-4xl">
               Giá Trị Cốt Lõi
             </h2>
           </div>
@@ -144,7 +144,7 @@ export default function AboutPage() {
             ].map((value) => (
               <div key={value.title} className="rounded-2xl bg-sand p-8 text-center">
                 <CheckCircle2 className="mx-auto h-10 w-10 text-gold" />
-                <h3 className="mt-4 font-heading text-xl font-semibold text-navy">
+                <h3 className="mt-4 font-heading text-xl font-semibold text-primary">
                   {value.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-gray-500">
@@ -158,3 +158,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

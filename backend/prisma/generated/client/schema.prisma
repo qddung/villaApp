@@ -159,14 +159,27 @@ model User {
 }
 
 model Area {
-  id        String   @id @default(uuid())
-  slug      String   @unique
-  name      String
-  isFamous  Boolean  @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          String   @id @default(uuid())
+  slug        String   @unique
+  name        String
+  description String?
+  isFamous    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   villas Villa[]
+  image  ImageArea?
 
   @@map("areas")
+}
+
+model ImageArea {
+  id       String @id @default(uuid())
+  areaId   String @unique
+  data     Bytes
+  mimeType String @default("image/jpeg")
+
+  area Area @relation(fields: [areaId], references: [id], onDelete: Cascade)
+
+  @@map("image_areas")
 }

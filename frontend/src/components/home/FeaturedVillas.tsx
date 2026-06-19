@@ -18,13 +18,13 @@ export default function FeaturedVillas() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
               Được yêu thích nhất
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-navy sm:text-4xl">
+            <h2 className="mt-3 font-heading text-3xl font-bold text-primary sm:text-4xl">
               Villa Nổi Bật
             </h2>
           </div>
           <Link
             to="/villas"
-            className="group flex items-center gap-2 text-sm font-semibold text-navy transition-colors hover:text-gold"
+            className="group flex items-center gap-2 text-sm font-semibold text-primary transition-colors hover:text-gold"
           >
             Xem tất cả
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -48,7 +48,7 @@ export default function FeaturedVillas() {
             >
               <Link
                 to={`/villas/${villa.slug}`}
-                className="block group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-navy/10"
+                className="block group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
               >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <img
@@ -66,7 +66,7 @@ export default function FeaturedVillas() {
                   <MapPin className="h-3.5 w-3.5" />
                   {villa.area}
                 </div>
-                <h3 className="mt-2 font-heading text-lg font-semibold text-navy group-hover:text-gold">
+                <h3 className="mt-2 font-heading text-lg font-semibold text-primary group-hover:text-gold">
                   {villa.name}
                 </h3>
                 <p className="mt-1 line-clamp-2 text-sm text-gray-500">
@@ -83,7 +83,7 @@ export default function FeaturedVillas() {
                   </span>
                 </div>
                 <div className="mt-4 flex items-baseline gap-1 border-t border-gray-50 pt-4">
-                  <span className="text-lg font-bold text-navy">
+                  <span className="text-lg font-bold text-primary">
                     Liên hệ
                   </span>
                 </div>
@@ -96,3 +96,4 @@ export default function FeaturedVillas() {
     </section>
   );
 }
+

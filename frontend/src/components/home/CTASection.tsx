@@ -5,7 +5,7 @@ export default function CTASection() {
   return (
     <section className="relative overflow-hidden bg-white py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl bg-navy px-8 py-16 sm:px-16 sm:py-20">
+        <div className="relative overflow-hidden rounded-3xl bg-primary px-8 py-16 sm:px-16 sm:py-20">
           {/* Decorative circles */}
           <div className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-gold/10" />
           <div className="absolute -bottom-16 -left-16 h-60 w-60 rounded-full bg-gold/5" />
@@ -28,7 +28,7 @@ export default function CTASection() {
             <div className="flex lg:justify-end">
               <Link
                 to="/list-your-villa"
-                className="group inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 font-semibold text-navy transition-all hover:bg-gold-light hover:shadow-lg"
+                className="group inline-flex items-center gap-3 rounded-full bg-gold px-8 py-4 font-semibold text-primary transition-all hover:bg-gold-light hover:shadow-lg"
               >
                 Đăng ký villa của bạn
                 <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
@@ -40,3 +40,4 @@ export default function CTASection() {
     </section>
   );
 }
+

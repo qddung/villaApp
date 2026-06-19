@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
-
 import { useState, useEffect } from "react";
 import { ArrowRight } from "lucide-react";
-import { fetchFamousAreas } from "@/lib/api";
+import { fetchFamousAreas, getFullImageUrl } from "@/lib/api";
 
 export default function AreaHighlights() {
   const [areas, setAreas] = useState<any[]>([]);
@@ -17,7 +16,7 @@ export default function AreaHighlights() {
           <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
             Khám phá
           </p>
-          <h2 className="mt-3 font-heading text-3xl font-bold text-navy sm:text-4xl">
+          <h2 className="mt-3 font-heading text-3xl font-bold text-primary sm:text-4xl">
             Khu Vực Nổi Bật
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-gray-500">
@@ -34,12 +33,16 @@ export default function AreaHighlights() {
               className="group relative overflow-hidden rounded-2xl"
             >
               <div className="relative aspect-[3/4] sm:aspect-[4/5]">
-                <img
-                  src={area.image}
-                  alt={area.name}
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                />
+                {area.image ? (
+                  <img
+                    src={getFullImageUrl(area.image) || ""}
+                    alt={area.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                ) : (
+                  <div className="absolute inset-0 w-full h-full bg-slate-200 dark:bg-slate-800 flex items-center justify-center text-slate-400">Không có ảnh</div>
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
               </div>
               <div className="absolute bottom-0 left-0 right-0 p-6">
@@ -61,3 +64,4 @@ export default function AreaHighlights() {
     </section>
   );
 }
+

@@ -102,7 +102,7 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
 
         <button
           type="submit"
-          className="flex items-center justify-center gap-2 rounded-xl bg-navy py-3 font-semibold text-white transition-colors hover:bg-navy-light"
+          className="flex items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white transition-colors hover:bg-primary-light"
         >
           <Search className="h-5 w-5" />
           <span>Tìm villa</span>
@@ -111,3 +111,4 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     </form>
   );
 }
+

@@ -63,6 +63,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  * 
  */
 export type Area = $Result.DefaultSelection<Prisma.$AreaPayload>
+/**
+ * Model ImageArea
+ * 
+ */
+export type ImageArea = $Result.DefaultSelection<Prisma.$ImageAreaPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -281,6 +286,16 @@ export class PrismaClient<
     * ```
     */
   get area(): Prisma.AreaDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.imageArea`: Exposes CRUD operations for the **ImageArea** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ImageAreas
+    * const imageAreas = await prisma.imageArea.findMany()
+    * ```
+    */
+  get imageArea(): Prisma.ImageAreaDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -731,7 +746,8 @@ export namespace Prisma {
     VillaPolicy: 'VillaPolicy',
     Review: 'Review',
     User: 'User',
-    Area: 'Area'
+    Area: 'Area',
+    ImageArea: 'ImageArea'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -750,7 +766,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "settings" | "villa" | "booking" | "villaImage" | "villaAmenity" | "villaHighlight" | "villaPolicy" | "review" | "user" | "area"
+      modelProps: "settings" | "villa" | "booking" | "villaImage" | "villaAmenity" | "villaHighlight" | "villaPolicy" | "review" | "user" | "area" | "imageArea"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1494,6 +1510,80 @@ export namespace Prisma {
           }
         }
       }
+      ImageArea: {
+        payload: Prisma.$ImageAreaPayload<ExtArgs>
+        fields: Prisma.ImageAreaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ImageAreaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ImageAreaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          findFirst: {
+            args: Prisma.ImageAreaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ImageAreaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          findMany: {
+            args: Prisma.ImageAreaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>[]
+          }
+          create: {
+            args: Prisma.ImageAreaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          createMany: {
+            args: Prisma.ImageAreaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ImageAreaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>[]
+          }
+          delete: {
+            args: Prisma.ImageAreaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          update: {
+            args: Prisma.ImageAreaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          deleteMany: {
+            args: Prisma.ImageAreaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ImageAreaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ImageAreaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>[]
+          }
+          upsert: {
+            args: Prisma.ImageAreaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ImageAreaPayload>
+          }
+          aggregate: {
+            args: Prisma.ImageAreaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateImageArea>
+          }
+          groupBy: {
+            args: Prisma.ImageAreaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ImageAreaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ImageAreaCountArgs<ExtArgs>
+            result: $Utils.Optional<ImageAreaCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1600,6 +1690,7 @@ export namespace Prisma {
     review?: ReviewOmit
     user?: UserOmit
     area?: AreaOmit
+    imageArea?: ImageAreaOmit
   }
 
   /* Types for Logging */
@@ -12092,7 +12183,6 @@ export namespace Prisma {
     slug: string | null
     name: string | null
     description: string | null
-    imageUrl: string | null
     isFamous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12103,7 +12193,6 @@ export namespace Prisma {
     slug: string | null
     name: string | null
     description: string | null
-    imageUrl: string | null
     isFamous: boolean | null
     createdAt: Date | null
     updatedAt: Date | null
@@ -12114,7 +12203,6 @@ export namespace Prisma {
     slug: number
     name: number
     description: number
-    imageUrl: number
     isFamous: number
     createdAt: number
     updatedAt: number
@@ -12127,7 +12215,6 @@ export namespace Prisma {
     slug?: true
     name?: true
     description?: true
-    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -12138,7 +12225,6 @@ export namespace Prisma {
     slug?: true
     name?: true
     description?: true
-    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -12149,7 +12235,6 @@ export namespace Prisma {
     slug?: true
     name?: true
     description?: true
-    imageUrl?: true
     isFamous?: true
     createdAt?: true
     updatedAt?: true
@@ -12233,7 +12318,6 @@ export namespace Prisma {
     slug: string
     name: string
     description: string | null
-    imageUrl: string | null
     isFamous: boolean
     createdAt: Date
     updatedAt: Date
@@ -12261,11 +12345,11 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     description?: boolean
-    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
     villas?: boolean | Area$villasArgs<ExtArgs>
+    image?: boolean | Area$imageArgs<ExtArgs>
     _count?: boolean | AreaCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["area"]>
 
@@ -12274,7 +12358,6 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     description?: boolean
-    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12285,7 +12368,6 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     description?: boolean
-    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
@@ -12296,15 +12378,15 @@ export namespace Prisma {
     slug?: boolean
     name?: boolean
     description?: boolean
-    imageUrl?: boolean
     isFamous?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type AreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "imageUrl" | "isFamous" | "createdAt" | "updatedAt", ExtArgs["result"]["area"]>
+  export type AreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "slug" | "name" | "description" | "isFamous" | "createdAt" | "updatedAt", ExtArgs["result"]["area"]>
   export type AreaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     villas?: boolean | Area$villasArgs<ExtArgs>
+    image?: boolean | Area$imageArgs<ExtArgs>
     _count?: boolean | AreaCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type AreaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -12314,13 +12396,13 @@ export namespace Prisma {
     name: "Area"
     objects: {
       villas: Prisma.$VillaPayload<ExtArgs>[]
+      image: Prisma.$ImageAreaPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
       slug: string
       name: string
       description: string | null
-      imageUrl: string | null
       isFamous: boolean
       createdAt: Date
       updatedAt: Date
@@ -12719,6 +12801,7 @@ export namespace Prisma {
   export interface Prisma__AreaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     villas<T extends Area$villasArgs<ExtArgs> = {}>(args?: Subset<T, Area$villasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VillaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    image<T extends Area$imageArgs<ExtArgs> = {}>(args?: Subset<T, Area$imageArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -12752,7 +12835,6 @@ export namespace Prisma {
     readonly slug: FieldRef<"Area", 'String'>
     readonly name: FieldRef<"Area", 'String'>
     readonly description: FieldRef<"Area", 'String'>
-    readonly imageUrl: FieldRef<"Area", 'String'>
     readonly isFamous: FieldRef<"Area", 'Boolean'>
     readonly createdAt: FieldRef<"Area", 'DateTime'>
     readonly updatedAt: FieldRef<"Area", 'DateTime'>
@@ -13168,6 +13250,25 @@ export namespace Prisma {
   }
 
   /**
+   * Area.image
+   */
+  export type Area$imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    where?: ImageAreaWhereInput
+  }
+
+  /**
    * Area without action
    */
   export type AreaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -13183,6 +13284,1051 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: AreaInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model ImageArea
+   */
+
+  export type AggregateImageArea = {
+    _count: ImageAreaCountAggregateOutputType | null
+    _min: ImageAreaMinAggregateOutputType | null
+    _max: ImageAreaMaxAggregateOutputType | null
+  }
+
+  export type ImageAreaMinAggregateOutputType = {
+    id: string | null
+    areaId: string | null
+    data: Bytes | null
+    mimeType: string | null
+  }
+
+  export type ImageAreaMaxAggregateOutputType = {
+    id: string | null
+    areaId: string | null
+    data: Bytes | null
+    mimeType: string | null
+  }
+
+  export type ImageAreaCountAggregateOutputType = {
+    id: number
+    areaId: number
+    data: number
+    mimeType: number
+    _all: number
+  }
+
+
+  export type ImageAreaMinAggregateInputType = {
+    id?: true
+    areaId?: true
+    data?: true
+    mimeType?: true
+  }
+
+  export type ImageAreaMaxAggregateInputType = {
+    id?: true
+    areaId?: true
+    data?: true
+    mimeType?: true
+  }
+
+  export type ImageAreaCountAggregateInputType = {
+    id?: true
+    areaId?: true
+    data?: true
+    mimeType?: true
+    _all?: true
+  }
+
+  export type ImageAreaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ImageArea to aggregate.
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ImageAreas to fetch.
+     */
+    orderBy?: ImageAreaOrderByWithRelationInput | ImageAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ImageAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ImageAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ImageAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned ImageAreas
+    **/
+    _count?: true | ImageAreaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ImageAreaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ImageAreaMaxAggregateInputType
+  }
+
+  export type GetImageAreaAggregateType<T extends ImageAreaAggregateArgs> = {
+        [P in keyof T & keyof AggregateImageArea]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateImageArea[P]>
+      : GetScalarType<T[P], AggregateImageArea[P]>
+  }
+
+
+
+
+  export type ImageAreaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ImageAreaWhereInput
+    orderBy?: ImageAreaOrderByWithAggregationInput | ImageAreaOrderByWithAggregationInput[]
+    by: ImageAreaScalarFieldEnum[] | ImageAreaScalarFieldEnum
+    having?: ImageAreaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ImageAreaCountAggregateInputType | true
+    _min?: ImageAreaMinAggregateInputType
+    _max?: ImageAreaMaxAggregateInputType
+  }
+
+  export type ImageAreaGroupByOutputType = {
+    id: string
+    areaId: string
+    data: Bytes
+    mimeType: string
+    _count: ImageAreaCountAggregateOutputType | null
+    _min: ImageAreaMinAggregateOutputType | null
+    _max: ImageAreaMaxAggregateOutputType | null
+  }
+
+  type GetImageAreaGroupByPayload<T extends ImageAreaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ImageAreaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ImageAreaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ImageAreaGroupByOutputType[P]>
+            : GetScalarType<T[P], ImageAreaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ImageAreaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    areaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["imageArea"]>
+
+  export type ImageAreaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    areaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["imageArea"]>
+
+  export type ImageAreaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    areaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["imageArea"]>
+
+  export type ImageAreaSelectScalar = {
+    id?: boolean
+    areaId?: boolean
+    data?: boolean
+    mimeType?: boolean
+  }
+
+  export type ImageAreaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "areaId" | "data" | "mimeType", ExtArgs["result"]["imageArea"]>
+  export type ImageAreaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }
+  export type ImageAreaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }
+  export type ImageAreaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    area?: boolean | AreaDefaultArgs<ExtArgs>
+  }
+
+  export type $ImageAreaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "ImageArea"
+    objects: {
+      area: Prisma.$AreaPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      areaId: string
+      data: Prisma.Bytes
+      mimeType: string
+    }, ExtArgs["result"]["imageArea"]>
+    composites: {}
+  }
+
+  type ImageAreaGetPayload<S extends boolean | null | undefined | ImageAreaDefaultArgs> = $Result.GetResult<Prisma.$ImageAreaPayload, S>
+
+  type ImageAreaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ImageAreaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ImageAreaCountAggregateInputType | true
+    }
+
+  export interface ImageAreaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['ImageArea'], meta: { name: 'ImageArea' } }
+    /**
+     * Find zero or one ImageArea that matches the filter.
+     * @param {ImageAreaFindUniqueArgs} args - Arguments to find a ImageArea
+     * @example
+     * // Get one ImageArea
+     * const imageArea = await prisma.imageArea.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ImageAreaFindUniqueArgs>(args: SelectSubset<T, ImageAreaFindUniqueArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one ImageArea that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ImageAreaFindUniqueOrThrowArgs} args - Arguments to find a ImageArea
+     * @example
+     * // Get one ImageArea
+     * const imageArea = await prisma.imageArea.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ImageAreaFindUniqueOrThrowArgs>(args: SelectSubset<T, ImageAreaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ImageArea that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaFindFirstArgs} args - Arguments to find a ImageArea
+     * @example
+     * // Get one ImageArea
+     * const imageArea = await prisma.imageArea.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ImageAreaFindFirstArgs>(args?: SelectSubset<T, ImageAreaFindFirstArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first ImageArea that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaFindFirstOrThrowArgs} args - Arguments to find a ImageArea
+     * @example
+     * // Get one ImageArea
+     * const imageArea = await prisma.imageArea.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ImageAreaFindFirstOrThrowArgs>(args?: SelectSubset<T, ImageAreaFindFirstOrThrowArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more ImageAreas that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all ImageAreas
+     * const imageAreas = await prisma.imageArea.findMany()
+     * 
+     * // Get first 10 ImageAreas
+     * const imageAreas = await prisma.imageArea.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const imageAreaWithIdOnly = await prisma.imageArea.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ImageAreaFindManyArgs>(args?: SelectSubset<T, ImageAreaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a ImageArea.
+     * @param {ImageAreaCreateArgs} args - Arguments to create a ImageArea.
+     * @example
+     * // Create one ImageArea
+     * const ImageArea = await prisma.imageArea.create({
+     *   data: {
+     *     // ... data to create a ImageArea
+     *   }
+     * })
+     * 
+     */
+    create<T extends ImageAreaCreateArgs>(args: SelectSubset<T, ImageAreaCreateArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many ImageAreas.
+     * @param {ImageAreaCreateManyArgs} args - Arguments to create many ImageAreas.
+     * @example
+     * // Create many ImageAreas
+     * const imageArea = await prisma.imageArea.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ImageAreaCreateManyArgs>(args?: SelectSubset<T, ImageAreaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many ImageAreas and returns the data saved in the database.
+     * @param {ImageAreaCreateManyAndReturnArgs} args - Arguments to create many ImageAreas.
+     * @example
+     * // Create many ImageAreas
+     * const imageArea = await prisma.imageArea.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many ImageAreas and only return the `id`
+     * const imageAreaWithIdOnly = await prisma.imageArea.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ImageAreaCreateManyAndReturnArgs>(args?: SelectSubset<T, ImageAreaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a ImageArea.
+     * @param {ImageAreaDeleteArgs} args - Arguments to delete one ImageArea.
+     * @example
+     * // Delete one ImageArea
+     * const ImageArea = await prisma.imageArea.delete({
+     *   where: {
+     *     // ... filter to delete one ImageArea
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ImageAreaDeleteArgs>(args: SelectSubset<T, ImageAreaDeleteArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one ImageArea.
+     * @param {ImageAreaUpdateArgs} args - Arguments to update one ImageArea.
+     * @example
+     * // Update one ImageArea
+     * const imageArea = await prisma.imageArea.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ImageAreaUpdateArgs>(args: SelectSubset<T, ImageAreaUpdateArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more ImageAreas.
+     * @param {ImageAreaDeleteManyArgs} args - Arguments to filter ImageAreas to delete.
+     * @example
+     * // Delete a few ImageAreas
+     * const { count } = await prisma.imageArea.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ImageAreaDeleteManyArgs>(args?: SelectSubset<T, ImageAreaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ImageAreas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many ImageAreas
+     * const imageArea = await prisma.imageArea.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ImageAreaUpdateManyArgs>(args: SelectSubset<T, ImageAreaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more ImageAreas and returns the data updated in the database.
+     * @param {ImageAreaUpdateManyAndReturnArgs} args - Arguments to update many ImageAreas.
+     * @example
+     * // Update many ImageAreas
+     * const imageArea = await prisma.imageArea.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more ImageAreas and only return the `id`
+     * const imageAreaWithIdOnly = await prisma.imageArea.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ImageAreaUpdateManyAndReturnArgs>(args: SelectSubset<T, ImageAreaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one ImageArea.
+     * @param {ImageAreaUpsertArgs} args - Arguments to update or create a ImageArea.
+     * @example
+     * // Update or create a ImageArea
+     * const imageArea = await prisma.imageArea.upsert({
+     *   create: {
+     *     // ... data to create a ImageArea
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the ImageArea we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ImageAreaUpsertArgs>(args: SelectSubset<T, ImageAreaUpsertArgs<ExtArgs>>): Prisma__ImageAreaClient<$Result.GetResult<Prisma.$ImageAreaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of ImageAreas.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaCountArgs} args - Arguments to filter ImageAreas to count.
+     * @example
+     * // Count the number of ImageAreas
+     * const count = await prisma.imageArea.count({
+     *   where: {
+     *     // ... the filter for the ImageAreas we want to count
+     *   }
+     * })
+    **/
+    count<T extends ImageAreaCountArgs>(
+      args?: Subset<T, ImageAreaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ImageAreaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a ImageArea.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ImageAreaAggregateArgs>(args: Subset<T, ImageAreaAggregateArgs>): Prisma.PrismaPromise<GetImageAreaAggregateType<T>>
+
+    /**
+     * Group by ImageArea.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ImageAreaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ImageAreaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ImageAreaGroupByArgs['orderBy'] }
+        : { orderBy?: ImageAreaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ImageAreaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetImageAreaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the ImageArea model
+   */
+  readonly fields: ImageAreaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for ImageArea.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ImageAreaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    area<T extends AreaDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AreaDefaultArgs<ExtArgs>>): Prisma__AreaClient<$Result.GetResult<Prisma.$AreaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the ImageArea model
+   */
+  interface ImageAreaFieldRefs {
+    readonly id: FieldRef<"ImageArea", 'String'>
+    readonly areaId: FieldRef<"ImageArea", 'String'>
+    readonly data: FieldRef<"ImageArea", 'Bytes'>
+    readonly mimeType: FieldRef<"ImageArea", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * ImageArea findUnique
+   */
+  export type ImageAreaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ImageArea to fetch.
+     */
+    where: ImageAreaWhereUniqueInput
+  }
+
+  /**
+   * ImageArea findUniqueOrThrow
+   */
+  export type ImageAreaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ImageArea to fetch.
+     */
+    where: ImageAreaWhereUniqueInput
+  }
+
+  /**
+   * ImageArea findFirst
+   */
+  export type ImageAreaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ImageArea to fetch.
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ImageAreas to fetch.
+     */
+    orderBy?: ImageAreaOrderByWithRelationInput | ImageAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ImageAreas.
+     */
+    cursor?: ImageAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ImageAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ImageAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ImageAreas.
+     */
+    distinct?: ImageAreaScalarFieldEnum | ImageAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ImageArea findFirstOrThrow
+   */
+  export type ImageAreaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ImageArea to fetch.
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ImageAreas to fetch.
+     */
+    orderBy?: ImageAreaOrderByWithRelationInput | ImageAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for ImageAreas.
+     */
+    cursor?: ImageAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ImageAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ImageAreas.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of ImageAreas.
+     */
+    distinct?: ImageAreaScalarFieldEnum | ImageAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ImageArea findMany
+   */
+  export type ImageAreaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter, which ImageAreas to fetch.
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of ImageAreas to fetch.
+     */
+    orderBy?: ImageAreaOrderByWithRelationInput | ImageAreaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing ImageAreas.
+     */
+    cursor?: ImageAreaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` ImageAreas from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` ImageAreas.
+     */
+    skip?: number
+    distinct?: ImageAreaScalarFieldEnum | ImageAreaScalarFieldEnum[]
+  }
+
+  /**
+   * ImageArea create
+   */
+  export type ImageAreaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a ImageArea.
+     */
+    data: XOR<ImageAreaCreateInput, ImageAreaUncheckedCreateInput>
+  }
+
+  /**
+   * ImageArea createMany
+   */
+  export type ImageAreaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many ImageAreas.
+     */
+    data: ImageAreaCreateManyInput | ImageAreaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * ImageArea createManyAndReturn
+   */
+  export type ImageAreaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * The data used to create many ImageAreas.
+     */
+    data: ImageAreaCreateManyInput | ImageAreaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ImageArea update
+   */
+  export type ImageAreaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a ImageArea.
+     */
+    data: XOR<ImageAreaUpdateInput, ImageAreaUncheckedUpdateInput>
+    /**
+     * Choose, which ImageArea to update.
+     */
+    where: ImageAreaWhereUniqueInput
+  }
+
+  /**
+   * ImageArea updateMany
+   */
+  export type ImageAreaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update ImageAreas.
+     */
+    data: XOR<ImageAreaUpdateManyMutationInput, ImageAreaUncheckedUpdateManyInput>
+    /**
+     * Filter which ImageAreas to update
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * Limit how many ImageAreas to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * ImageArea updateManyAndReturn
+   */
+  export type ImageAreaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * The data used to update ImageAreas.
+     */
+    data: XOR<ImageAreaUpdateManyMutationInput, ImageAreaUncheckedUpdateManyInput>
+    /**
+     * Filter which ImageAreas to update
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * Limit how many ImageAreas to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * ImageArea upsert
+   */
+  export type ImageAreaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the ImageArea to update in case it exists.
+     */
+    where: ImageAreaWhereUniqueInput
+    /**
+     * In case the ImageArea found by the `where` argument doesn't exist, create a new ImageArea with this data.
+     */
+    create: XOR<ImageAreaCreateInput, ImageAreaUncheckedCreateInput>
+    /**
+     * In case the ImageArea was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ImageAreaUpdateInput, ImageAreaUncheckedUpdateInput>
+  }
+
+  /**
+   * ImageArea delete
+   */
+  export type ImageAreaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
+    /**
+     * Filter which ImageArea to delete.
+     */
+    where: ImageAreaWhereUniqueInput
+  }
+
+  /**
+   * ImageArea deleteMany
+   */
+  export type ImageAreaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which ImageAreas to delete
+     */
+    where?: ImageAreaWhereInput
+    /**
+     * Limit how many ImageAreas to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * ImageArea without action
+   */
+  export type ImageAreaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ImageArea
+     */
+    select?: ImageAreaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the ImageArea
+     */
+    omit?: ImageAreaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ImageAreaInclude<ExtArgs> | null
   }
 
 
@@ -13336,13 +14482,22 @@ export namespace Prisma {
     slug: 'slug',
     name: 'name',
     description: 'description',
-    imageUrl: 'imageUrl',
     isFamous: 'isFamous',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type AreaScalarFieldEnum = (typeof AreaScalarFieldEnum)[keyof typeof AreaScalarFieldEnum]
+
+
+  export const ImageAreaScalarFieldEnum: {
+    id: 'id',
+    areaId: 'areaId',
+    data: 'data',
+    mimeType: 'mimeType'
+  };
+
+  export type ImageAreaScalarFieldEnum = (typeof ImageAreaScalarFieldEnum)[keyof typeof ImageAreaScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -14141,11 +15296,11 @@ export namespace Prisma {
     slug?: StringFilter<"Area"> | string
     name?: StringFilter<"Area"> | string
     description?: StringNullableFilter<"Area"> | string | null
-    imageUrl?: StringNullableFilter<"Area"> | string | null
     isFamous?: BoolFilter<"Area"> | boolean
     createdAt?: DateTimeFilter<"Area"> | Date | string
     updatedAt?: DateTimeFilter<"Area"> | Date | string
     villas?: VillaListRelationFilter
+    image?: XOR<ImageAreaNullableScalarRelationFilter, ImageAreaWhereInput> | null
   }
 
   export type AreaOrderByWithRelationInput = {
@@ -14153,11 +15308,11 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     villas?: VillaOrderByRelationAggregateInput
+    image?: ImageAreaOrderByWithRelationInput
   }
 
   export type AreaWhereUniqueInput = Prisma.AtLeast<{
@@ -14168,11 +15323,11 @@ export namespace Prisma {
     NOT?: AreaWhereInput | AreaWhereInput[]
     name?: StringFilter<"Area"> | string
     description?: StringNullableFilter<"Area"> | string | null
-    imageUrl?: StringNullableFilter<"Area"> | string | null
     isFamous?: BoolFilter<"Area"> | boolean
     createdAt?: DateTimeFilter<"Area"> | Date | string
     updatedAt?: DateTimeFilter<"Area"> | Date | string
     villas?: VillaListRelationFilter
+    image?: XOR<ImageAreaNullableScalarRelationFilter, ImageAreaWhereInput> | null
   }, "id" | "slug">
 
   export type AreaOrderByWithAggregationInput = {
@@ -14180,7 +15335,6 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     description?: SortOrderInput | SortOrder
-    imageUrl?: SortOrderInput | SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -14197,10 +15351,59 @@ export namespace Prisma {
     slug?: StringWithAggregatesFilter<"Area"> | string
     name?: StringWithAggregatesFilter<"Area"> | string
     description?: StringNullableWithAggregatesFilter<"Area"> | string | null
-    imageUrl?: StringNullableWithAggregatesFilter<"Area"> | string | null
     isFamous?: BoolWithAggregatesFilter<"Area"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Area"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Area"> | Date | string
+  }
+
+  export type ImageAreaWhereInput = {
+    AND?: ImageAreaWhereInput | ImageAreaWhereInput[]
+    OR?: ImageAreaWhereInput[]
+    NOT?: ImageAreaWhereInput | ImageAreaWhereInput[]
+    id?: StringFilter<"ImageArea"> | string
+    areaId?: StringFilter<"ImageArea"> | string
+    data?: BytesFilter<"ImageArea"> | Bytes
+    mimeType?: StringFilter<"ImageArea"> | string
+    area?: XOR<AreaScalarRelationFilter, AreaWhereInput>
+  }
+
+  export type ImageAreaOrderByWithRelationInput = {
+    id?: SortOrder
+    areaId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    area?: AreaOrderByWithRelationInput
+  }
+
+  export type ImageAreaWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    areaId?: string
+    AND?: ImageAreaWhereInput | ImageAreaWhereInput[]
+    OR?: ImageAreaWhereInput[]
+    NOT?: ImageAreaWhereInput | ImageAreaWhereInput[]
+    data?: BytesFilter<"ImageArea"> | Bytes
+    mimeType?: StringFilter<"ImageArea"> | string
+    area?: XOR<AreaScalarRelationFilter, AreaWhereInput>
+  }, "id" | "areaId">
+
+  export type ImageAreaOrderByWithAggregationInput = {
+    id?: SortOrder
+    areaId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+    _count?: ImageAreaCountOrderByAggregateInput
+    _max?: ImageAreaMaxOrderByAggregateInput
+    _min?: ImageAreaMinOrderByAggregateInput
+  }
+
+  export type ImageAreaScalarWhereWithAggregatesInput = {
+    AND?: ImageAreaScalarWhereWithAggregatesInput | ImageAreaScalarWhereWithAggregatesInput[]
+    OR?: ImageAreaScalarWhereWithAggregatesInput[]
+    NOT?: ImageAreaScalarWhereWithAggregatesInput | ImageAreaScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"ImageArea"> | string
+    areaId?: StringWithAggregatesFilter<"ImageArea"> | string
+    data?: BytesWithAggregatesFilter<"ImageArea"> | Bytes
+    mimeType?: StringWithAggregatesFilter<"ImageArea"> | string
   }
 
   export type SettingsCreateInput = {
@@ -14953,11 +16156,11 @@ export namespace Prisma {
     slug: string
     name: string
     description?: string | null
-    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     villas?: VillaCreateNestedManyWithoutAreaObjInput
+    image?: ImageAreaCreateNestedOneWithoutAreaInput
   }
 
   export type AreaUncheckedCreateInput = {
@@ -14965,11 +16168,11 @@ export namespace Prisma {
     slug: string
     name: string
     description?: string | null
-    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
     villas?: VillaUncheckedCreateNestedManyWithoutAreaObjInput
+    image?: ImageAreaUncheckedCreateNestedOneWithoutAreaInput
   }
 
   export type AreaUpdateInput = {
@@ -14977,11 +16180,11 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     villas?: VillaUpdateManyWithoutAreaObjNestedInput
+    image?: ImageAreaUpdateOneWithoutAreaNestedInput
   }
 
   export type AreaUncheckedUpdateInput = {
@@ -14989,11 +16192,11 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     villas?: VillaUncheckedUpdateManyWithoutAreaObjNestedInput
+    image?: ImageAreaUncheckedUpdateOneWithoutAreaNestedInput
   }
 
   export type AreaCreateManyInput = {
@@ -15001,7 +16204,6 @@ export namespace Prisma {
     slug: string
     name: string
     description?: string | null
-    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
@@ -15012,7 +16214,6 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15023,10 +16224,57 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ImageAreaCreateInput = {
+    id?: string
+    data: Bytes
+    mimeType?: string
+    area: AreaCreateNestedOneWithoutImageInput
+  }
+
+  export type ImageAreaUncheckedCreateInput = {
+    id?: string
+    areaId: string
+    data: Bytes
+    mimeType?: string
+  }
+
+  export type ImageAreaUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
+    area?: AreaUpdateOneRequiredWithoutImageNestedInput
+  }
+
+  export type ImageAreaUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    areaId?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ImageAreaCreateManyInput = {
+    id?: string
+    areaId: string
+    data: Bytes
+    mimeType?: string
+  }
+
+  export type ImageAreaUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ImageAreaUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    areaId?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -15701,6 +16949,11 @@ export namespace Prisma {
     none?: VillaWhereInput
   }
 
+  export type ImageAreaNullableScalarRelationFilter = {
+    is?: ImageAreaWhereInput | null
+    isNot?: ImageAreaWhereInput | null
+  }
+
   export type VillaOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -15710,7 +16963,6 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15721,7 +16973,6 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
@@ -15732,10 +16983,35 @@ export namespace Prisma {
     slug?: SortOrder
     name?: SortOrder
     description?: SortOrder
-    imageUrl?: SortOrder
     isFamous?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type AreaScalarRelationFilter = {
+    is?: AreaWhereInput
+    isNot?: AreaWhereInput
+  }
+
+  export type ImageAreaCountOrderByAggregateInput = {
+    id?: SortOrder
+    areaId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+  }
+
+  export type ImageAreaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    areaId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
+  }
+
+  export type ImageAreaMinOrderByAggregateInput = {
+    id?: SortOrder
+    areaId?: SortOrder
+    data?: SortOrder
+    mimeType?: SortOrder
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -16145,11 +17421,23 @@ export namespace Prisma {
     connect?: VillaWhereUniqueInput | VillaWhereUniqueInput[]
   }
 
+  export type ImageAreaCreateNestedOneWithoutAreaInput = {
+    create?: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+    connectOrCreate?: ImageAreaCreateOrConnectWithoutAreaInput
+    connect?: ImageAreaWhereUniqueInput
+  }
+
   export type VillaUncheckedCreateNestedManyWithoutAreaObjInput = {
     create?: XOR<VillaCreateWithoutAreaObjInput, VillaUncheckedCreateWithoutAreaObjInput> | VillaCreateWithoutAreaObjInput[] | VillaUncheckedCreateWithoutAreaObjInput[]
     connectOrCreate?: VillaCreateOrConnectWithoutAreaObjInput | VillaCreateOrConnectWithoutAreaObjInput[]
     createMany?: VillaCreateManyAreaObjInputEnvelope
     connect?: VillaWhereUniqueInput | VillaWhereUniqueInput[]
+  }
+
+  export type ImageAreaUncheckedCreateNestedOneWithoutAreaInput = {
+    create?: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+    connectOrCreate?: ImageAreaCreateOrConnectWithoutAreaInput
+    connect?: ImageAreaWhereUniqueInput
   }
 
   export type VillaUpdateManyWithoutAreaObjNestedInput = {
@@ -16166,6 +17454,16 @@ export namespace Prisma {
     deleteMany?: VillaScalarWhereInput | VillaScalarWhereInput[]
   }
 
+  export type ImageAreaUpdateOneWithoutAreaNestedInput = {
+    create?: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+    connectOrCreate?: ImageAreaCreateOrConnectWithoutAreaInput
+    upsert?: ImageAreaUpsertWithoutAreaInput
+    disconnect?: ImageAreaWhereInput | boolean
+    delete?: ImageAreaWhereInput | boolean
+    connect?: ImageAreaWhereUniqueInput
+    update?: XOR<XOR<ImageAreaUpdateToOneWithWhereWithoutAreaInput, ImageAreaUpdateWithoutAreaInput>, ImageAreaUncheckedUpdateWithoutAreaInput>
+  }
+
   export type VillaUncheckedUpdateManyWithoutAreaObjNestedInput = {
     create?: XOR<VillaCreateWithoutAreaObjInput, VillaUncheckedCreateWithoutAreaObjInput> | VillaCreateWithoutAreaObjInput[] | VillaUncheckedCreateWithoutAreaObjInput[]
     connectOrCreate?: VillaCreateOrConnectWithoutAreaObjInput | VillaCreateOrConnectWithoutAreaObjInput[]
@@ -16178,6 +17476,30 @@ export namespace Prisma {
     update?: VillaUpdateWithWhereUniqueWithoutAreaObjInput | VillaUpdateWithWhereUniqueWithoutAreaObjInput[]
     updateMany?: VillaUpdateManyWithWhereWithoutAreaObjInput | VillaUpdateManyWithWhereWithoutAreaObjInput[]
     deleteMany?: VillaScalarWhereInput | VillaScalarWhereInput[]
+  }
+
+  export type ImageAreaUncheckedUpdateOneWithoutAreaNestedInput = {
+    create?: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+    connectOrCreate?: ImageAreaCreateOrConnectWithoutAreaInput
+    upsert?: ImageAreaUpsertWithoutAreaInput
+    disconnect?: ImageAreaWhereInput | boolean
+    delete?: ImageAreaWhereInput | boolean
+    connect?: ImageAreaWhereUniqueInput
+    update?: XOR<XOR<ImageAreaUpdateToOneWithWhereWithoutAreaInput, ImageAreaUpdateWithoutAreaInput>, ImageAreaUncheckedUpdateWithoutAreaInput>
+  }
+
+  export type AreaCreateNestedOneWithoutImageInput = {
+    create?: XOR<AreaCreateWithoutImageInput, AreaUncheckedCreateWithoutImageInput>
+    connectOrCreate?: AreaCreateOrConnectWithoutImageInput
+    connect?: AreaWhereUniqueInput
+  }
+
+  export type AreaUpdateOneRequiredWithoutImageNestedInput = {
+    create?: XOR<AreaCreateWithoutImageInput, AreaUncheckedCreateWithoutImageInput>
+    connectOrCreate?: AreaCreateOrConnectWithoutImageInput
+    upsert?: AreaUpsertWithoutImageInput
+    connect?: AreaWhereUniqueInput
+    update?: XOR<XOR<AreaUpdateToOneWithWhereWithoutImageInput, AreaUpdateWithoutImageInput>, AreaUncheckedUpdateWithoutImageInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -16394,10 +17716,10 @@ export namespace Prisma {
     slug: string
     name: string
     description?: string | null
-    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: ImageAreaCreateNestedOneWithoutAreaInput
   }
 
   export type AreaUncheckedCreateWithoutVillasInput = {
@@ -16405,10 +17727,10 @@ export namespace Prisma {
     slug: string
     name: string
     description?: string | null
-    imageUrl?: string | null
     isFamous?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    image?: ImageAreaUncheckedCreateNestedOneWithoutAreaInput
   }
 
   export type AreaCreateOrConnectWithoutVillasInput = {
@@ -16594,10 +17916,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: ImageAreaUpdateOneWithoutAreaNestedInput
   }
 
   export type AreaUncheckedUpdateWithoutVillasInput = {
@@ -16605,10 +17927,10 @@ export namespace Prisma {
     slug?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
-    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isFamous?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: ImageAreaUncheckedUpdateOneWithoutAreaNestedInput
   }
 
   export type VillaImageUpsertWithWhereUniqueWithoutVillaInput = {
@@ -17694,6 +19016,23 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ImageAreaCreateWithoutAreaInput = {
+    id?: string
+    data: Bytes
+    mimeType?: string
+  }
+
+  export type ImageAreaUncheckedCreateWithoutAreaInput = {
+    id?: string
+    data: Bytes
+    mimeType?: string
+  }
+
+  export type ImageAreaCreateOrConnectWithoutAreaInput = {
+    where: ImageAreaWhereUniqueInput
+    create: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+  }
+
   export type VillaUpsertWithWhereUniqueWithoutAreaObjInput = {
     where: VillaWhereUniqueInput
     update: XOR<VillaUpdateWithoutAreaObjInput, VillaUncheckedUpdateWithoutAreaObjInput>
@@ -17737,6 +19076,89 @@ export namespace Prisma {
     lng?: FloatFilter<"Villa"> | number
     createdAt?: DateTimeFilter<"Villa"> | Date | string
     updatedAt?: DateTimeFilter<"Villa"> | Date | string
+  }
+
+  export type ImageAreaUpsertWithoutAreaInput = {
+    update: XOR<ImageAreaUpdateWithoutAreaInput, ImageAreaUncheckedUpdateWithoutAreaInput>
+    create: XOR<ImageAreaCreateWithoutAreaInput, ImageAreaUncheckedCreateWithoutAreaInput>
+    where?: ImageAreaWhereInput
+  }
+
+  export type ImageAreaUpdateToOneWithWhereWithoutAreaInput = {
+    where?: ImageAreaWhereInput
+    data: XOR<ImageAreaUpdateWithoutAreaInput, ImageAreaUncheckedUpdateWithoutAreaInput>
+  }
+
+  export type ImageAreaUpdateWithoutAreaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type ImageAreaUncheckedUpdateWithoutAreaInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    data?: BytesFieldUpdateOperationsInput | Bytes
+    mimeType?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AreaCreateWithoutImageInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    isFamous?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    villas?: VillaCreateNestedManyWithoutAreaObjInput
+  }
+
+  export type AreaUncheckedCreateWithoutImageInput = {
+    id?: string
+    slug: string
+    name: string
+    description?: string | null
+    isFamous?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    villas?: VillaUncheckedCreateNestedManyWithoutAreaObjInput
+  }
+
+  export type AreaCreateOrConnectWithoutImageInput = {
+    where: AreaWhereUniqueInput
+    create: XOR<AreaCreateWithoutImageInput, AreaUncheckedCreateWithoutImageInput>
+  }
+
+  export type AreaUpsertWithoutImageInput = {
+    update: XOR<AreaUpdateWithoutImageInput, AreaUncheckedUpdateWithoutImageInput>
+    create: XOR<AreaCreateWithoutImageInput, AreaUncheckedCreateWithoutImageInput>
+    where?: AreaWhereInput
+  }
+
+  export type AreaUpdateToOneWithWhereWithoutImageInput = {
+    where?: AreaWhereInput
+    data: XOR<AreaUpdateWithoutImageInput, AreaUncheckedUpdateWithoutImageInput>
+  }
+
+  export type AreaUpdateWithoutImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isFamous?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    villas?: VillaUpdateManyWithoutAreaObjNestedInput
+  }
+
+  export type AreaUncheckedUpdateWithoutImageInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    isFamous?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    villas?: VillaUncheckedUpdateManyWithoutAreaObjNestedInput
   }
 
   export type VillaImageCreateManyVillaInput = {

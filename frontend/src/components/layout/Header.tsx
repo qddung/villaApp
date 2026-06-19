@@ -47,7 +47,7 @@ export default function Header() {
               <span
                 className={cn(
                   "font-heading text-2xl font-bold tracking-tight transition-colors",
-                  scrolled ? "text-navy" : "text-white"
+                  scrolled ? "text-primary" : "text-white"
                 )}
               >
                 Villa<span className="text-gold">VungTau</span>
@@ -62,7 +62,7 @@ export default function Header() {
                   to={link.href}
                   className={cn(
                     "text-sm font-medium tracking-wide transition-colors hover:text-gold",
-                    scrolled ? "text-navy" : "text-white/90"
+                    scrolled ? "text-primary" : "text-white/90"
                   )}
                 >
                   {link.label}
@@ -73,7 +73,7 @@ export default function Header() {
                 className={cn(
                   "flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all",
                   scrolled
-                    ? "bg-navy text-white hover:bg-navy-light"
+                    ? "bg-primary text-white hover:bg-primary-light"
                     : "bg-white/20 text-white backdrop-blur-sm hover:bg-white/30"
                 )}
               >
@@ -87,7 +87,7 @@ export default function Header() {
               onClick={() => setMobileOpen(true)}
               className={cn(
                 "rounded-lg p-2 md:hidden",
-                scrolled ? "text-navy" : "text-white"
+                scrolled ? "text-primary" : "text-white"
               )}
               aria-label="Open menu"
             >
@@ -105,3 +105,4 @@ export default function Header() {
     </>
   );
 }
+

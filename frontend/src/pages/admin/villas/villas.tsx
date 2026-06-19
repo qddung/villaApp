@@ -192,9 +192,9 @@ export default function VillasPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Quản Lý Villa</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Quản Lý Villa</h1>
         {!editing && (
-          <button onClick={startNew} className="flex items-center gap-2 rounded-xl bg-gold px-5 py-2.5 text-sm font-semibold text-navy hover:bg-gold-light">
+          <button onClick={startNew} className="flex items-center gap-2 rounded-xl bg-gold px-5 py-2.5 text-sm font-semibold text-primary hover:bg-gold-light">
             <Plus className="h-4 w-4" /> Thêm Villa Mới
           </button>
         )}
@@ -211,7 +211,7 @@ export default function VillasPage() {
                   <Bed className="h-5 w-5 text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-navy dark:text-white">{villa.name}</h3>
+                  <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">{villa.name}</h3>
                   <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400">
                     <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{villa.area}</span>
                     <span>{villa.bedrooms} PN &middot; {villa.maxGuests} khách</span>
@@ -233,8 +233,8 @@ export default function VillasPage() {
       ) : (
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h2 className="font-heading text-xl font-semibold text-navy dark:text-white">{editing.id ? "Sửa Villa" : "Thêm Mới"}</h2>
-            <button onClick={handleCancel} className="flex items-center gap-1 text-sm text-gray-400 hover:text-navy dark:hover:text-white"><X className="h-4 w-4" />Hủy</button>
+            <h2 className="font-heading text-xl font-semibold text-primary dark:text-white">{editing.id ? "Sửa Villa" : "Thêm Mới"}</h2>
+            <button onClick={handleCancel} className="flex items-center gap-1 text-sm text-gray-400 hover:text-primary dark:hover:text-white"><X className="h-4 w-4" />Hủy</button>
           </div>
 
           <Section title="Thông tin cơ bản">
@@ -257,10 +257,10 @@ export default function VillasPage() {
                 <label className="flex items-center gap-3 cursor-pointer p-4 border dark:border-slate-800 rounded-xl hover:bg-gray-50 dark:hover:bg-slate-900 transition-colors">
                   <div className="relative flex items-center">
                     <input type="checkbox" checked={editing.featured} onChange={e => updateField("featured", e.target.checked)} className="peer h-5 w-5 cursor-pointer appearance-none rounded-md border border-gray-300 dark:border-slate-700 checked:border-gold checked:bg-gold transition-all" />
-                    <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 text-navy opacity-0 peer-checked:opacity-100 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    <svg className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-3.5 w-3.5 text-primary opacity-0 peer-checked:opacity-100 pointer-events-none" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="3"><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
                   </div>
                   <div>
-                    <div className="text-sm font-semibold text-navy dark:text-white">Villa Nổi Bật</div>
+                    <div className="text-sm font-semibold text-primary dark:text-white">Villa Nổi Bật</div>
                     <div className="text-xs text-gray-500">Hiển thị ở trang chủ và chân trang (footer).</div>
                   </div>
                 </label>
@@ -403,7 +403,7 @@ export default function VillasPage() {
           </Section>
 
           <div className="flex items-center gap-4 pt-4">
-            <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 rounded-xl bg-gold px-8 py-3 font-semibold text-navy hover:bg-gold-light transition-colors"><Save className="h-4 w-4" />{saving ? "Đang lưu..." : "Lưu Villa"}</button>
+            <button onClick={handleSave} disabled={saving} className="flex items-center gap-2 rounded-xl bg-gold px-8 py-3 font-semibold text-primary hover:bg-gold-light transition-colors"><Save className="h-4 w-4" />{saving ? "Đang lưu..." : "Lưu Villa"}</button>
           </div>
         </div>
       )}
@@ -418,9 +418,10 @@ export default function VillasPage() {
 }
 
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
-  return <div className="rounded-2xl bg-white dark:bg-slate-950 p-6 shadow-sm border border-transparent dark:border-slate-800 transition-colors"><h3 className="mb-4 font-heading text-lg font-semibold text-navy dark:text-white">{title}</h3>{children}</div>;
+  return <div className="rounded-2xl bg-white dark:bg-slate-950 p-6 shadow-sm border border-transparent dark:border-slate-800 transition-colors"><h3 className="mb-4 font-heading text-lg font-semibold text-primary dark:text-white">{title}</h3>{children}</div>;
 }
 
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return <div><label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">{label}</label>{children}</div>;
 }
+

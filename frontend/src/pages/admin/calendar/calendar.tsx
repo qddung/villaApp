@@ -54,7 +54,7 @@ export default function CalendarPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Lịch Đặt Phòng</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Lịch Đặt Phòng</h1>
         <span className="rounded-lg bg-green-100 dark:bg-green-900/30 px-3 py-1.5 text-xs font-semibold text-green-700 dark:text-green-400">
           Chỉ hiển thị đã xác nhận
         </span>
@@ -86,7 +86,7 @@ export default function CalendarPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setSelectedBooking(null)}>
           <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-800 pb-4">
-              <h2 className="font-heading text-xl font-bold text-navy dark:text-white">Chi tiết đặt phòng</h2>
+              <h2 className="font-heading text-xl font-bold text-primary dark:text-white">Chi tiết đặt phòng</h2>
               <button onClick={() => setSelectedBooking(null)} className="rounded-full p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
                 <X className="h-5 w-5" />
               </button>
@@ -107,9 +107,9 @@ export default function CalendarPage() {
               <div>
                 <p className="text-sm text-gray-500 dark:text-slate-400 mb-1">Thông tin khách hàng</p>
                 <div className="space-y-1.5 rounded-xl bg-gray-50 dark:bg-slate-800 p-4 text-sm">
-                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Tên:</span> <span className="font-medium text-navy dark:text-white">{selectedBooking.name}</span></p>
-                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Số điện thoại:</span> <span className="font-medium text-navy dark:text-white">{selectedBooking.phone}</span></p>
-                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Email:</span> <span className="font-medium text-navy dark:text-white">{selectedBooking.email}</span></p>
+                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Tên:</span> <span className="font-medium text-primary dark:text-white">{selectedBooking.name}</span></p>
+                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Số điện thoại:</span> <span className="font-medium text-primary dark:text-white">{selectedBooking.phone}</span></p>
+                  <p className="flex items-center justify-between"><span className="text-gray-500 dark:text-slate-400">Email:</span> <span className="font-medium text-primary dark:text-white">{selectedBooking.email}</span></p>
                 </div>
               </div>
 
@@ -119,31 +119,31 @@ export default function CalendarPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Check-in</p>
-                      <p className="font-medium text-navy dark:text-white">{selectedBooking.checkIn?.replace('T', ' ')}</p>
+                      <p className="font-medium text-primary dark:text-white">{selectedBooking.checkIn?.replace('T', ' ')}</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Check-out</p>
-                      <p className="font-medium text-navy dark:text-white">{selectedBooking.checkOut?.replace('T', ' ')}</p>
+                      <p className="font-medium text-primary dark:text-white">{selectedBooking.checkOut?.replace('T', ' ')}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Số khách</p>
-                      <p className="font-medium text-navy dark:text-white">{selectedBooking.guests} người</p>
+                      <p className="font-medium text-primary dark:text-white">{selectedBooking.guests} người</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Villa</p>
-                      <p className="font-medium text-navy dark:text-white">{selectedBooking.villa?.name}</p>
+                      <p className="font-medium text-primary dark:text-white">{selectedBooking.villa?.name}</p>
                     </div>
                   </div>
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Giá lúc đặt</p>
-                      <p className="font-medium text-navy dark:text-white">{selectedBooking.priceAtBooking ? formatPrice(selectedBooking.priceAtBooking) : 'N/A'}/ngày</p>
+                      <p className="font-medium text-primary dark:text-white">{selectedBooking.priceAtBooking ? formatPrice(selectedBooking.priceAtBooking) : 'N/A'}/ngày</p>
                     </div>
                     <div>
                       <p className="text-sm text-gray-500 dark:text-slate-400">Tổng tiền</p>
-                      <p className="font-medium text-navy dark:text-white">{formatPrice(selectedBooking.total)}</p>
+                      <p className="font-medium text-primary dark:text-white">{formatPrice(selectedBooking.total)}</p>
                     </div>
                   </div>
                 </>
@@ -151,7 +151,7 @@ export default function CalendarPage() {
               {selectedBooking.bookingType === 'CONTACT' && (
                 <div>
                   <p className="text-sm text-gray-500 dark:text-slate-400">Thời gian gửi</p>
-                  <p className="font-medium text-navy dark:text-white">{new Date(selectedBooking.createdAt).toLocaleString('vi-VN')}</p>
+                  <p className="font-medium text-primary dark:text-white">{new Date(selectedBooking.createdAt).toLocaleString('vi-VN')}</p>
                 </div>
               )}
 
@@ -169,7 +169,7 @@ export default function CalendarPage() {
             <div className="mt-6 flex justify-end">
               <button
                 onClick={() => setSelectedBooking(null)}
-                className="rounded-xl bg-navy px-6 py-2.5 font-semibold text-white hover:bg-navy-light transition-colors"
+                className="rounded-xl bg-primary px-6 py-2.5 font-semibold text-white hover:bg-primary-light transition-colors"
               >
                 Đóng
               </button>
@@ -195,3 +195,4 @@ export default function CalendarPage() {
     </div>
   );
 }
+

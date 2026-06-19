@@ -60,7 +60,7 @@ export default function FilterSidebar({
         )}
       >
         <div className="flex items-center justify-between lg:hidden">
-          <h3 className="font-heading text-lg font-semibold text-navy">Bộ lọc</h3>
+          <h3 className="font-heading text-lg font-semibold text-primary">Bộ lọc</h3>
           <button
             onClick={onClose}
             className="rounded-lg p-2 text-gray-400 hover:bg-gray-100"
@@ -171,3 +171,4 @@ export default function FilterSidebar({
     </>
   );
 }
+

@@ -11,12 +11,13 @@ export default function AreasPage() {
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     name: "",
     slug: "",
     description: "",
-    imageUrl: "",
-    isFamous: false
+    isFamous: false,
+    imageFile: null as File | null
   });
 
   const loadAreas = async () => {
@@ -37,30 +38,53 @@ export default function AreasPage() {
 
   const openAddModal = () => {
     setEditingId(null);
-    setFormData({ name: "", slug: "", description: "", imageUrl: "", isFamous: false });
+    setPreviewUrl(null);
+    setFormData({ name: "", slug: "", description: "", isFamous: false, imageFile: null });
     setIsModalOpen(true);
   };
 
   const openEditModal = (area: any) => {
     setEditingId(area.id);
+    setPreviewUrl(area.imageUrl ? `http://localhost:3001${area.imageUrl}` : null);
     setFormData({
       name: area.name,
       slug: area.slug,
       description: area.description || "",
-      imageUrl: area.imageUrl || "",
-      isFamous: area.isFamous
+      isFamous: area.isFamous,
+      imageFile: null
     });
     setIsModalOpen(true);
+  };
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setFormData({ ...formData, imageFile: file });
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      const submitData = new FormData();
+      submitData.append("name", formData.name);
+      submitData.append("slug", formData.slug);
+      if (formData.description) submitData.append("description", formData.description);
+      submitData.append("isFamous", String(formData.isFamous));
+      if (formData.imageFile) {
+        submitData.append("image", formData.imageFile);
+      }
+
       if (editingId) {
-        await updateArea(editingId, formData);
+        await updateArea(editingId, submitData);
         toast.success("Cập nhật khu vực thành công!");
       } else {
-        await createArea(formData);
+        await createArea(submitData);
         toast.success("Thêm khu vực thành công!");
       }
       setIsModalOpen(false);
@@ -73,10 +97,10 @@ export default function AreasPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Quản lý Khu vực</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Quản lý Khu vực</h1>
         <button
           onClick={openAddModal}
-          className="flex items-center gap-2 rounded-xl bg-gold px-4 py-2 text-sm font-semibold text-navy hover:bg-gold-light transition-colors"
+          className="flex items-center gap-2 rounded-xl bg-gold px-4 py-2 text-sm font-semibold text-primary hover:bg-gold-light transition-colors"
         >
           <Plus className="h-4 w-4" />
           Thêm mới
@@ -88,6 +112,7 @@ export default function AreasPage() {
           <table className="w-full text-left text-sm text-gray-500 dark:text-slate-400">
             <thead className="bg-gray-50/50 dark:bg-slate-900/50 text-xs uppercase text-gray-700 dark:text-slate-300">
               <tr>
+                <th className="px-6 py-4 font-semibold">Hình ảnh</th>
                 <th className="px-6 py-4 font-semibold">Tên khu vực</th>
                 <th className="px-6 py-4 font-semibold">Mã (Slug)</th>
                 <th className="px-6 py-4 font-semibold">Số Villa</th>
@@ -98,16 +123,23 @@ export default function AreasPage() {
             <tbody className="divide-y divide-gray-100 dark:divide-slate-800">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">Đang tải dữ liệu...</td>
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">Đang tải dữ liệu...</td>
                 </tr>
               ) : areas.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-8 text-center text-gray-500">Chưa có khu vực nào</td>
+                  <td colSpan={6} className="px-6 py-8 text-center text-gray-500">Chưa có khu vực nào</td>
                 </tr>
               ) : (
                 areas.map((area) => (
                   <tr key={area.id} className="hover:bg-gray-50/50 dark:hover:bg-slate-900/50 transition-colors">
-                    <td className="px-6 py-4 font-medium text-navy dark:text-white">{area.name}</td>
+                    <td className="px-6 py-4">
+                      {area.imageUrl ? (
+                        <img src={`http://localhost:3001${area.imageUrl}`} alt={area.name} className="h-10 w-16 object-cover rounded shadow-sm" />
+                      ) : (
+                        <div className="h-10 w-16 bg-gray-200 dark:bg-slate-800 rounded flex items-center justify-center text-xs text-gray-400">N/A</div>
+                      )}
+                    </td>
+                    <td className="px-6 py-4 font-medium text-primary dark:text-white">{area.name}</td>
                     <td className="px-6 py-4"><code>{area.slug}</code></td>
                     <td className="px-6 py-4">{area._count?.villas || 0}</td>
                     <td className="px-6 py-4">
@@ -136,8 +168,8 @@ export default function AreasPage() {
 
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-          <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-xl border border-gray-100 dark:border-slate-800">
-            <h3 className="mb-4 font-heading text-lg font-bold text-navy dark:text-white">
+          <div className="w-full max-w-lg rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-xl border border-gray-100 dark:border-slate-800 max-h-[90vh] overflow-y-auto">
+            <h3 className="mb-4 font-heading text-lg font-bold text-primary dark:text-white">
               {editingId ? "Sửa khu vực" : "Thêm khu vực mới"}
             </h3>
             
@@ -173,14 +205,19 @@ export default function AreasPage() {
               </div>
 
               <div>
-                <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Hình ảnh đại diện (Link/URL)</label>
+                <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Hình ảnh đại diện</label>
                 <input
-                  type="text"
-                  className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent px-4 py-2 outline-none focus:border-gold dark:text-white"
-                  value={formData.imageUrl}
-                  onChange={e => setFormData({...formData, imageUrl: e.target.value})}
-                  placeholder="https://..."
+                  type="file"
+                  accept="image/*"
+                  className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent px-4 py-2 outline-none focus:border-gold dark:text-white file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-gold/10 file:text-gold hover:file:bg-gold/20"
+                  onChange={handleImageChange}
                 />
+                {previewUrl && (
+                  <div className="mt-3">
+                    <p className="text-xs text-gray-500 mb-1">Xem trước ảnh:</p>
+                    <img src={previewUrl} alt="Preview" className="h-32 object-cover rounded-xl shadow-sm border border-gray-200 dark:border-slate-700" />
+                  </div>
+                )}
               </div>
 
               <div>
@@ -216,7 +253,7 @@ export default function AreasPage() {
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-gold px-6 py-2 text-sm font-semibold text-navy hover:bg-gold-light transition-colors"
+                  className="rounded-xl bg-gold px-6 py-2 text-sm font-semibold text-primary hover:bg-gold-light transition-colors"
                 >
                   {editingId ? "Lưu thay đổi" : "Tạo mới"}
                 </button>
@@ -228,3 +265,4 @@ export default function AreasPage() {
     </div>
   );
 }
+

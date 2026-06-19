@@ -34,7 +34,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Tổng quan</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Tổng quan</h1>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -54,7 +54,7 @@ export default function DashboardPage() {
               </div>
               <div className="mt-4">
                 <h3 className="text-sm font-medium text-gray-500 dark:text-slate-400">{stat.name}</h3>
-                <p className="mt-1 font-heading text-2xl font-bold text-navy dark:text-white">{stat.value}</p>
+                <p className="mt-1 font-heading text-2xl font-bold text-primary dark:text-white">{stat.value}</p>
               </div>
             </div>
           );
@@ -68,3 +68,4 @@ export default function DashboardPage() {
     </div>
   );
 }
+

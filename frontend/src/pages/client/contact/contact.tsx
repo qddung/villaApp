@@ -49,7 +49,7 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-gray-50 pt-24">
       {/* Header */}
-      <section className="bg-navy py-16">
+      <section className="bg-primary py-16">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h1 className="font-heading text-3xl font-bold text-white sm:text-4xl">
             Liên Hệ
@@ -65,7 +65,7 @@ export default function ContactPage() {
           {/* Contact info */}
           <div className="space-y-8">
             <div>
-              <h2 className="font-heading text-xl font-semibold text-navy">
+              <h2 className="font-heading text-xl font-semibold text-primary">
                 Thông tin liên hệ
               </h2>
               <p className="mt-2 text-sm text-gray-500">
@@ -109,7 +109,7 @@ export default function ContactPage() {
                     <item.icon className="h-5 w-5 text-gold" />
                   </div>
                   <div>
-                    <p className="text-sm font-semibold text-navy">{item.title}</p>
+                    <p className="text-sm font-semibold text-primary">{item.title}</p>
                     <p className="mt-0.5 text-sm text-gray-500">{item.value}</p>
                   </div>
                 </a>
@@ -123,7 +123,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="py-16 text-center">
                   <CheckCircle2 className="mx-auto h-16 w-16 text-green-500" />
-                  <h3 className="mt-6 font-heading text-2xl font-bold text-navy">
+                  <h3 className="mt-6 font-heading text-2xl font-bold text-primary">
                     Đã gửi thành công!
                   </h3>
                   <p className="mt-3 text-gray-500">
@@ -141,7 +141,7 @@ export default function ContactPage() {
                 </div>
               ) : (
                 <>
-                  <h2 className="font-heading text-xl font-semibold text-navy">
+                  <h2 className="font-heading text-xl font-semibold text-primary">
                     Gửi tin nhắn
                   </h2>
                   <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -214,7 +214,7 @@ export default function ContactPage() {
                     </div>
                     <button
                       type="submit"
-                      className="flex items-center gap-2 rounded-xl bg-navy px-8 py-3 font-semibold text-white transition-colors hover:bg-navy-light"
+                      className="flex items-center gap-2 rounded-xl bg-primary px-8 py-3 font-semibold text-white transition-colors hover:bg-primary-light"
                     >
                       <Send className="h-4 w-4" />
                       Gửi tin nhắn
@@ -229,3 +229,4 @@ export default function ContactPage() {
     </div>
   );
 }
+

@@ -22,7 +22,7 @@ export default function Testimonials() {
             <p className="text-sm font-semibold uppercase tracking-[0.2em] text-gold">
               Đánh giá
             </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-navy sm:text-4xl">
+            <h2 className="mt-3 font-heading text-3xl font-bold text-primary sm:text-4xl">
               Khách Hàng Nói Gì
             </h2>
           </div>
@@ -72,7 +72,7 @@ export default function Testimonials() {
                   <img src={t.avatar} alt={t.author} className="absolute inset-0 w-full h-full object-cover" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-navy">{t.author}</p>
+                  <p className="text-sm font-semibold text-primary">{t.author}</p>
                   <p className="text-xs text-gray-400">
                     {t.location} &middot; {t.villaName}
                   </p>
@@ -85,3 +85,4 @@ export default function Testimonials() {
     </section>
   );
 }
+

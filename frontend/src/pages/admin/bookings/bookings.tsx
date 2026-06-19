@@ -112,7 +112,7 @@ export default function BookingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Yêu Cầu Tư Vấn</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Yêu Cầu Tư Vấn</h1>
         <select
           className="rounded-lg border dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm outline-none dark:text-white shadow-sm focus:border-gold transition-colors"
           value={filterType}
@@ -136,11 +136,11 @@ export default function BookingsPage() {
                   <Calendar className="h-5 w-5 text-gold" />
                 </div>
                 <div>
-                  <h3 className="font-heading text-lg font-semibold text-navy dark:text-white">
+                  <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">
                     {booking.name} <span className="text-sm font-normal text-gray-500 dark:text-slate-400">({booking.phone})</span>
                   </h3>
                   <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-500 dark:text-slate-400">
-                    <span className="font-medium text-navy dark:text-slate-300">{booking.villa?.name || "Tư vấn chung"}</span>
+                    <span className="font-medium text-primary dark:text-slate-300">{booking.villa?.name || "Tư vấn chung"}</span>
                     <span>&middot;</span>
                     <span>{booking.bookingType === 'CONTACT' ? `Gửi lúc: ${new Date(booking.createdAt).toLocaleString('vi-VN')}` : `${booking.checkIn?.replace('T', ' ')} đến ${booking.checkOut?.replace('T', ' ')}`}</span>
                     <span>&middot;</span>
@@ -152,7 +152,7 @@ export default function BookingsPage() {
                     {booking.bookingType === "CONTACT" ? (
                       <span>Yêu cầu liên hệ</span>
                     ) : (
-                      <>Giá lúc đặt: <span className="font-medium text-navy dark:text-slate-300">{booking.priceAtBooking ? formatPrice(booking.priceAtBooking) : 'N/A'}</span>/ngày &middot; Tổng: <span className="font-medium text-navy dark:text-slate-300">{formatPrice(booking.total)}</span></>
+                      <>Giá lúc đặt: <span className="font-medium text-primary dark:text-slate-300">{booking.priceAtBooking ? formatPrice(booking.priceAtBooking) : 'N/A'}</span>/ngày &middot; Tổng: <span className="font-medium text-primary dark:text-slate-300">{formatPrice(booking.total)}</span></>
                     )}
                   </p>
                   {booking.note && <p className="mt-1 text-xs italic text-gray-400 dark:text-slate-500 line-clamp-1">Ghi chú: {booking.note}</p>}
@@ -209,7 +209,7 @@ export default function BookingsPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4" onClick={() => setSelectedBooking(null)}>
           <div className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-slate-900 p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between border-b border-gray-100 dark:border-slate-800 pb-4">
-              <h2 className="font-heading text-xl font-bold text-navy dark:text-white">Chi tiết yêu cầu</h2>
+              <h2 className="font-heading text-xl font-bold text-primary dark:text-white">Chi tiết yêu cầu</h2>
               <button onClick={() => setSelectedBooking(null)} className="rounded-full p-2 text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-800 transition-colors">
                 <X className="h-5 w-5" />
               </button>
@@ -370,3 +370,4 @@ export default function BookingsPage() {
     </div>
   );
 }
+

@@ -13,7 +13,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
   return (
     <Link
       to={`/villas/${villa.slug}`}
-      className="group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-navy/10"
+      className="group overflow-hidden rounded-2xl bg-white shadow-lg shadow-black/5 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10"
     >
       <div className="relative aspect-[4/3] overflow-hidden">
         <img
@@ -27,7 +27,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
           <span className="text-gray-400">({villa.reviewCount})</span>
         </div> */}
         {villa.featured && (
-          <div className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy">
+          <div className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-primary">
             Nổi bật
           </div>
         )}
@@ -37,7 +37,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
           <MapPin className="h-3.5 w-3.5" />
           {villa.area} &middot; {villa.address.split(",").slice(-2).join(",")}
         </div>
-        <h3 className="mt-2 font-heading text-lg font-semibold text-navy transition-colors group-hover:text-gold">
+        <h3 className="mt-2 font-heading text-lg font-semibold text-primary transition-colors group-hover:text-gold">
           {villa.name}
         </h3>
         <p className="mt-1 line-clamp-2 text-sm text-gray-500 font-light">{villa.tagline}</p>
@@ -59,7 +59,7 @@ export default function VillaCard({ villa }: VillaCardProps) {
         </div>
 
         <div className="mt-4 flex items-baseline gap-1 border-t border-gray-50 pt-4">
-          <span className="text-lg font-bold text-navy">
+          <span className="text-lg font-bold text-primary">
             {formatPrice(villa.pricePerNight)}
           </span>
           <span className="text-xs text-gray-500 font-medium">/ ngày</span>
@@ -68,3 +68,4 @@ export default function VillaCard({ villa }: VillaCardProps) {
     </Link>
   );
 }
+

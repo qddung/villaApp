@@ -25,7 +25,7 @@ function ConfirmationContent() {
         <CheckCircle2 className="h-10 w-10 text-green-500" />
       </div>
 
-      <h1 className="mt-6 font-heading text-2xl font-bold text-navy sm:text-3xl">
+      <h1 className="mt-6 font-heading text-2xl font-bold text-primary sm:text-3xl">
         Gửi Yêu Cầu Thành Công!
       </h1>
       <p className="mt-3 text-gray-500">
@@ -39,14 +39,14 @@ function ConfirmationContent() {
         <p className="font-medium text-gray-700">Cần hỗ trợ?</p>
         <a
           href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
-          className="flex items-center justify-center gap-2 hover:text-navy"
+          className="flex items-center justify-center gap-2 hover:text-primary"
         >
           <Phone className="h-4 w-4" />
           {settings?.contactPhone || "0909 123 456"}
         </a>
         <a
           href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}
-          className="flex items-center justify-center gap-2 hover:text-navy"
+          className="flex items-center justify-center gap-2 hover:text-primary"
         >
           <Mail className="h-4 w-4" />
           {settings?.contactEmail || "hello@villavungtau.vn"}
@@ -62,7 +62,7 @@ function ConfirmationContent() {
         </Link>
         <Link
           to="/"
-          className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-navy py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
+          className="group flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-light"
         >
           Về trang chủ
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -82,7 +82,7 @@ function ConfirmationContent() {
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-gold/20">
             <Phone className="h-6 w-6 text-gold" />
           </div>
-          <h3 className="mt-4 text-center font-heading text-xl font-bold text-navy">
+          <h3 className="mt-4 text-center font-heading text-xl font-bold text-primary">
             Thông báo quan trọng
           </h3>
           <p className="mt-2 text-center text-sm leading-relaxed text-gray-600">
@@ -91,7 +91,7 @@ function ConfirmationContent() {
           </p>
           <button
             onClick={() => setShowPopup(false)}
-            className="mt-6 w-full rounded-xl bg-navy py-2.5 font-semibold text-white transition-colors hover:bg-navy-light"
+            className="mt-6 w-full rounded-xl bg-primary py-2.5 font-semibold text-white transition-colors hover:bg-primary-light"
           >
             Tôi đã hiểu
           </button>
@@ -115,3 +115,4 @@ export default function BookingConfirmationPage() {
     </div>
   );
 }
+

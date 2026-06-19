@@ -38,12 +38,12 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between border-b border-gray-200 dark:border-slate-800 pb-4 transition-colors">
-        <h1 className="font-heading text-2xl font-bold text-navy dark:text-white">Cài đặt chung</h1>
+        <h1 className="font-heading text-2xl font-bold text-primary dark:text-white">Cài đặt chung</h1>
       </div>
 
       <div className="rounded-2xl bg-white dark:bg-slate-950 p-6 shadow-sm space-y-6 max-w-2xl border border-transparent dark:border-slate-800 transition-colors">
         <div className="space-y-4">
-          <h3 className="font-heading text-lg font-semibold text-navy dark:text-white">Thông tin liên hệ</h3>
+          <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">Thông tin liên hệ</h3>
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Email hỗ trợ khách hàng</label>
             <input 
@@ -65,7 +65,7 @@ export default function SettingsPage() {
         </div>
 
         <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-800 transition-colors">
-          <h3 className="font-heading text-lg font-semibold text-navy dark:text-white">Mẫu tin nhắn xác nhận (Zalo/SMS)</h3>
+          <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">Mẫu tin nhắn xác nhận (Zalo/SMS)</h3>
           <p className="text-sm text-gray-500 dark:text-slate-400">Sử dụng các biến sau để hệ thống tự động điền: <code className="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded transition-colors">{`{CustomerName}`}</code>, <code className="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded transition-colors">{`{VillaName}`}</code>, <code className="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded transition-colors">{`{CheckIn}`}</code>, <code className="bg-gray-100 dark:bg-slate-800 px-1 py-0.5 rounded transition-colors">{`{CheckOut}`}</code></p>
           <div>
             <textarea 
@@ -81,7 +81,7 @@ export default function SettingsPage() {
           <button 
             onClick={handleSave}
             disabled={saving}
-            className="flex items-center gap-2 rounded-xl bg-gold px-8 py-3 font-semibold text-navy hover:bg-gold-light transition-colors"
+            className="flex items-center gap-2 rounded-xl bg-gold px-8 py-3 font-semibold text-primary hover:bg-gold-light transition-colors"
           >
             <Save className="h-4 w-4" />
             {saving ? "Đang lưu..." : "Lưu cài đặt"}
@@ -91,3 +91,4 @@ export default function SettingsPage() {
     </div>
   );
 }
+

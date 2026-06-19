@@ -8,17 +8,28 @@ export class AreasService {
   constructor(private prisma: PrismaService) { }
 
   async findAll() {
-    return this.prisma.area.findMany({
+    const areas = await this.prisma.area.findMany({
       orderBy: { createdAt: 'desc' },
       include: {
         _count: {
           select: { villas: true }
+        },
+        image: {
+          select: { id: true }
         }
       }
     });
+    
+    return areas.map(area => {
+      const { image, ...rest } = area;
+      return {
+        ...rest,
+        imageUrl: image ? `/api/areas/${area.id}/image` : null
+      };
+    });
   }
 
-  async create(createAreaDto: CreateAreaDto) {
+  async create(createAreaDto: CreateAreaDto, file?: Express.Multer.File) {
     const existing = await this.prisma.area.findUnique({
       where: { slug: createAreaDto.slug }
     });
@@ -27,11 +38,19 @@ export class AreasService {
     }
 
     return this.prisma.area.create({
-      data: createAreaDto
+      data: {
+        ...createAreaDto,
+        image: file ? {
+          create: {
+            data: file.buffer as any,
+            mimeType: file.mimetype
+          }
+        } : undefined
+      }
     });
   }
 
-  async update(id: string, updateAreaDto: UpdateAreaDto) {
+  async update(id: string, updateAreaDto: UpdateAreaDto, file?: Express.Multer.File) {
     const existing = await this.prisma.area.findUnique({ where: { id } });
     if (!existing) {
       throw new NotFoundException('Area not found');
@@ -48,7 +67,21 @@ export class AreasService {
 
     return this.prisma.area.update({
       where: { id },
-      data: updateAreaDto
+      data: {
+        ...updateAreaDto,
+        image: file ? {
+          upsert: {
+            create: {
+              data: file.buffer as any,
+              mimeType: file.mimetype
+            },
+            update: {
+              data: file.buffer as any,
+              mimeType: file.mimetype
+            }
+          }
+        } : undefined
+      }
     });
   }
 
@@ -62,7 +95,7 @@ export class AreasService {
         slug: true,
         name: true,
         description: true,
-        imageUrl: true,
+        image: { select: { id: true } },
         _count: {
           select: { villas: true }
         }
@@ -77,8 +110,18 @@ export class AreasService {
       slug: area.slug,
       name: area.name,
       description: area.description || '',
-      image: area.imageUrl || '',
+      image: area.image ? `/api/areas/${area.id}/image` : '',
       villaCount: area._count.villas,
     }));
+  }
+
+  async getImage(areaId: string) {
+    const imageArea = await this.prisma.imageArea.findUnique({
+      where: { areaId }
+    });
+    if (!imageArea) {
+      throw new NotFoundException('Image not found for this area');
+    }
+    return imageArea;
   }
 }

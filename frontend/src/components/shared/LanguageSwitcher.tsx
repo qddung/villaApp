@@ -19,7 +19,7 @@ export default function LanguageSwitcher({ onChangeLocale, variant = "dark" }: L
           className={cn(
             "rounded-full px-2.5 py-1 text-xs font-semibold uppercase transition-colors",
             locale === l
-              ? "bg-gold text-navy"
+              ? "bg-gold text-primary"
               : variant === "light"
                 ? "text-white/70 hover:text-white"
                 : "text-gray-500 hover:text-gray-700"
@@ -31,3 +31,4 @@ export default function LanguageSwitcher({ onChangeLocale, variant = "dark" }: L
     </div>
   );
 }
+
