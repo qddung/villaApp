@@ -8,7 +8,7 @@
 /database/node_modules
 
 # Commented out to allow committing built files for server deployment
-/dist
+
 /backend/dist
 /frontend/dist
 /database/dist
