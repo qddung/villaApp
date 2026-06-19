@@ -126,6 +126,7 @@ exports.Prisma.SettingsScalarFieldEnum = {
   bookingConfirmationTemplate: 'bookingConfirmationTemplate',
   contactEmail: 'contactEmail',
   contactPhone: 'contactPhone',
+  contactAddress: 'contactAddress',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };

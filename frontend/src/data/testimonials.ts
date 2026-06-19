@@ -38,7 +38,7 @@ export const testimonials: Testimonial[] = [
     location: "Singapore",
     rating: 5,
     comment:
-      "Amazing villa with stunning ocean views! The concierge service was exceptional - they arranged a private chef dinner for us. Highly recommend for a luxury getaway.",
+      "Amazing villa with stunning ocean views! The  service was exceptional - they arranged a private chef dinner for us. Highly recommend for a luxury getaway.",
     villaName: "Villa Ánh Dương",
   },
   {

@@ -1892,6 +1892,7 @@ export namespace Prisma {
     bookingConfirmationTemplate: string | null
     contactEmail: string | null
     contactPhone: string | null
+    contactAddress: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1901,6 +1902,7 @@ export namespace Prisma {
     bookingConfirmationTemplate: string | null
     contactEmail: string | null
     contactPhone: string | null
+    contactAddress: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -1910,6 +1912,7 @@ export namespace Prisma {
     bookingConfirmationTemplate: number
     contactEmail: number
     contactPhone: number
+    contactAddress: number
     createdAt: number
     updatedAt: number
     _all: number
@@ -1921,6 +1924,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: true
     contactEmail?: true
     contactPhone?: true
+    contactAddress?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1930,6 +1934,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: true
     contactEmail?: true
     contactPhone?: true
+    contactAddress?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -1939,6 +1944,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: true
     contactEmail?: true
     contactPhone?: true
+    contactAddress?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2021,6 +2027,7 @@ export namespace Prisma {
     bookingConfirmationTemplate: string | null
     contactEmail: string | null
     contactPhone: string | null
+    contactAddress: string | null
     createdAt: Date
     updatedAt: Date
     _count: SettingsCountAggregateOutputType | null
@@ -2047,6 +2054,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: boolean
     contactEmail?: boolean
     contactPhone?: boolean
+    contactAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["settings"]>
@@ -2056,6 +2064,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: boolean
     contactEmail?: boolean
     contactPhone?: boolean
+    contactAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["settings"]>
@@ -2065,6 +2074,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: boolean
     contactEmail?: boolean
     contactPhone?: boolean
+    contactAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["settings"]>
@@ -2074,11 +2084,12 @@ export namespace Prisma {
     bookingConfirmationTemplate?: boolean
     contactEmail?: boolean
     contactPhone?: boolean
+    contactAddress?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type SettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingConfirmationTemplate" | "contactEmail" | "contactPhone" | "createdAt" | "updatedAt", ExtArgs["result"]["settings"]>
+  export type SettingsOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "bookingConfirmationTemplate" | "contactEmail" | "contactPhone" | "contactAddress" | "createdAt" | "updatedAt", ExtArgs["result"]["settings"]>
 
   export type $SettingsPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Settings"
@@ -2088,6 +2099,7 @@ export namespace Prisma {
       bookingConfirmationTemplate: string | null
       contactEmail: string | null
       contactPhone: string | null
+      contactAddress: string | null
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["settings"]>
@@ -2517,6 +2529,7 @@ export namespace Prisma {
     readonly bookingConfirmationTemplate: FieldRef<"Settings", 'String'>
     readonly contactEmail: FieldRef<"Settings", 'String'>
     readonly contactPhone: FieldRef<"Settings", 'String'>
+    readonly contactAddress: FieldRef<"Settings", 'String'>
     readonly createdAt: FieldRef<"Settings", 'DateTime'>
     readonly updatedAt: FieldRef<"Settings", 'DateTime'>
   }
@@ -14351,6 +14364,7 @@ export namespace Prisma {
     bookingConfirmationTemplate: 'bookingConfirmationTemplate',
     contactEmail: 'contactEmail',
     contactPhone: 'contactPhone',
+    contactAddress: 'contactAddress',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
@@ -14617,6 +14631,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: StringNullableFilter<"Settings"> | string | null
     contactEmail?: StringNullableFilter<"Settings"> | string | null
     contactPhone?: StringNullableFilter<"Settings"> | string | null
+    contactAddress?: StringNullableFilter<"Settings"> | string | null
     createdAt?: DateTimeFilter<"Settings"> | Date | string
     updatedAt?: DateTimeFilter<"Settings"> | Date | string
   }
@@ -14626,6 +14641,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: SortOrderInput | SortOrder
     contactEmail?: SortOrderInput | SortOrder
     contactPhone?: SortOrderInput | SortOrder
+    contactAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -14638,6 +14654,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: StringNullableFilter<"Settings"> | string | null
     contactEmail?: StringNullableFilter<"Settings"> | string | null
     contactPhone?: StringNullableFilter<"Settings"> | string | null
+    contactAddress?: StringNullableFilter<"Settings"> | string | null
     createdAt?: DateTimeFilter<"Settings"> | Date | string
     updatedAt?: DateTimeFilter<"Settings"> | Date | string
   }, "id">
@@ -14647,6 +14664,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: SortOrderInput | SortOrder
     contactEmail?: SortOrderInput | SortOrder
     contactPhone?: SortOrderInput | SortOrder
+    contactAddress?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: SettingsCountOrderByAggregateInput
@@ -14662,6 +14680,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: StringNullableWithAggregatesFilter<"Settings"> | string | null
     contactEmail?: StringNullableWithAggregatesFilter<"Settings"> | string | null
     contactPhone?: StringNullableWithAggregatesFilter<"Settings"> | string | null
+    contactAddress?: StringNullableWithAggregatesFilter<"Settings"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Settings"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Settings"> | Date | string
   }
@@ -15411,6 +15430,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: string | null
     contactEmail?: string | null
     contactPhone?: string | null
+    contactAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15420,6 +15440,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: string | null
     contactEmail?: string | null
     contactPhone?: string | null
+    contactAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15429,6 +15450,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15438,6 +15460,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15447,6 +15470,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: string | null
     contactEmail?: string | null
     contactPhone?: string | null
+    contactAddress?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15456,6 +15480,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15465,6 +15490,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: NullableStringFieldUpdateOperationsInput | string | null
     contactEmail?: NullableStringFieldUpdateOperationsInput | string | null
     contactPhone?: NullableStringFieldUpdateOperationsInput | string | null
+    contactAddress?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -16328,6 +16354,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: SortOrder
     contactEmail?: SortOrder
     contactPhone?: SortOrder
+    contactAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -16337,6 +16364,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: SortOrder
     contactEmail?: SortOrder
     contactPhone?: SortOrder
+    contactAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -16346,6 +16374,7 @@ export namespace Prisma {
     bookingConfirmationTemplate?: SortOrder
     contactEmail?: SortOrder
     contactPhone?: SortOrder
+    contactAddress?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }

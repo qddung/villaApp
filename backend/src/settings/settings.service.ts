@@ -26,6 +26,7 @@ export class SettingsService {
       data: {
         contactEmail: data.contactEmail,
         contactPhone: data.contactPhone,
+        contactAddress: data.contactAddress,
         bookingConfirmationTemplate: data.bookingConfirmationTemplate,
       },
     });

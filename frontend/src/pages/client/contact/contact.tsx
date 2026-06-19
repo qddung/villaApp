@@ -78,8 +78,8 @@ export default function ContactPage() {
                 {
                   icon: Phone,
                   title: "Điện thoại / Zalo",
-                  value: settings?.contactPhone || "0909 123 456",
-                  href: `tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`,
+                  value: settings?.contactPhone || "0326 151 111",
+                  href: `tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`,
                 },
                 {
                   icon: Mail,
@@ -90,7 +90,7 @@ export default function ContactPage() {
                 {
                   icon: MapPin,
                   title: "Văn phòng",
-                  value: "12 Đường Thùy Vân, Phường Thắng Tam, TP. Vũng Tàu",
+                  value: settings?.contactAddress || "12 Đường Thùy Vân, Phường Thắng Tam, TP. Vũng Tàu",
                   href: "#",
                 },
                 {

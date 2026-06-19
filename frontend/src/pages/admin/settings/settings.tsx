@@ -8,6 +8,7 @@ export default function SettingsPage() {
   const [settings, setSettings] = useState({
     contactEmail: "",
     contactPhone: "",
+    contactAddress: "",
     bookingConfirmationTemplate: ""
   });
 
@@ -60,6 +61,15 @@ export default function SettingsPage() {
               className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors"
               value={settings.contactPhone}
               onChange={(e) => setSettings({...settings, contactPhone: e.target.value})}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Địa chỉ liên hệ</label>
+            <input 
+              type="text" 
+              className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors"
+              value={settings.contactAddress}
+              onChange={(e) => setSettings({...settings, contactAddress: e.target.value})}
             />
           </div>
         </div>

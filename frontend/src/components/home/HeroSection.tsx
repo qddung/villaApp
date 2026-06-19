@@ -17,26 +17,26 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-amber-800/10 mix-blend-multiply" />
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 mx-auto w-full max-w-7xl px-4 text-center sm:px-6 lg:px-8"
+        className="relative z-10 mx-auto w-full max-w-7xl px-4 pt-28 md:pt-0 text-center sm:px-6 lg:px-8"
       >
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.3em] text-gold-light">
           Trải nghiệm nghỉ dưỡng đẳng cấp
         </p>
         <h1 className="mx-auto max-w-4xl font-heading text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-          Villa Cao Cấp
+          Villa Căn Hộ Cao Cấp
           <br />
           <span className="text-gold">Tại Vũng Tàu</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 sm:text-xl font-light">
           Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng,
-          view biển tuyệt đẹp và dịch vụ concierge 24/7
+          view biển tuyệt đẹp và dịch vụ  24/7
         </p>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
@@ -46,7 +46,7 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Stats */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 0.4 }}

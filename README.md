@@ -2,7 +2,7 @@
 
 Nền tảng cho thuê villa cao cấp tại Vũng Tàu — được xây dựng bằng **Next.js 16**, **React 19**, **Tailwind CSS 4** và **TypeScript**.
 
-> Khám phá và đặt thuê villa cao cấp tại Vũng Tàu. Hồ bơi riêng, view biển, dịch vụ concierge 24/7.
+> Khám phá và đặt thuê villa cao cấp tại Vũng Tàu. Hồ bơi riêng, view biển, dịch vụ  24/7.
 
 ---
 

@@ -71,11 +71,11 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
             Liên hệ
           </p>
           <a
-            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
+            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`}
             className="mb-3 flex items-center gap-3 text-sm text-gray-600 hover:text-primary"
           >
             <Phone className="h-4 w-4" />
-            {settings?.contactPhone || "0909 123 456"}
+            {settings?.contactPhone || "0326 151 111"}
           </a>
           <a
             href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}
@@ -88,7 +88,7 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
 
         <div className="absolute bottom-0 left-0 right-0 p-6">
           <a
-            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
+            href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`}
             className="flex w-full items-center justify-center gap-2 rounded-full bg-primary py-3 text-sm font-semibold text-white transition-colors hover:bg-primary-light"
           >
             <Phone className="h-4 w-4" />

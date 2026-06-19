@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Menu, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
 import MobileMenu from "./MobileMenu";
+import { fetchSettings } from "@/lib/api";
 
 const navLinks = [
   { href: "/villas", label: "Villa" },
@@ -18,6 +19,13 @@ export default function Header() {
   const isHomepage = pathname === "/";
   const [scrolled, setScrolled] = useState(!isHomepage);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    fetchSettings().then(data => {
+      if (data) setSettings(data);
+    }).catch(e => console.error("Failed to load settings in header", e));
+  }, []);
 
   useEffect(() => {
     if (!isHomepage) {
@@ -50,7 +58,7 @@ export default function Header() {
                   scrolled ? "text-primary" : "text-white"
                 )}
               >
-                Villa<span className="text-gold">VungTau</span>
+                TungLuong<span className="text-gold">Villa</span>
               </span>
             </Link>
 
@@ -69,7 +77,7 @@ export default function Header() {
                 </Link>
               ))}
               <a
-                href="tel:+84909123456"
+                href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`}
                 className={cn(
                   "flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-all",
                   scrolled
@@ -78,7 +86,7 @@ export default function Header() {
                 )}
               >
                 <Phone className="h-4 w-4" />
-                0326 151 111
+                {settings?.contactPhone || "0326 151 111"}
               </a>
             </nav>
 

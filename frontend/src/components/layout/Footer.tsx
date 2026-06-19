@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useEffect, useState } from "react";
-import { fetchFamousAreas } from "@/lib/api";
+import { fetchFamousAreas, fetchSettings } from "@/lib/api";
 import { useVillaStore } from "@/store/useVillaStore";
 
 const companyLinks = [
@@ -14,6 +14,7 @@ export default function Footer() {
   const [famousAreas, setFamousAreas] = useState<any[]>([]);
   const getFeaturedVillas = useVillaStore(state => state.getFeaturedVillas);
   const featuredVillas = getFeaturedVillas().slice(0, 5);
+  const [settings, setSettings] = useState<any>(null);
 
   useEffect(() => {
     fetchFamousAreas().then(data => {
@@ -22,6 +23,12 @@ export default function Footer() {
       }
     }).catch(err => {
       console.error("Failed to fetch famous areas for footer", err);
+    });
+
+    fetchSettings().then((data) => {
+      if (data) setSettings(data);
+    }).catch(err => {
+      console.error("Failed to fetch settings for footer", err);
     });
   }, []);
 
@@ -38,7 +45,7 @@ export default function Footer() {
             </Link>
             <p className="mt-4 text-sm leading-relaxed text-sand/80">
               Nền tảng cho thuê villa cao cấp hàng đầu tại Vũng Tàu.
-              Trải nghiệm kỳ nghỉ đẳng cấp với dịch vụ concierge chuyên nghiệp.
+              Trải nghiệm kỳ nghỉ đẳng cấp với dịch vụ  chuyên nghiệp.
             </p>
           </div>
 
@@ -103,26 +110,26 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="tel:+84326151111"
+                  href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`}
                   className="flex items-center gap-3 text-sm text-sand/80 transition-colors hover:text-gold"
                 >
                   <Phone className="h-4 w-4 shrink-0" />
-                  0326 151 111
+                  {settings?.contactPhone || "0326 151 111"}
                 </a>
               </li>
               <li>
                 <a
-                  href="mailto:hello@villavungtau.vn"
+                  href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}
                   className="flex items-center gap-3 text-sm text-sand/80 transition-colors hover:text-gold"
                 >
                   <Mail className="h-4 w-4 shrink-0" />
-                  hello@villavungtau.vn
+                  {settings?.contactEmail || "hello@villavungtau.vn"}
                 </a>
               </li>
               <li>
                 <span className="flex items-start gap-3 text-sm text-sand/80">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-                  12 Đường Thùy Vân, Phường Thắng Tam, TP. Vũng Tàu
+                  {settings?.contactAddress || "12 Đường Thùy Vân, Phường Thắng Tam, TP. Vũng Tàu"}
                 </span>
               </li>
             </ul>
