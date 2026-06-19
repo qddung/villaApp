@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Plus, Edit2 } from "lucide-react";
 import { toast } from "sonner";
-import { fetchAllAreas, createArea, updateArea } from "@/lib/api";
+import { fetchAllAreas, createArea, updateArea, getFullImageUrl } from "@/lib/api";
 import { slugify } from "@/lib/utils";
 
 export default function AreasPage() {
@@ -45,7 +45,7 @@ export default function AreasPage() {
 
   const openEditModal = (area: any) => {
     setEditingId(area.id);
-    setPreviewUrl(area.imageUrl ? `http://localhost:3001${area.imageUrl}` : null);
+    setPreviewUrl(area.imageUrl ? getFullImageUrl(area.imageUrl) : null);
     setFormData({
       name: area.name,
       slug: area.slug,
@@ -134,7 +134,7 @@ export default function AreasPage() {
                   <tr key={area.id} className="hover:bg-gray-50/50 dark:hover:bg-slate-900/50 transition-colors">
                     <td className="px-6 py-4">
                       {area.imageUrl ? (
-                        <img src={`http://localhost:3001${area.imageUrl}`} alt={area.name} className="h-10 w-16 object-cover rounded shadow-sm" />
+                        <img src={getFullImageUrl(area.imageUrl) || ""} alt={area.name} className="h-10 w-16 object-cover rounded shadow-sm" />
                       ) : (
                         <div className="h-10 w-16 bg-gray-200 dark:bg-slate-800 rounded flex items-center justify-center text-xs text-gray-400">N/A</div>
                       )}

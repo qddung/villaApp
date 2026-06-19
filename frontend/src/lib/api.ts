@@ -129,7 +129,7 @@ export async function deleteVillaImage(id: string) {
 export function getFullImageUrl(url: string | null): string | null {
   if (!url) return null;
   if (url.startsWith('http')) return url;
-  return `http://localhost:3001${url}`;
+  return `${window.location.origin}${url}`;
 }
 
 /** Get the URL of the first (main) image from a villa's images array */
