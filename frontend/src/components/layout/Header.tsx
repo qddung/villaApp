@@ -58,7 +58,14 @@ export default function Header() {
                   scrolled ? "text-primary" : "text-white"
                 )}
               >
-                TungLuong<span className="text-gold">Villa</span>
+                {(() => {
+                  const text = settings?.siteName || "TungLuongVilla";
+                  const match = text.match(/^(.*)(Villa)$/i);
+                  if (match) {
+                    return <>{match[1]}<span className="text-gold">{match[2]}</span></>;
+                  }
+                  return text;
+                })()}
               </span>
             </Link>
 

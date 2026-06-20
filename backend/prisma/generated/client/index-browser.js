@@ -127,6 +127,10 @@ exports.Prisma.SettingsScalarFieldEnum = {
   contactEmail: 'contactEmail',
   contactPhone: 'contactPhone',
   contactAddress: 'contactAddress',
+  siteName: 'siteName',
+  heroTitle: 'heroTitle',
+  heroHighlight: 'heroHighlight',
+  heroDescription: 'heroDescription',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
@@ -184,10 +188,17 @@ exports.Prisma.VillaImageScalarFieldEnum = {
   order: 'order'
 };
 
-exports.Prisma.VillaAmenityScalarFieldEnum = {
+exports.Prisma.AmenityScalarFieldEnum = {
   id: 'id',
+  slug: 'slug',
   name: 'name',
-  villaId: 'villaId'
+  icon: 'icon',
+  category: 'category'
+};
+
+exports.Prisma.VillaAmenityScalarFieldEnum = {
+  villaId: 'villaId',
+  amenityId: 'amenityId'
 };
 
 exports.Prisma.VillaHighlightScalarFieldEnum = {
@@ -264,6 +275,7 @@ exports.Prisma.ModelName = {
   Villa: 'Villa',
   Booking: 'Booking',
   VillaImage: 'VillaImage',
+  Amenity: 'Amenity',
   VillaAmenity: 'VillaAmenity',
   VillaHighlight: 'VillaHighlight',
   VillaPolicy: 'VillaPolicy',

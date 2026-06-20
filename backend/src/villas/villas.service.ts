@@ -6,7 +6,7 @@ import type { Villa, VillaBasic } from '../shared/types';
 const villaIncludes = {
   areaObj: true,
   images: { orderBy: { order: 'asc' as const }, select: { id: true, isMain: true, order: true } },
-  amenities: true,
+  amenities: { include: { amenity: true } },
   highlights: { orderBy: { order: 'asc' as const } },
   policies: { orderBy: { order: 'asc' as const } },
   reviews: true,
@@ -27,7 +27,7 @@ const villaBasicSelect = {
   reviewCount: true,
   featured: true,
   areaObj: { select: { name: true, slug: true } },
-  amenities: true,
+  amenities: { include: { amenity: true } },
   images: { where: { isMain: true }, select: { id: true, isMain: true, order: true }, take: 1 },
 };
 
@@ -53,7 +53,7 @@ function toVillaBasicDto(dbVilla: any): VillaBasic {
     rating: dbVilla.rating,
     reviewCount: dbVilla.reviewCount,
     featured: dbVilla.featured,
-    amenities: (dbVilla.amenities || []).map((a: any) => a.name),
+    amenities: (dbVilla.amenities || []).map((a: any) => a.amenity),
   };
 }
 
@@ -64,7 +64,7 @@ function toVillaDto(dbVilla: any): Villa {
     description: dbVilla.description,
     priceWeekend: dbVilla.priceWeekend,
     priceHoliday: dbVilla.priceHoliday,
-    amenities: dbVilla.amenities.map((a: any) => a.name),
+    amenities: dbVilla.amenities.map((a: any) => a.amenity),
     highlights: dbVilla.highlights.map((h: any) => h.text),
     reviews: dbVilla.reviews.map((r: any) => ({
       id: r.id,
@@ -113,10 +113,10 @@ export class VillasService {
       villaCount: a._count.villas,
     }));
 
-    const amenitiesDb = await this.prisma.villaAmenity.groupBy({
-      by: ['name'],
+    const amenitiesDb = await this.prisma.amenity.findMany({
+      orderBy: { name: 'asc' },
     });
-    const amenities = amenitiesDb.map((a) => a.name).sort();
+    const amenities = amenitiesDb.map((a) => a.name);
 
     const priceRanges = [
       { label: 'Dưới 5 triệu', min: 0, max: 5000000 },
@@ -185,7 +185,9 @@ export class VillasService {
         id: villa.id || undefined,
         ...data,
         amenities: {
-          create: (villa.amenities || []).map((name: string) => ({ name })),
+          create: (villa.amenities || []).map((item: any) => ({
+            amenityId: typeof item === 'string' ? item : item.id
+          })),
         },
         highlights: {
           create: (villa.highlights || []).map((text: string, i: number) => ({ text, order: i })),
@@ -253,7 +255,9 @@ export class VillasService {
         ...data,
         amenities: {
           deleteMany: {},
-          create: (villa.amenities || []).map((name: string) => ({ name })),
+          create: (villa.amenities || []).map((item: any) => ({
+            amenityId: typeof item === 'string' ? item : item.id
+          })),
         },
         highlights: {
           deleteMany: {},

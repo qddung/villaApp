@@ -15,6 +15,45 @@ export async function fetchFilterOptions(): Promise<FilterOptions> {
   return res.json();
 }
 
+export async function fetchAllAmenities() {
+  const res = await authFetch(`${API_BASE}/amenities`);
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export async function fetchAmenityCategories() {
+  const res = await authFetch(`${API_BASE}/amenities/categories`);
+  if (!res.ok) return [];
+  return res.json();
+}
+
+export async function createAmenity(data: any) {
+  const res = await authFetch(`${API_BASE}/amenities`, {
+    method: 'POST',
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to create amenity');
+  return res.json();
+}
+
+export async function updateAmenity(id: number, data: any) {
+  const res = await authFetch(`${API_BASE}/amenities/${id}`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  });
+  if (!res.ok) throw new Error('Failed to update amenity');
+  return res.json();
+}
+
+export async function deleteAmenity(id: number) {
+  const res = await authFetch(`${API_BASE}/amenities/${id}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete amenity');
+  return res.json();
+}
+
 export async function fetchFamousAreas() {
   const res = await authFetch(`${API_BASE}/areas/famous`);
   if (!res.ok) throw new Error('Failed to fetch famous areas');

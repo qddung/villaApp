@@ -42,7 +42,14 @@ export default function MobileMenu({ open, onClose, links }: MobileMenuProps) {
       <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl">
         <div className="flex items-center justify-between p-6">
           <span className="font-heading text-xl font-bold text-primary">
-            Villa<span className="text-gold">VungTau</span>
+            {(() => {
+              const text = settings?.siteName || "TungLuongVilla";
+              const match = text.match(/^(.*)(Villa)$/i);
+              if (match) {
+                return <>{match[1]}<span className="text-gold">{match[2]}</span></>;
+              }
+              return text;
+            })()}
           </span>
           <button
             onClick={onClose}

@@ -15,7 +15,7 @@ export interface VillaBasic {
   rating: number;
   reviewCount: number;
   featured: boolean;
-  amenities: string[];
+  amenities: Amenity[];
 }
 
 export interface Villa extends VillaBasic {
@@ -60,10 +60,16 @@ export interface Area {
 }
 
 export interface Amenity {
-  id: string;
+  id: number;
+  slug?: string;
   name: string;
   icon: string;
-  category: string;
+  category: number;
+}
+
+export interface AmenityCategoryOption {
+  id: number;
+  name: string;
 }
 
 export interface Testimonial {

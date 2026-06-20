@@ -3,7 +3,7 @@ import {
   Shield, Music, Dumbbell, Bath, Tv, WashingMachine, ArrowUpDown, Umbrella,
   CircleDot, Droplets,
 } from "lucide-react";
-import { getAmenityByIds } from "@/data/amenities";
+
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Waves, Sunset, TreePine, Flame, Wifi, Wind, CookingPot, Car,
@@ -11,12 +11,14 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   CircleDot, Droplets,
 };
 
+import { Amenity } from "@/lib/types";
+
 interface AmenityGridProps {
-  amenityIds: string[];
+  amenities: Amenity[];
 }
 
-export default function AmenityGrid({ amenityIds }: AmenityGridProps) {
-  const items = getAmenityByIds(amenityIds);
+export default function AmenityGrid({ amenities }: AmenityGridProps) {
+  const items = amenities || [];
 
   return (
     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">

@@ -12,6 +12,7 @@ import { UsersModule } from './users/users.module';
 import { SettingsModule } from './settings/settings.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { AreasModule } from './areas/areas.module';
+import { AmenitiesModule } from './amenities/amenities.module';
 
 @Module({
   imports: [
@@ -19,7 +20,7 @@ import { AreasModule } from './areas/areas.module';
       rootPath: join(__dirname, '..', '..', 'frontend', 'dist', 'assets'),
       serveRoot: '/assets',
     }),
-    PrismaModule, VillasModule, ImagesModule, BookingsModule, AuthModule, UsersModule, SettingsModule, DashboardModule, AreasModule
+    PrismaModule, VillasModule, ImagesModule, BookingsModule, AuthModule, UsersModule, SettingsModule, DashboardModule, AreasModule, AmenitiesModule
   ],
   controllers: [AppController],
   providers: [AppService],

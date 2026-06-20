@@ -1,5 +1,5 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { LayoutDashboard, Home, CalendarCheck, Calendar as CalendarIcon, Settings, LogOut, Sun, Moon, Map } from "lucide-react";
+import { LayoutDashboard, Home, CalendarCheck, Calendar as CalendarIcon, Settings, LogOut, Sun, Moon, Map, Bath } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
 import { useState, useEffect } from "react";
 
@@ -30,6 +30,7 @@ export default function AdminLayout() {
     { name: "Khu vực", path: "/admin/areas", icon: Map },
     { name: "Yêu cầu tư vấn", path: "/admin/bookings", icon: CalendarCheck },
     { name: "Lịch trống", path: "/admin/calendar", icon: CalendarIcon },
+    { name: "Tiện nghi", path: "/admin/amenities", icon: Bath },
     { name: "Cài đặt", path: "/admin/settings", icon: Settings },
   ];
 

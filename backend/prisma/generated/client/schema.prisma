@@ -22,6 +22,11 @@ model Settings {
   bookingConfirmationTemplate String?
   contactEmail                String?
   contactPhone                String?
+  contactAddress              String?
+  siteName                    String?  @default("TungLuongVilla")
+  heroTitle                   String?  @default("Villa Căn Hộ Cao Cấp")
+  heroHighlight               String?  @default("Tại Vũng Tàu")
+  heroDescription             String?  @default("Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng, view biển tuyệt đẹp và dịch vụ 24/7")
   createdAt                   DateTime @default(now())
   updatedAt                   DateTime @updatedAt
 
@@ -67,7 +72,7 @@ model Villa {
 model Booking {
   id             String   @id @default(uuid())
   villaId        String?
-  villa          Villa?   @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa          Villa?   @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
   name           String
   email          String
   phone          String
@@ -93,18 +98,31 @@ model VillaImage {
   isMain   Boolean @default(false)
   order    Int     @default(0)
 
-  villa Villa? @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa Villa? @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("villa_images")
 }
 
+model Amenity {
+  id       Int    @id @default(autoincrement())
+  slug     String @unique
+  name     String
+  icon     String
+  category Int    @default(6)
+
+  villas VillaAmenity[]
+
+  @@map("amenities")
+}
+
 model VillaAmenity {
-  id      String @id @default(cuid())
-  name    String
-  villaId String
+  villaId   String
+  amenityId Int
 
-  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa   Villa   @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  amenity Amenity @relation(fields: [amenityId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
+  @@id([villaId, amenityId])
   @@map("villa_amenities")
 }
 
@@ -114,7 +132,7 @@ model VillaHighlight {
   order   Int    @default(0)
   villaId String
 
-  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("villa_highlights")
 }
@@ -125,7 +143,7 @@ model VillaPolicy {
   order   Int    @default(0)
   villaId String
 
-  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("villa_policies")
 }
@@ -139,7 +157,7 @@ model Review {
   comment String
   villaId String
 
-  villa Villa @relation(fields: [villaId], references: [id], onDelete: Cascade)
+  villa Villa @relation(fields: [villaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("reviews")
 }
@@ -179,7 +197,7 @@ model ImageArea {
   data     Bytes
   mimeType String @default("image/jpeg")
 
-  area Area @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  area Area @relation(fields: [areaId], references: [id], onDelete: NoAction, onUpdate: NoAction)
 
   @@map("image_areas")
 }

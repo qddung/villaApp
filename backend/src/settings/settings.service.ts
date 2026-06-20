@@ -24,6 +24,10 @@ export class SettingsService {
     return this.prisma.settings.update({
       where: { id: settings.id },
       data: {
+        siteName: data.siteName,
+        heroTitle: data.heroTitle,
+        heroHighlight: data.heroHighlight,
+        heroDescription: data.heroDescription,
         contactEmail: data.contactEmail,
         contactPhone: data.contactPhone,
         contactAddress: data.contactAddress,

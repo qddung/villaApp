@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Villa, VillaImageInfo } from "@/lib/types";
 import { slugify } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
-import { fetchAllAreas, saveVilla, deleteVilla, uploadVillaImage, deleteVillaImage, getFullImageUrl } from "@/lib/api";
+import { fetchAllAreas, fetchAllAmenities, saveVilla, deleteVilla, uploadVillaImage, deleteVillaImage, getFullImageUrl } from "@/lib/api";
 import {
   Plus, Save, Trash2, X,
   Bed, MapPin, ImageIcon, Upload
@@ -47,9 +47,11 @@ export default function VillasPage() {
   const detailInputRef = useRef<HTMLInputElement>(null);
 
   const [areas, setAreas] = useState<any[]>([]);
+  const [allAmenities, setAllAmenities] = useState<any[]>([]);
 
   useEffect(() => {
     fetchAllAreas().then(setAreas).catch(console.error);
+    fetchAllAmenities().then(setAllAmenities).catch(console.error);
   }, []);
 
   // ─── Image helpers ─────────────────────────────────
@@ -152,8 +154,7 @@ export default function VillasPage() {
 
     const cleanedVilla = {
       ...editing,
-      amenities: editing.amenities?.map(s => s.trim()).filter(Boolean) || [],
-      highlights: editing.highlights?.map(s => s.trim()).filter(Boolean) || [],
+      highlights: editing.highlights?.map((s: string) => s.trim()).filter(Boolean) || [],
       rules: {
         ...editing.rules,
         policies: editing.rules?.policies?.map(s => s.trim()).filter(Boolean) || []
@@ -283,13 +284,50 @@ export default function VillasPage() {
 
           <Section title="Đặc điểm & Tiện nghi">
             <div className="grid gap-4 sm:grid-cols-2">
-              <Field label="Tiện nghi (mỗi dòng 1 tiện nghi)">
-                <textarea
-                  value={editing.amenities?.join("\n") || ""}
-                  onChange={e => updateField("amenities", e.target.value.split("\n"))}
-                  className="input" rows={4}
-                  placeholder="Hồ bơi riêng&#10;BBQ ngoài trời&#10;Karaoke..."
-                />
+              <Field label="Tiện nghi">
+                <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 min-h-[52px]">
+                  {editing.amenities?.map((a: any) => {
+                    const amenityObj = typeof a === 'string' ? allAmenities.find(am => am.id === a) : a;
+                    const name = amenityObj?.name || a.name || a;
+                    const id = amenityObj?.id || a.id || a;
+                    return (
+                      <span key={id} className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary">
+                        {name}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const newAmenities = editing.amenities?.filter((item: any) => (item.id || item) !== id);
+                            updateField("amenities", newAmenities);
+                          }}
+                          className="text-primary/60 hover:text-primary"
+                        >
+                          <X className="h-3.5 w-3.5" />
+                        </button>
+                      </span>
+                    );
+                  })}
+                  <select
+                    className="flex-1 bg-transparent text-sm font-medium text-gray-500 outline-none min-w-[180px] cursor-pointer"
+                    value=""
+                    onChange={(e) => {
+                      const selectedId = e.target.value;
+                      if (!selectedId) return;
+                      const amenityObj = allAmenities.find(a => a.id === selectedId);
+                      if (!amenityObj) return;
+                      const current = editing.amenities || [];
+                      if (!current.some((sel: any) => (sel.id || sel) === selectedId)) {
+                        updateField("amenities", [...current, amenityObj]);
+                      }
+                    }}
+                  >
+                    <option value="">+ Chọn thêm tiện nghi...</option>
+                    {allAmenities
+                      .filter(a => !(editing.amenities || []).some((sel: any) => (sel.id || sel) === a.id))
+                      .map((a) => (
+                        <option key={a.id} value={a.id}>{a.name}</option>
+                      ))}
+                  </select>
+                </div>
               </Field>
               <Field label="Điểm nổi bật (mỗi dòng 1 điểm)">
                 <textarea

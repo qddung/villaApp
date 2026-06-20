@@ -42,7 +42,7 @@ export default function VillasPage() {
     }
     if (filters.amenities && filters.amenities.length > 0) {
       result = result.filter((v) =>
-        filters.amenities!.every((a) => v.amenities.includes(a))
+        filters.amenities!.every((a) => v.amenities.some(am => am.name === a))
       );
     }
     if (filters.guests) {

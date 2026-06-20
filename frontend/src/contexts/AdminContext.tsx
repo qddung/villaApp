@@ -33,7 +33,7 @@ export const AdminProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         if (data.profile) return data.profile as UserProfile;
       }
 
-      if (response.status === 401) {
+      if (response.status === 401 || response.status === 404) {
         await logout();
         return null;
       }

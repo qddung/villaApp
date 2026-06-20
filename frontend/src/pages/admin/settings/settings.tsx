@@ -6,6 +6,10 @@ import { fetchSettings, updateSettings } from "@/lib/api";
 export default function SettingsPage() {
   const [saving, setSaving] = useState(false);
   const [settings, setSettings] = useState({
+    siteName: "",
+    heroTitle: "",
+    heroHighlight: "",
+    heroDescription: "",
     contactEmail: "",
     contactPhone: "",
     contactAddress: "",
@@ -44,6 +48,46 @@ export default function SettingsPage() {
 
       <div className="rounded-2xl bg-white dark:bg-slate-950 p-6 shadow-sm space-y-6 max-w-2xl border border-transparent dark:border-slate-800 transition-colors">
         <div className="space-y-4">
+          <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">Nội dung trang chủ</h3>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Tên thương hiệu (Logo)</label>
+            <input 
+              type="text" 
+              className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors"
+              value={settings.siteName}
+              onChange={(e) => setSettings({...settings, siteName: e.target.value})}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Tiêu đề chính</label>
+            <input 
+              type="text" 
+              className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors"
+              value={settings.heroTitle}
+              onChange={(e) => setSettings({...settings, heroTitle: e.target.value})}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Dòng chữ nổi bật (Vàng)</label>
+            <input 
+              type="text" 
+              className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors"
+              value={settings.heroHighlight}
+              onChange={(e) => setSettings({...settings, heroHighlight: e.target.value})}
+            />
+          </div>
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Mô tả ngắn</label>
+            <textarea 
+              rows={3}
+              className="w-full rounded-xl border border-gray-200 dark:border-slate-700 bg-transparent dark:bg-slate-900 px-4 py-2.5 outline-none focus:border-gold dark:text-white transition-colors resize-none"
+              value={settings.heroDescription}
+              onChange={(e) => setSettings({...settings, heroDescription: e.target.value})}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4 pt-6 border-t border-gray-100 dark:border-slate-800 transition-colors">
           <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">Thông tin liên hệ</h3>
           <div>
             <label className="mb-1 block text-sm font-medium text-gray-700 dark:text-slate-300">Email hỗ trợ khách hàng</label>

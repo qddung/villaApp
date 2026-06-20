@@ -1,7 +1,18 @@
 import SearchForm from "@/components/shared/SearchForm";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { fetchSettings } from "@/lib/api";
 
 export default function HeroSection() {
+  const [settings, setSettings] = useState<any>(null);
+
+  useEffect(() => {
+    fetchSettings().then((data) => {
+      if (data) setSettings(data);
+    }).catch(err => {
+      console.error("Failed to fetch settings for hero", err);
+    });
+  }, []);
   return (
     <section className="relative flex min-h-[110vh] items-center justify-center">
       {/* Background image */}
@@ -27,13 +38,12 @@ export default function HeroSection() {
           Trải nghiệm nghỉ dưỡng đẳng cấp
         </p>
         <h1 className="mx-auto max-w-4xl font-heading text-4xl font-bold leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-          Villa Căn Hộ Cao Cấp
+          {settings?.heroTitle || "Villa Căn Hộ Cao Cấp"}
           <br />
-          <span className="text-gold">Tại Vũng Tàu</span>
+          <span className="text-gold">{settings?.heroHighlight || "Tại Vũng Tàu"}</span>
         </h1>
         <p className="mx-auto mt-6 max-w-2xl text-lg text-white/80 sm:text-xl font-light">
-          Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng,
-          view biển tuyệt đẹp và dịch vụ  24/7
+          {settings?.heroDescription || "Khám phá bộ sưu tập villa được chọn lọc kỹ lưỡng với hồ bơi riêng, view biển tuyệt đẹp và dịch vụ 24/7"}
         </p>
 
         <motion.div

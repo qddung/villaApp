@@ -111,7 +111,7 @@ export default function VillaDetailPage() {
                 Tiện nghi
               </h2>
               <div className="mt-4">
-                <AmenityGrid amenityIds={villa.amenities} />
+                <AmenityGrid amenities={villa.amenities} />
               </div>
             </div>
 
