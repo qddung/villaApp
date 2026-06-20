@@ -8,6 +8,7 @@
 
 */
 -- AlterTable
+DELETE FROM "villa_amenities";
 ALTER TABLE "villa_amenities" DROP CONSTRAINT "villa_amenities_pkey",
 DROP COLUMN "id",
 DROP COLUMN "name",
