@@ -287,16 +287,20 @@ export default function VillasPage() {
               <Field label="Tiện nghi">
                 <div className="flex flex-wrap items-center gap-2 rounded-xl border border-gray-200 bg-white p-2 min-h-[52px]">
                   {editing.amenities?.map((a: any) => {
-                    const amenityObj = typeof a === 'string' ? allAmenities.find(am => am.id === a) : a;
-                    const name = amenityObj?.name || a.name || a;
-                    const id = amenityObj?.id || a.id || a;
+                    const rawId = typeof a === 'object' && a !== null ? a.id : a;
+                    const amenityObj = typeof a === 'object' && a !== null && a.name ? a : allAmenities.find(am => String(am.id) === String(rawId));
+                    const name = amenityObj?.name || a?.name || `Tiện nghi #${rawId}`;
+                    const id = amenityObj?.id || rawId;
                     return (
                       <span key={id} className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-sm font-medium text-primary">
                         {name}
                         <button
                           type="button"
                           onClick={() => {
-                            const newAmenities = editing.amenities?.filter((item: any) => (item.id || item) !== id);
+                            const newAmenities = editing.amenities?.filter((item: any) => {
+                              const itemId = typeof item === 'object' && item !== null ? item.id : item;
+                              return String(itemId) !== String(id);
+                            });
                             updateField("amenities", newAmenities);
                           }}
                           className="text-primary/60 hover:text-primary"
@@ -312,17 +316,17 @@ export default function VillasPage() {
                     onChange={(e) => {
                       const selectedId = e.target.value;
                       if (!selectedId) return;
-                      const amenityObj = allAmenities.find(a => a.id === selectedId);
+                      const amenityObj = allAmenities.find(a => String(a.id) === String(selectedId));
                       if (!amenityObj) return;
                       const current = editing.amenities || [];
-                      if (!current.some((sel: any) => (sel.id || sel) === selectedId)) {
+                      if (!current.some((sel: any) => String(typeof sel === 'object' && sel !== null ? sel.id : sel) === String(selectedId))) {
                         updateField("amenities", [...current, amenityObj]);
                       }
                     }}
                   >
                     <option value="">+ Chọn thêm tiện nghi...</option>
                     {allAmenities
-                      .filter(a => !(editing.amenities || []).some((sel: any) => (sel.id || sel) === a.id))
+                      .filter(a => !(editing.amenities || []).some((sel: any) => String(typeof sel === 'object' && sel !== null ? sel.id : sel) === String(a.id)))
                       .map((a) => (
                         <option key={a.id} value={a.id}>{a.name}</option>
                       ))}

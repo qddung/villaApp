@@ -185,9 +185,10 @@ export class VillasService {
         id: villa.id || undefined,
         ...data,
         amenities: {
-          create: (villa.amenities || []).map((item: any) => ({
-            amenityId: typeof item === 'string' ? item : item.id
-          })),
+          create: (villa.amenities || [])
+            .map((item: any) => Number(typeof item === 'object' && item !== null ? item.id : item))
+            .filter((id: number) => !isNaN(id) && id > 0)
+            .map((amenityId: number) => ({ amenityId })),
         },
         highlights: {
           create: (villa.highlights || []).map((text: string, i: number) => ({ text, order: i })),
@@ -255,9 +256,10 @@ export class VillasService {
         ...data,
         amenities: {
           deleteMany: {},
-          create: (villa.amenities || []).map((item: any) => ({
-            amenityId: typeof item === 'string' ? item : item.id
-          })),
+          create: (villa.amenities || [])
+            .map((item: any) => Number(typeof item === 'object' && item !== null ? item.id : item))
+            .filter((id: number) => !isNaN(id) && id > 0)
+            .map((amenityId: number) => ({ amenityId })),
         },
         highlights: {
           deleteMany: {},
