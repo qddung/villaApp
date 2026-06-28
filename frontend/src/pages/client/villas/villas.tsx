@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { SlidersHorizontal } from "lucide-react";
 import VillaCard from "@/components/villas/VillaCard";
@@ -17,13 +17,26 @@ const sortOptions = [
 export default function VillasPage() {
   const [searchParams] = useSearchParams();
   const initialArea = searchParams.get("area") || undefined;
+  const initialGuests = searchParams.get("guests") ? Number(searchParams.get("guests")) : undefined;
   
   const villas = useVillaStore((state) => state.villas);
 
   const [filters, setFilters] = useState<SearchFilters>({
     area: initialArea,
+    guests: initialGuests,
     sortBy: "newest",
   });
+
+  useEffect(() => {
+    const areaParam = searchParams.get("area") || undefined;
+    const guestsParam = searchParams.get("guests") ? Number(searchParams.get("guests")) : undefined;
+    setFilters((prev) => ({
+      ...prev,
+      area: areaParam,
+      guests: guestsParam,
+    }));
+  }, [searchParams]);
+
   const filterOptions = useVillaStore((state) => state.filterOptions);
   const selectedArea = filterOptions?.areas?.find((a) => a.slug === filters.area);
   const areaName = selectedArea ? selectedArea.name : "Vũng Tàu";

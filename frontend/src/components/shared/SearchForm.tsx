@@ -1,8 +1,9 @@
 
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Search, CalendarDays, Users } from "lucide-react";
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Search, CalendarDays, Users, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useVillaStore } from "@/store/useVillaStore";
 
 interface SearchFormProps {
   variant?: "hero" | "compact";
@@ -11,13 +12,34 @@ interface SearchFormProps {
 
 export default function SearchForm({ variant = "hero", className }: SearchFormProps) {
   const navigate = useNavigate();
-  const [checkIn, setCheckIn] = useState("");
-  const [checkOut, setCheckOut] = useState("");
-  const [guests, setGuests] = useState("");
+  const [searchParams] = useSearchParams();
+  const filterOptions = useVillaStore((state) => state.filterOptions);
+  const loadFilterOptions = useVillaStore((state) => state.loadFilterOptions);
+
+  const [area, setArea] = useState(() => searchParams.get("area") || "");
+  const [checkIn, setCheckIn] = useState(() => searchParams.get("checkIn") || "");
+  const [checkOut, setCheckOut] = useState(() => searchParams.get("checkOut") || "");
+  const [guests, setGuests] = useState(() => searchParams.get("guests") || "");
+
+  useEffect(() => {
+    if (!filterOptions) {
+      loadFilterOptions();
+    }
+  }, [filterOptions, loadFilterOptions]);
+
+  useEffect(() => {
+    setArea(searchParams.get("area") || "");
+    setCheckIn(searchParams.get("checkIn") || "");
+    setCheckOut(searchParams.get("checkOut") || "");
+    setGuests(searchParams.get("guests") || "");
+  }, [searchParams]);
+
+  const areas = filterOptions?.areas || [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const params = new URLSearchParams();
+    if (area) params.set("area", area);
     if (checkIn) params.set("checkIn", checkIn);
     if (checkOut) params.set("checkOut", checkOut);
     if (guests) params.set("guests", guests);
@@ -44,14 +66,35 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "w-full max-w-4xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
+        "w-full max-w-5xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
         className
       )}
     >
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-4">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
+          <MapPin className="h-5 w-5 text-gold" />
+          <div className="flex-1 text-left">
+            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
+              Khu vực
+            </label>
+            <select
+              value={area}
+              onChange={(e) => setArea(e.target.value)}
+              className="w-full bg-transparent text-sm font-medium text-gray-800 outline-none"
+            >
+              <option value="">Tất cả Vũng Tàu</option>
+              {areas.map((a) => (
+                <option key={a.slug} value={a.slug}>
+                  {a.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+
         <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
           <CalendarDays className="h-5 w-5 text-gold" />
-          <div className="flex-1">
+          <div className="flex-1 text-left">
             <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
               Ngày đến
             </label>
@@ -66,7 +109,7 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
 
         <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
           <CalendarDays className="h-5 w-5 text-gold" />
-          <div className="flex-1">
+          <div className="flex-1 text-left">
             <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
               Ngày đi
             </label>
@@ -81,7 +124,7 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
 
         <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
           <Users className="h-5 w-5 text-gold" />
-          <div className="flex-1">
+          <div className="flex-1 text-left">
             <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
               Số khách
             </label>
