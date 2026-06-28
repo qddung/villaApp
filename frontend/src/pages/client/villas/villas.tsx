@@ -15,27 +15,25 @@ const sortOptions = [
 ] as const;
 
 export default function VillasPage() {
-  const [searchParams] = useSearchParams();
-  const initialArea = searchParams.get("area") || undefined;
-  const initialGuests = searchParams.get("guests") ? Number(searchParams.get("guests")) : undefined;
+  const [searchParams, setSearchParams] = useSearchParams();
+  const areaParam = searchParams.get("area") || undefined;
+  const guestsParam = searchParams.get("guests") ? Number(searchParams.get("guests")) : undefined;
   
   const villas = useVillaStore((state) => state.villas);
 
   const [filters, setFilters] = useState<SearchFilters>({
-    area: initialArea,
-    guests: initialGuests,
+    area: areaParam,
+    guests: guestsParam,
     sortBy: "newest",
   });
 
   useEffect(() => {
-    const areaParam = searchParams.get("area") || undefined;
-    const guestsParam = searchParams.get("guests") ? Number(searchParams.get("guests")) : undefined;
     setFilters((prev) => ({
       ...prev,
       area: areaParam,
       guests: guestsParam,
     }));
-  }, [searchParams]);
+  }, [areaParam, guestsParam]);
 
   const filterOptions = useVillaStore((state) => state.filterOptions);
   const selectedArea = filterOptions?.areas?.find((a) => a.slug === filters.area);
@@ -80,6 +78,18 @@ export default function VillasPage() {
   const handleFilterChange = (newFilters: SearchFilters) => {
     setFilters(newFilters);
     setPage(1);
+    const params = new URLSearchParams(searchParams);
+    if (newFilters.area) {
+      params.set("area", newFilters.area);
+    } else {
+      params.delete("area");
+    }
+    if (newFilters.guests) {
+      params.set("guests", String(newFilters.guests));
+    } else {
+      params.delete("guests");
+    }
+    setSearchParams(params, { replace: true });
   };
 
   return (
