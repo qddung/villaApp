@@ -38,11 +38,11 @@ function ConfirmationContent() {
       <div className="mt-6 space-y-2 text-sm text-gray-500">
         <p className="font-medium text-gray-700">Cần hỗ trợ?</p>
         <a
-          href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84909123456'}`}
+          href={`tel:${settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '+84326151111'}`}
           className="flex items-center justify-center gap-2 hover:text-primary"
         >
           <Phone className="h-4 w-4" />
-          {settings?.contactPhone || "0909 123 456"}
+          {settings?.contactPhone || "0326 151 111"}
         </a>
         <a
           href={`mailto:${settings?.contactEmail || 'hello@villavungtau.vn'}`}

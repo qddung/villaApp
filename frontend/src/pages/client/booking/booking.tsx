@@ -71,7 +71,7 @@ export default function BookingPage() {
       });
       if (isZalo) {
         const settings = await fetchSettings();
-        const zaloPhone = settings?.contactPhone || '090000000';
+        const zaloPhone = settings?.contactPhone ? settings.contactPhone.replace(/\s+/g, '') : '0326151111';
         window.open(`https://zalo.me/${zaloPhone}`, '_blank');
       }
       navigate(
@@ -188,7 +188,7 @@ export default function BookingPage() {
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
                     className="mt-1 w-full rounded-xl border border-gray-200 px-4 py-3 text-sm outline-none focus:border-gold focus:ring-1 focus:ring-gold"
-                    placeholder="0909 xxx xxx"
+                    placeholder="0326 xxx xxx"
                   />
                 </div>
                 <div className="sm:col-span-2">
