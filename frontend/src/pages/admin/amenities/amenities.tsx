@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Plus, Edit2, Trash2, X, Save } from "lucide-react";
 import { fetchAllAmenities, fetchAmenityCategories, createAmenity, updateAmenity, deleteAmenity } from "@/lib/api";
 import { Amenity, AmenityCategoryOption } from "@/lib/types";
-import { useNotification } from "@/contexts/NotificationContext";
+import { toast } from "sonner";
 
 export function generateSlug(text: string) {
   return text
@@ -29,7 +29,7 @@ export default function AmenitiesPage() {
   const [amenities, setAmenities] = useState<Amenity[]>([]);
       const [categories, setCategories] = useState<AmenityCategoryOption[]>([]);
       const [loading, setLoading] = useState(true);
-      const {showToast} = useNotification();
+
 
       // Modal states
       const [isModalOpen, setIsModalOpen] = useState(false);
@@ -50,7 +50,7 @@ export default function AmenitiesPage() {
       setAmenities(amenitiesData);
       setCategories(categoriesData);
     } catch (error: any) {
-        showToast("Lỗi khi tải dữ liệu", "error");
+        toast.error("Lỗi khi tải dữ liệu");
     } finally {
         setLoading(false);
     }
@@ -79,16 +79,16 @@ export default function AmenitiesPage() {
     if (!window.confirm("Bạn có chắc muốn xóa tiện nghi này?")) return;
       try {
         await deleteAmenity(id);
-      showToast("Xóa tiện nghi thành công", "success");
+      toast.success("Xóa tiện nghi thành công");
         loadData();
     } catch (error: any) {
-        showToast("Lỗi khi xóa tiện nghi", "error");
+        toast.error("Lỗi khi xóa tiện nghi");
     }
   };
 
   const handleSave = async () => {
     if (!editing?.name || !editing.icon || !editing.category) {
-        showToast("Vui lòng điền đầy đủ thông tin", "error");
+        toast.error("Vui lòng điền đầy đủ thông tin");
       return;
     }
       setIsSubmitting(true);
@@ -96,15 +96,15 @@ export default function AmenitiesPage() {
         const isUpdate = amenities.some((a) => a.id === editing.id) && editing.id !== 0;
       if (isUpdate) {
         await updateAmenity(editing.id!, editing);
-      showToast("Cập nhật thành công", "success");
+      toast.success("Cập nhật thành công");
       } else {
         await createAmenity(editing);
-      showToast("Thêm mới thành công", "success");
+      toast.success("Thêm mới thành công");
       }
       handleCloseModal();
       loadData();
     } catch (error: any) {
-        showToast("Lỗi khi lưu tiện nghi", "error");
+        toast.error("Lỗi khi lưu tiện nghi");
     } finally {
         setIsSubmitting(false);
     }

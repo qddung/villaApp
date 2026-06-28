@@ -95,6 +95,7 @@ export default function BookingsPage() {
       if (selectedBooking?.id === bookingId) {
         setSelectedBooking({ ...selectedBooking, status: newStatus });
       }
+      toast.success("Cập nhật trạng thái thành công!");
     } catch {
       toast.error("Không thể cập nhật trạng thái.");
     }

@@ -7,6 +7,7 @@ import {
   Plus, Save, Trash2, X,
   Bed, MapPin, ImageIcon, Upload
 } from "lucide-react";
+import { toast } from "sonner";
 
 const emptyVilla: Villa = {
   id: "",
@@ -69,7 +70,9 @@ export default function VillasPage() {
         ...editing,
         images: [...editing.images, imageInfo],
       });
+      toast.success("Tải ảnh lên thành công!");
     } catch {
+      toast.error("Lỗi upload ảnh.");
       setMessage("Lỗi upload ảnh.");
     }
   }
@@ -84,8 +87,12 @@ export default function VillasPage() {
         const imageInfo = await uploadVillaImage(file, false);
         newImages.push(imageInfo);
       } catch {
+        toast.error("Lỗi upload một số ảnh.");
         setMessage("Lỗi upload một số ảnh.");
       }
+    }
+    if (newImages.length > 0) {
+      toast.success(`Đã tải lên ${newImages.length} ảnh!`);
     }
     setEditing((prev) => prev ? {
       ...prev,
@@ -117,12 +124,16 @@ export default function VillasPage() {
   async function startEdit(villaBasic: any) {
     setMessage("");
     setLoadingEdit(villaBasic.id);
-    const fullVilla = await fetchVillaDetails(villaBasic.slug, true);
-    setLoadingEdit(null);
-    if (fullVilla) {
-      setEditing({ ...fullVilla });
-    } else {
+    try {
+      const data = await fetchVillaDetails(villaBasic.slug, true);
+      setLoadingEdit(null);
+      if (data) {
+        setEditing(data);
+      }
+    } catch {
+      toast.error("Không thể tải chi tiết villa.");
       setMessage("Không thể tải chi tiết villa.");
+      setLoadingEdit(null);
     }
   }
 
@@ -144,6 +155,7 @@ export default function VillasPage() {
   async function handleSave() {
     if (!editing) return;
     if (!editing.name || !editing.address) {
+      toast.error("Vui lòng điền tên villa và địa chỉ.");
       setMessage("Vui lòng điền tên villa và địa chỉ.");
       return;
     }
@@ -164,9 +176,11 @@ export default function VillasPage() {
     try {
       await saveVilla(cleanedVilla);
       await loadVillas();
+      toast.success("Lưu thông tin Villa thành công!");
       setMessage("Đã lưu thành công!");
       setEditing(null);
     } catch {
+      toast.error("Lỗi khi lưu Villa. Vui lòng thử lại.");
       setMessage("Lỗi khi lưu. Vui lòng thử lại.");
     }
     setSaving(false);
@@ -184,10 +198,15 @@ export default function VillasPage() {
 
   async function handleDelete(id: string) {
     if (!confirm("Bạn có chắc muốn xóa villa này?")) return;
-    await deleteVilla(id);
-    await loadVillas();
-    if (editing?.id === id) setEditing(null);
-    setMessage("Đã xóa villa.");
+    try {
+      await deleteVilla(id);
+      await loadVillas();
+      if (editing?.id === id) setEditing(null);
+      toast.success("Đã xóa Villa thành công!");
+      setMessage("Đã xóa villa.");
+    } catch {
+      toast.error("Lỗi khi xóa Villa. Vui lòng thử lại.");
+    }
   }
 
   return (
