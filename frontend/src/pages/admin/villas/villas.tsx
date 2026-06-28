@@ -42,6 +42,9 @@ export default function VillasPage() {
   const [editing, setEditing] = useState<Villa | null>(null);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState("");
+  const [selectedFilterArea, setSelectedFilterArea] = useState<string>("all");
+
+  const filteredVillas = selectedFilterArea === "all" ? villasList : villasList.filter(v => v.areaSlug === selectedFilterArea || v.area === selectedFilterArea);
 
   const [dragOver, setDragOver] = useState(false);
   const [uploadingDetails, setUploadingDetails] = useState(false);
@@ -223,32 +226,66 @@ export default function VillasPage() {
       {message && <div className="rounded-xl bg-green-50 px-4 py-3 text-sm font-medium text-green-700">{message}</div>}
 
       {!editing ? (
-        <div className="space-y-4">
-          {villasList.map((villa) => (
-            <div key={villa.id} className="flex items-center justify-between rounded-2xl bg-white dark:bg-slate-950 p-5 shadow-sm border border-transparent dark:border-slate-800 transition-colors">
-              <div className="flex items-center gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sand dark:bg-gold/10">
-                  <Bed className="h-5 w-5 text-gold" />
-                </div>
-                <div>
-                  <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">{villa.name}</h3>
-                  <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400">
-                    <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{villa.area}</span>
-                    <span>{villa.bedrooms} PN &middot; {villa.maxGuests} khách</span>
+        <div className="space-y-6">
+          {/* Area Filter Tabs */}
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              onClick={() => setSelectedFilterArea("all")}
+              className={`rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
+                selectedFilterArea === "all"
+                  ? "bg-gold text-primary shadow-sm"
+                  : "bg-white dark:bg-slate-950 text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 border border-gray-200 dark:border-slate-800"
+              }`}
+            >
+              Tất cả ({villasList.length})
+            </button>
+            {areas.map((a) => {
+              const count = villasList.filter((v) => v.areaSlug === a.slug || v.area === a.name).length;
+              return (
+                <button
+                  key={a.slug || a.id}
+                  onClick={() => setSelectedFilterArea(a.slug)}
+                  className={`rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${
+                    selectedFilterArea === a.slug
+                      ? "bg-gold text-primary shadow-sm"
+                      : "bg-white dark:bg-slate-950 text-gray-600 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 border border-gray-200 dark:border-slate-800"
+                  }`}
+                >
+                  {a.name} ({count})
+                </button>
+              );
+            })}
+          </div>
+
+          <div className="space-y-4">
+            {filteredVillas.map((villa) => (
+              <div key={villa.id} className="flex items-center justify-between rounded-2xl bg-white dark:bg-slate-950 p-5 shadow-sm border border-transparent dark:border-slate-800 transition-colors">
+                <div className="flex items-center gap-4">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-sand dark:bg-gold/10">
+                    <Bed className="h-5 w-5 text-gold" />
+                  </div>
+                  <div>
+                    <h3 className="font-heading text-lg font-semibold text-primary dark:text-white">{villa.name}</h3>
+                    <div className="mt-0.5 flex items-center gap-3 text-xs text-gray-400">
+                      <span className="flex items-center gap-1"><MapPin className="h-3 w-3" />{villa.area}</span>
+                      <span>{villa.bedrooms} PN &middot; {villa.maxGuests} khách</span>
+                    </div>
                   </div>
                 </div>
+                <div className="flex items-center gap-2">
+                  <button onClick={() => startEdit(villa)} disabled={loadingEdit === villa.id} className="rounded-lg border dark:border-slate-700 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
+                    {loadingEdit === villa.id ? "Đang tải..." : "Sửa"}
+                  </button>
+                  <button onClick={() => handleDelete(villa.id)} className="rounded-lg border border-red-200 dark:border-red-900 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"><Trash2 className="h-4 w-4" /></button>
+                </div>
               </div>
-              <div className="flex items-center gap-2">
-                <button onClick={() => startEdit(villa)} disabled={loadingEdit === villa.id} className="rounded-lg border dark:border-slate-700 px-4 py-2 text-sm text-gray-700 dark:text-slate-300 hover:bg-gray-50 dark:hover:bg-slate-800 transition-colors disabled:opacity-50">
-                  {loadingEdit === villa.id ? "Đang tải..." : "Sửa"}
-                </button>
-                <button onClick={() => handleDelete(villa.id)} className="rounded-lg border border-red-200 dark:border-red-900 px-3 py-2 text-red-500 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors"><Trash2 className="h-4 w-4" /></button>
+            ))}
+            {filteredVillas.length === 0 && (
+              <div className="py-12 text-center text-gray-500 dark:text-slate-400 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-transparent dark:border-slate-800">
+                {selectedFilterArea === "all" ? "Chưa có villa nào." : "Không có villa nào trong khu vực này."}
               </div>
-            </div>
-          ))}
-          {villasList.length === 0 && (
-            <div className="py-12 text-center text-gray-500 dark:text-slate-400 bg-white dark:bg-slate-950 rounded-2xl shadow-sm border border-transparent dark:border-slate-800">Chưa có villa nào.</div>
-          )}
+            )}
+          </div>
         </div>
       ) : (
         <div className="space-y-6">
