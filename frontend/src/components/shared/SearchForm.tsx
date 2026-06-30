@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Search, Users, MapPin } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
 
@@ -17,7 +17,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
   const loadFilterOptions = useVillaStore((state) => state.loadFilterOptions);
 
   const [area, setArea] = useState(() => searchParams.get("area") || "");
-  const [guests, setGuests] = useState(() => searchParams.get("guests") || "");
 
   useEffect(() => {
     if (!filterOptions) {
@@ -27,7 +26,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
 
   useEffect(() => {
     setArea(searchParams.get("area") || "");
-    setGuests(searchParams.get("guests") || "");
   }, [searchParams]);
 
   const areas = filterOptions?.areas || [];
@@ -36,7 +34,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     e.preventDefault();
     const params = new URLSearchParams();
     if (area) params.set("area", area);
-    if (guests) params.set("guests", guests);
     navigate(`/villas?${params.toString()}`);
   };
 
@@ -60,12 +57,12 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "w-full max-w-4xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
+        "w-full max-w-3xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
         className
       )}
     >
       <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
-        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
+        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3 sm:col-span-2">
           <MapPin className="h-5 w-5 text-gold" />
           <div className="flex-1 text-left">
             <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
@@ -86,30 +83,9 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
           </div>
         </div>
 
-        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
-          <Users className="h-5 w-5 text-gold" />
-          <div className="flex-1 text-left">
-            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-              Số khách
-            </label>
-            <select
-              value={guests}
-              onChange={(e) => setGuests(e.target.value)}
-              className="w-full bg-transparent text-sm font-medium text-gray-800 outline-none"
-            >
-              <option value="">Chọn</option>
-              {[2, 4, 6, 8, 10, 12, 14].map((n) => (
-                <option key={n} value={n}>
-                  {n} khách
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
-
         <button
           type="submit"
-          className="flex items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white transition-colors hover:bg-primary-light"
+          className="flex items-center justify-center gap-2 rounded-xl bg-primary py-3 font-semibold text-white transition-colors hover:bg-primary-light sm:col-span-1"
         >
           <Search className="h-5 w-5" />
           <span>Tìm villa</span>
