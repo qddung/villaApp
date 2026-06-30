@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Search, CalendarDays, Users, MapPin } from "lucide-react";
+import { Search, Users, MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useVillaStore } from "@/store/useVillaStore";
 
@@ -17,8 +17,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
   const loadFilterOptions = useVillaStore((state) => state.loadFilterOptions);
 
   const [area, setArea] = useState(() => searchParams.get("area") || "");
-  const [checkIn, setCheckIn] = useState(() => searchParams.get("checkIn") || "");
-  const [checkOut, setCheckOut] = useState(() => searchParams.get("checkOut") || "");
   const [guests, setGuests] = useState(() => searchParams.get("guests") || "");
 
   useEffect(() => {
@@ -29,8 +27,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
 
   useEffect(() => {
     setArea(searchParams.get("area") || "");
-    setCheckIn(searchParams.get("checkIn") || "");
-    setCheckOut(searchParams.get("checkOut") || "");
     setGuests(searchParams.get("guests") || "");
   }, [searchParams]);
 
@@ -40,8 +36,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     e.preventDefault();
     const params = new URLSearchParams();
     if (area) params.set("area", area);
-    if (checkIn) params.set("checkIn", checkIn);
-    if (checkOut) params.set("checkOut", checkOut);
     if (guests) params.set("guests", guests);
     navigate(`/villas?${params.toString()}`);
   };
@@ -66,11 +60,11 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
     <form
       onSubmit={handleSubmit}
       className={cn(
-        "w-full max-w-5xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
+        "w-full max-w-4xl rounded-2xl bg-white/95 p-3 shadow-2xl backdrop-blur-md",
         className
       )}
     >
-      <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
         <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
           <MapPin className="h-5 w-5 text-gold" />
           <div className="flex-1 text-left">
@@ -89,36 +83,6 @@ export default function SearchForm({ variant = "hero", className }: SearchFormPr
                 </option>
               ))}
             </select>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
-          <CalendarDays className="h-5 w-5 text-gold" />
-          <div className="flex-1 text-left">
-            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-              Ngày đến
-            </label>
-            <input
-              type="date"
-              value={checkIn}
-              onChange={(e) => setCheckIn(e.target.value)}
-              className="w-full bg-transparent text-sm font-medium text-gray-800 outline-none"
-            />
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3">
-          <CalendarDays className="h-5 w-5 text-gold" />
-          <div className="flex-1 text-left">
-            <label className="block text-[10px] font-semibold uppercase tracking-wider text-gray-400">
-              Ngày đi
-            </label>
-            <input
-              type="date"
-              value={checkOut}
-              onChange={(e) => setCheckOut(e.target.value)}
-              className="w-full bg-transparent text-sm font-medium text-gray-800 outline-none"
-            />
           </div>
         </div>
 
